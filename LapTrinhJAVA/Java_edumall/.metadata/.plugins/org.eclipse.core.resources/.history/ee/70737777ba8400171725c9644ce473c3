@@ -1,0 +1,9 @@
+package ChelLong.javacoban;
+
+import java.util.ArrayList;
+
+public class HocArrayList {
+	public static void main (String[]args) {
+		ArrayList ds = new ArrayList();
+	}
+}

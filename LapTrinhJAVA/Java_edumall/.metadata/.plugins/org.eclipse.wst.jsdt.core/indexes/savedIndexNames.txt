@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+G:\LapTrinhJAVA\Java_edumall\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3586998537.index
+648490745.index
+912074838.index
+3579111845.index
+1368494198.index
+1857620749.index
+3383584957.index

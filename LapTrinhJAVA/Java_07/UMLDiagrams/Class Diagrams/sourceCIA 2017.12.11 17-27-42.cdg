@@ -1,0 +1,2470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="sourceCIA">
+  <ClassDiagramComponents>
+    <Class name="CompoundDependenciesAnalyser" package="com.vnu.fit.graph.analyser.components" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="compoundNode" type="CompoundNode" visibility="private"/>
+        <Field name="node" type="IASTNode" visibility="private"/>
+        <Field name="baseClassList" type="List&lt;ClassNode&gt;" visibility="private"/>
+        <Field name="usingNamespaceList" type="List&lt;NamespaceNode&gt;" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="CompoundNode" name="compoundNode"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="analysis" returnType="void" visibility="public"/>
+        <Method name="scan" returnType="void" visibility="private">
+          <Argument type="IASTNode" name="dad"/>
+        </Method>
+        <Method name="createOverrideDependency" returnType="void" visibility="private"/>
+        <Method name="findFunctionOverride" returnType="FunctionNode" visibility="private">
+          <Argument type="FunctionNode" name="node"/>
+        </Method>
+        <Method name="analysisVariables" returnType="void" visibility="private"/>
+        <Method name="getReturnedClass" returnType="void" visibility="private">
+          <Argument type="VariableNode" name="variableNode"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FunctionDependenciesAnalyser" package="com.vnu.fit.graph.analyser.components" visibility="public" xPosition="436.0" yPosition="20.0">
+      <Fields>
+        <Field name="functionNode" type="FunctionNode" visibility="private" isFinal="true"/>
+        <Field name="funcNode" type="IASTNode" visibility="private"/>
+        <Field name="usingNamespaceList" type="List&lt;NamespaceNode&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="FunctionNode" name="functionNode"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="prepare" returnType="void" visibility="public"/>
+        <Method name="analysisDeclSpecifier" returnType="void" visibility="public"/>
+        <Method name="analysisCompoundStatement" returnType="void" visibility="public"/>
+        <Method name="analysisExpression" returnType="void" visibility="private">
+          <Argument type="IASTExpression" name="e"/>
+        </Method>
+        <Method name="getVariables" returnType="List&lt;VariableNode&gt;" visibility="private">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="createLocalVariableList" returnType="void" visibility="private">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MemberDependenciesAnalyser" package="com.vnu.fit.graph.analyser.components" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="root" type="AbstractNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="root"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="analyser" returnType="void" visibility="public"/>
+        <Method name="scan" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TypedefAnalyser" package="com.vnu.fit.graph.analyser.components" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="node" type="IASTNode" visibility="protected"/>
+        <Field name="dictionary" type="Dictionary" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="analyser" returnType="TypedefAnalyser" visibility="public"/>
+        <Method name="scan" returnType="void" visibility="protected">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="build" returnType="Pair&lt;String, String&gt;" visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="getDictionary" returnType="Dictionary" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="VariableDependenciesAnalysis" package="com.vnu.fit.graph.analyser.components" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="variableNode" type="VariableNode" visibility="private"/>
+        <Field name="usingNamespaceList" type="List&lt;NamespaceNode&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="VariableNode" name="variableNode"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="analysis" returnType="void" visibility="public"/>
+        <Method name="analysisDeclSpecifier" returnType="void" visibility="private">
+          <Argument type="IASTSimpleDeclaration" name="sd"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DependenciesAnalyser" package="com.vnu.fit.graph.analyser" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="project" type="Project" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Project" name="project"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="analysis" returnType="Project" visibility="public">
+          <Argument type="Project" name="project"/>
+        </Method>
+        <Method name="analysisFunction" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="root"/>
+        </Method>
+        <Method name="analysisCompound" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="root"/>
+        </Method>
+        <Method name="analysisVariables" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="root"/>
+        </Method>
+        <Method name="cleanTree" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DeclSpecifierVisitor" package="com.vnu.fit.graph.analyser.visitors" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="caller" type="AbstractNode" visibility="private" isFinal="true"/>
+        <Field name="usingNamespaces" type="List&lt;NamespaceNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="onCallListener" type="OnCallListener" visibility="private"/>
+        <Field name="onReturnTypeListener" type="OnReturnTypeListener" visibility="private"/>
+        <Field name="level" type="int" visibility="private"/>
+        <Field name="templateNode" type="ITemplatable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="caller"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setTemplateNode" returnType="void" visibility="public">
+          <Argument type="ITemplatable" name="templateNode"/>
+        </Method>
+        <Method name="getLevel" returnType="int" visibility="public"/>
+        <Method name="getOnCallListener" returnType="OnCallListener" visibility="public"/>
+        <Method name="setOnCallListener" returnType="void" visibility="public">
+          <Argument type="OnCallListener" name="onCallListener"/>
+          <Argument type="int" name="level"/>
+        </Method>
+        <Method name="getOnReturnTypeListener" returnType="OnReturnTypeListener" visibility="public"/>
+        <Method name="setOnReturnTypeListener" returnType="void" visibility="public">
+          <Argument type="OnReturnTypeListener" name="onReturnTypeListener"/>
+        </Method>
+        <Method name="onCall" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="IASTDeclSpecifier" name="declSpecifier"/>
+        </Method>
+        <Method name="onReturnType" returnType="void" visibility="private">
+          <Argument type="Object" name="type"/>
+        </Method>
+        <Method name="getData" returnType="List&lt;Object&gt;" visibility="private">
+          <Argument type="IASTDeclSpecifier" name="declSpecifier"/>
+        </Method>
+        <Method name="visit" returnType="void" visibility="public">
+          <Argument type="IASTDeclSpecifier" name="declSpecifier"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ExpressionVisitor" package="com.vnu.fit.graph.analyser.visitors" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="LOGGER" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="caller" type="AbstractNode" visibility="private" isFinal="true"/>
+        <Field name="usingNamespaces" type="List&lt;NamespaceNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="onCallListener" type="OnCallListener" visibility="private"/>
+        <Field name="onReturnTypeListener" type="OnReturnTypeListener" visibility="private"/>
+        <Field name="level" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="caller"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getOnCallListener" returnType="OnCallListener" visibility="public"/>
+        <Method name="getLevel" returnType="int" visibility="public"/>
+        <Method name="setOnCallListener" returnType="void" visibility="public">
+          <Argument type="OnCallListener" name="onCallListener"/>
+          <Argument type="int" name="level"/>
+        </Method>
+        <Method name="getOnReturnTypeListener" returnType="OnReturnTypeListener" visibility="public"/>
+        <Method name="setOnReturnTypeListener" returnType="void" visibility="public">
+          <Argument type="OnReturnTypeListener" name="onReturnTypeListener"/>
+        </Method>
+        <Method name="onReturnType" returnType="void" visibility="private">
+          <Argument type="Object" name="type"/>
+        </Method>
+        <Method name="onCall" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="expression"/>
+          <Argument type="IASTExpression" name="node"/>
+        </Method>
+        <Method name="getData" returnType="List&lt;List&lt;Object&gt;&gt;" visibility="private">
+          <Argument type="IASTExpression" name="expression"/>
+        </Method>
+        <Method name="getExpressions" returnType="List&lt;IASTExpression&gt;" visibility="public" isStatic="true">
+          <Argument type="IASTInitializerClause[]" name="args"/>
+        </Method>
+        <Method name="getMemberNodeParent" returnType="MemberNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="current"/>
+        </Method>
+        <Method name="visit" returnType="void" visibility="public">
+          <Argument type="IASTExpression" name="expression"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClassBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="PRIVATE" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="PUBLIC" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="PROTECT" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="node" type="IASTNode" visibility="private"/>
+        <Field name="parent" type="AbstractNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="AbstractNode" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isClass" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="setVisibility" returnType="int" visibility="public">
+          <Argument type="CPPASTVisibilityLabel" name="visi"/>
+        </Method>
+        <Method name="build" returnType="ClassNode" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FunctionBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="node" type="IASTNode" visibility="private" isFinal="true"/>
+        <Field name="functionNode" type="FunctionNode" visibility="private"/>
+        <Field name="parent" type="AbstractNode" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="AbstractNode" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isFunction" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="typeFunction" returnType="int" visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="build" returnType="FunctionNode" visibility="public"/>
+        <Method name="addParams" returnType="void" visibility="private">
+          <Argument type="IASTNode" name="childtwo"/>
+        </Method>
+        <Method name="definitionBuilder" returnType="FunctionNode" visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="phototypeBuilder" returnType="FunctionNode" visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="onClassDefinitionBuilder" returnType="FunctionNode" visibility="public">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="IASTBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="LOGGER" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="file" type="File" visibility="private"/>
+        <Field name="iastTranslationUnit" type="IASTTranslationUnit" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setFile" returnType="IASTBuilder" visibility="public">
+          <Argument type="File" name="file"/>
+        </Method>
+        <Method name="getContentFile" returnType="String" visibility="private">
+          <Argument type="File" name="file"/>
+        </Method>
+        <Method name="build" returnType="IASTTranslationUnit" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="NamespaceBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="node" type="IASTNode" visibility="private"/>
+        <Field name="namespaceNode" type="NamespaceNode" visibility="private"/>
+        <Field name="parent" type="AbstractNode" visibility="private"/>
+        <Field name="usingNamespace" type="NamespaceNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="AbstractNode" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isNamespace" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="build" returnType="NamespaceNode" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TemplateBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="node" type="IASTNode" visibility="private"/>
+        <Field name="parent" type="AbstractNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="AbstractNode" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isTemplate" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="build" returnType="AbstractNode" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="VariableNodeBuilder" package="com.vnu.fit.graph.builder.hierarchy.components" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="node" type="IASTNode" visibility="private"/>
+        <Field name="variableNodes" type="List&lt;VariableNode&gt;" visibility="private"/>
+        <Field name="parent" type="AbstractNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="AbstractNode" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isVariable" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="isParamVariable" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+        </Method>
+        <Method name="build" returnType="List&lt;VariableNode&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FileHierarchyBuilder" package="com.vnu.fit.graph.builder.hierarchy" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="build" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="String" name="name"/>
+          <Argument type="IASTTranslationUnit" name="astTree"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="HierarchyBuilder" package="com.vnu.fit.graph.builder" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields>
+        <Field name="abstractNodes" type="List&lt;AbstractNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="fileList" type="List&lt;File&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="List&lt;File&gt;" name="fileList"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="build" returnType="AbstractNode" visibility="public"/>
+        <Method name="nameSpaceMerge" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="root"/>
+        </Method>
+        <Method name="mergeNamespaceList" returnType="List&lt;NamespaceNode&gt;" visibility="private">
+          <Argument type="List&lt;NamespaceNode&gt;" name="namespaceList"/>
+        </Method>
+        <Method name="mergeNamespaceUnit" returnType="NamespaceNode" visibility="private">
+          <Argument type="NamespaceNode" name="former"/>
+          <Argument type="NamespaceNode" name="latter"/>
+        </Method>
+        <Method name="rebuildNameSpace" returnType="void" visibility="private">
+          <Argument type="AbstractNode" name="namespace"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="private">
+          <Argument type="FunctionNode" name="function"/>
+          <Argument type="ClassNode" name="class_"/>
+        </Method>
+        <Method name="rebuildArray" returnType="List&lt;FunctionNode&gt;" visibility="private">
+          <Argument type="List&lt;FunctionNode&gt;" name="arrayList"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ContentNormalizer" package="com.vnu.fit.graph.builder.preprocessor" visibility="public" isFinal="true" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="source" type="String" visibility="public" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="source"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="abstractNormalize" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+          <Argument type="String[]" name="regex"/>
+          <Argument type="Boolean[]" name="remove"/>
+        </Method>
+        <Method name="removeConstString" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="removeBlockComments" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="removeSingleLineComments" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="removeDeleteOperators" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="removeCpp11Class" returnType="String" visibility="private" isStatic="true">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="normalize" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Dictionary" package="com.vnu.fit.graph.builder.preprocessor" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="usingnamespace" type="List&lt;String&gt;" visibility="protected"/>
+        <Field name="typedefList" type="List&lt;Pair&lt;String, String&gt;&gt;" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getTypedefList" returnType="List&lt;Pair&lt;String, String&gt;&gt;" visibility="public"/>
+        <Method name="setTypedefList" returnType="void" visibility="public">
+          <Argument type="List&lt;Pair&lt;String, String&gt;&gt;" name="typedefList"/>
+        </Method>
+        <Method name="addTypedef" returnType="void" visibility="public">
+          <Argument type="String" name="type"/>
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="addTypedef" returnType="void" visibility="public">
+          <Argument type="Pair&lt;String, String&gt;" name="pair"/>
+        </Method>
+        <Method name="add" returnType="Dictionary" visibility="public">
+          <Argument type="Dictionary" name="dictionary"/>
+        </Method>
+        <Method name="getUsingnamespace" returnType="List&lt;String&gt;" visibility="public"/>
+        <Method name="setUsingnamespace" returnType="void" visibility="public">
+          <Argument type="List&lt;String&gt;" name="usingnamespace"/>
+        </Method>
+        <Method name="addNamespaceUse" returnType="Dictionary" visibility="public">
+          <Argument type="String" name="namspace"/>
+        </Method>
+        <Method name="addAllUsingNamespace" returnType="Dictionary" visibility="public">
+          <Argument type="Dictionary" name="dictionary"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MacroReplace" package="com.vnu.fit.graph.builder.preprocessor" visibility="public" isFinal="true" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="instance" type="MacroReplace" visibility="private" isStatic="true"/>
+        <Field name="os" type="OS" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="MacroReplace" visibility="public" isStatic="true"/>
+        <Method name="checkOs" returnType="OS" visibility="private"/>
+        <Method name="isOsSupported" returnType="boolean" visibility="public"/>
+        <Method name="replaceMacro" returnType="File" visibility="public">
+          <Argument type="File" name="projectFolder"/>
+          <Argument type="boolean" name="keepCmt"/>
+        </Method>
+        <Method name="replace" returnType="String" visibility="private">
+          <Argument type="File" name="file"/>
+          <Argument type="String" name="include"/>
+          <Argument type="boolean" name="keepCmt"/>
+        </Method>
+        <Method name="linuxcheckMcpp" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PatternCompileComponent" package="com.vnu.fit.graph.builder.preprocessor" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Fields>
+        <Field name="key" type="String" visibility="private" isFinal="true"/>
+        <Field name="regex" type="String" visibility="private" isFinal="true"/>
+        <Field name="shouldRemove" type="boolean" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="key"/>
+          <Argument type="String" name="regex"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="key"/>
+          <Argument type="String" name="regex"/>
+          <Argument type="boolean" name="remove"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getKey" returnType="String" visibility="public"/>
+        <Method name="removeIfNeeded" returnType="String" visibility="public">
+          <Argument type="String" name="content"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DependencyCalculator" package="com.vnu.fit.graph.calculator" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Fields>
+        <Field name="dependency" type="Dependency" visibility="private"/>
+        <Field name="list1" type="List&lt;AbstractNode&gt;" visibility="private"/>
+        <Field name="list2" type="List&lt;AbstractNode&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculate" returnType="void" visibility="public"/>
+        <Method name="makeAncestorLists" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="GraphScan" package="com.vnu.fit.graph.calculator" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="scan" returnType="Project" visibility="public" isStatic="true">
+          <Argument type="Project" name="project"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FileFilterConfigurations" package="com.vnu.fit.graph.configurations" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Fields>
+        <Field name="SHOULD_ACCEPT_TEST" type="boolean" visibility="public" isStatic="true"/>
+        <Field name="IMPORT_FILE_EXTENSIONS" type="String[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="EXPORT_FILE_EXTENSIONS" type="String[]" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="GraphCreator" package="com.vnu.fit.graph" visibility="public" isFinal="true" xPosition="2120.0" yPosition="820.0">
+      <Fields>
+        <Field name="projectFolder" type="File" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="projectPath"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="File" name="projectFolder"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="execute" returnType="GraphCreator" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AbstractNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="20.0" yPosition="1220.0">
+      <Fields>
+        <Field name="parent" type="AbstractNode" visibility="protected"/>
+        <Field name="children" type="List&lt;AbstractNode&gt;" visibility="protected"/>
+        <Field name="name" type="String" visibility="protected"/>
+        <Field name="dependencyList" type="List&lt;Dependency&gt;" visibility="protected"/>
+        <Field name="dictionary" type="com.vnu.fit.graph.builder.preprocessor.Dictionary" visibility="protected"/>
+        <Field name="astList" type="Set&lt;IASTNode&gt;" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="getWeight" returnType="float" visibility="public"/>
+        <Method name="getAstList" returnType="Set&lt;IASTNode&gt;" visibility="public"/>
+        <Method name="getAst" returnType="IASTNode" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="addAst" returnType="void" visibility="public">
+          <Argument type="IASTNode" name="ast"/>
+        </Method>
+        <Method name="hasParent" returnType="boolean" visibility="public"/>
+        <Method name="getParent" returnType="AbstractNode" visibility="public"/>
+        <Method name="setParent" returnType="void" visibility="public">
+          <Argument type="AbstractNode" name="parent"/>
+        </Method>
+        <Method name="getChildren" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="setChildren" returnType="void" visibility="public">
+          <Argument type="List&lt;AbstractNode&gt;" name="children"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getDependencyList" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="setDependencyList" returnType="void" visibility="public">
+          <Argument type="List&lt;Dependency&gt;" name="dependencyList"/>
+        </Method>
+        <Method name="findChild" returnType="AbstractNode" visibility="public">
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findOrCreateChild" returnType="AbstractNode" visibility="public">
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="addDependency" returnType="void" visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getDictionary" returnType="com.vnu.fit.graph.builder.preprocessor.Dictionary" visibility="public"/>
+        <Method name="setDictionary" returnType="void" visibility="public">
+          <Argument type="com.vnu.fit.graph.builder.preprocessor.Dictionary" name="dictionary"/>
+        </Method>
+        <Method name="addDictionary" returnType="com.vnu.fit.graph.builder.preprocessor.Dictionary" visibility="public">
+          <Argument type="com.vnu.fit.graph.builder.preprocessor.Dictionary" name="dictionary"/>
+        </Method>
+        <Method name="getAbsulutePath" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="getRelativePath" returnType="List&lt;AbstractNode&gt;" visibility="public">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="getCompactName" returnType="String" visibility="public">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="getFullName" returnType="String" visibility="public"/>
+        <Method name="pathToString" returnType="String" visibility="private">
+          <Argument type="List&lt;AbstractNode&gt;" name="path"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="AbstractNode" name="o"/>
+        </Method>
+        <Method name="parseCIANodeToWNode" returnType="WNode" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="AbstractNode" name="other"/>
+        </Method>
+        <Method name="isFoundWhenSearchdependencyList" returnType="boolean" visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+        </Method>
+        <Method name="sortDependenceForGraph" returnType="void" visibility="private"/>
+        <Method name="markTypeWeightDependence" returnType="void" visibility="public">
+          <Argument type="double" name="percentLow"/>
+          <Argument type="double" name="percentAverage"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClassNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="320.0" yPosition="1220.0">
+      <Fields>
+        <Field name="isTemplate" type="boolean" visibility="private"/>
+        <Field name="templateDeclaration" type="ICPPASTTemplateDeclaration" visibility="private"/>
+        <Field name="templateParameters" type="List&lt;ICPPASTTemplateParameter&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="isBaseOn" returnType="boolean" visibility="public">
+          <Argument type="ClassNode" name="superClass"/>
+        </Method>
+        <Method name="isTemplate" returnType="boolean" visibility="public"/>
+        <Method name="setTemplate" returnType="void" visibility="public">
+          <Argument type="boolean" name="template"/>
+        </Method>
+        <Method name="getTemplateDeclaration" returnType="ICPPASTTemplateDeclaration" visibility="public"/>
+        <Method name="setTemplateDeclaration" returnType="void" visibility="public">
+          <Argument type="ICPPASTTemplateDeclaration" name="td"/>
+        </Method>
+        <Method name="getTemplateParameters" returnType="List&lt;ICPPASTTemplateParameter&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CompoundNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="620.0" yPosition="1220.0">
+      <Fields>
+        <Field name="subChilds" type="List&lt;AbstractNode&gt;" visibility="protected" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getSubChild" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="EnumerationNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="920.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="FunctionNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="1220.0" yPosition="1220.0">
+      <Fields>
+        <Field name="parentClassName" type="String" visibility="private"/>
+        <Field name="params" type="List&lt;IASTParameterDeclaration&gt;" visibility="private" isFinal="true"/>
+        <Field name="isTemplate" type="boolean" visibility="private"/>
+        <Field name="tempDecl" type="ICPPASTTemplateDeclaration" visibility="private"/>
+        <Field name="tempParams" type="List&lt;ICPPASTTemplateParameter&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getParams" returnType="List&lt;IASTParameterDeclaration&gt;" visibility="public"/>
+        <Method name="getParentClassName" returnType="String" visibility="public"/>
+        <Method name="setParentClassName" returnType="void" visibility="public">
+          <Argument type="String" name="parentClassName"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="FunctionNode" name="func"/>
+        </Method>
+        <Method name="isEqualsName" returnType="boolean" visibility="public">
+          <Argument type="FunctionNode" name="func"/>
+        </Method>
+        <Method name="isEqualsParams" returnType="boolean" visibility="public">
+          <Argument type="FunctionNode" name="func"/>
+        </Method>
+        <Method name="addVariableIgnoreDuplication" returnType="boolean" visibility="public">
+          <Argument type="VariableNode" name="node"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="isTemplate" returnType="boolean" visibility="public"/>
+        <Method name="setTemplate" returnType="void" visibility="public">
+          <Argument type="boolean" name="template"/>
+        </Method>
+        <Method name="getTemplateDeclaration" returnType="ICPPASTTemplateDeclaration" visibility="public"/>
+        <Method name="setTemplateDeclaration" returnType="void" visibility="public">
+          <Argument type="ICPPASTTemplateDeclaration" name="td"/>
+        </Method>
+        <Method name="getTemplateParameters" returnType="List&lt;ICPPASTTemplateParameter&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FunctionPointer" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="1520.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="LocalVariableNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="2120.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MemberNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="20.0" yPosition="1620.0">
+      <Fields>
+        <Field name="type" type="ClassNode" visibility="protected"/>
+        <Field name="visibility" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getVisibility" returnType="int" visibility="public"/>
+        <Method name="setVisibility" returnType="void" visibility="public">
+          <Argument type="int" name="visibility"/>
+        </Method>
+        <Method name="getType" returnType="ClassNode" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="ClassNode" name="type"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="NamespaceNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="320.0" yPosition="1620.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="TypedefNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="920.0" yPosition="1620.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="VariableNode" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="1220.0" yPosition="1620.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Dependency" package="com.vnu.fit.graph.models.dependences" visibility="public" xPosition="1520.0" yPosition="1620.0">
+      <Fields>
+        <Field name="typeWeightDependence" type="TypeWeightGrapeDepenedence" visibility="private"/>
+        <Field name="astList" type="Set&lt;IASTNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="weight" type="float" visibility="private"/>
+        <Field name="baseDependencies" type="List&lt;Dependency&gt;" visibility="private"/>
+        <Field name="details" type="String" visibility="private"/>
+        <Field name="beginNode" type="AbstractNode" visibility="private"/>
+        <Field name="endNode" type="AbstractNode" visibility="private"/>
+        <Field name="type" type="Type" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Dependency" name="o"/>
+        </Method>
+        <Method name="getTypeWeightDependence" returnType="TypeWeightGrapeDepenedence" visibility="public"/>
+        <Method name="setTypeWeightDependence" returnType="void" visibility="public">
+          <Argument type="TypeWeightGrapeDepenedence" name="typeWeightDependence"/>
+        </Method>
+        <Method name="createDirectDependency" returnType="Dependency" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="beginNode"/>
+          <Argument type="AbstractNode" name="endNode"/>
+          <Argument type="Type" name="type"/>
+          <Argument type="IASTNode" name="ast"/>
+        </Method>
+        <Method name="createDirectDependency" returnType="Dependency" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="beginNode"/>
+          <Argument type="AbstractNode" name="endNode"/>
+          <Argument type="Type" name="type"/>
+          <Argument type="Set&lt;IASTNode&gt;" name="astList"/>
+        </Method>
+        <Method name="createInDirectDependency" returnType="Dependency" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="beginNode"/>
+          <Argument type="AbstractNode" name="endNode"/>
+          <Argument type="Dependency" name="baseDependency"/>
+        </Method>
+        <Method name="memberImpact" returnType="float" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="hasBeginNode" returnType="boolean" visibility="public"/>
+        <Method name="hasEndNode" returnType="boolean" visibility="public"/>
+        <Method name="getAstList" returnType="Set&lt;IASTNode&gt;" visibility="public"/>
+        <Method name="getWeight" returnType="float" visibility="public"/>
+        <Method name="setWeight" returnType="Dependency" visibility="public">
+          <Argument type="float" name="weight"/>
+        </Method>
+        <Method name="getType" returnType="Type" visibility="public"/>
+        <Method name="setType" returnType="Dependency" visibility="public">
+          <Argument type="Type" name="type"/>
+        </Method>
+        <Method name="getDetails" returnType="String" visibility="public"/>
+        <Method name="setDetails" returnType="Dependency" visibility="public">
+          <Argument type="String" name="details"/>
+        </Method>
+        <Method name="getBaseDependencies" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="setBaseDependencies" returnType="void" visibility="public">
+          <Argument type="List&lt;Dependency&gt;" name="baseDependencies"/>
+        </Method>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="getBeginNode" returnType="AbstractNode" visibility="public"/>
+        <Method name="setBeginNode" returnType="Dependency" visibility="public">
+          <Argument type="AbstractNode" name="beginNode"/>
+        </Method>
+        <Method name="getEndNode" returnType="AbstractNode" visibility="public"/>
+        <Method name="setEndNode" returnType="Dependency" visibility="public">
+          <Argument type="AbstractNode" name="endNode"/>
+        </Method>
+        <Method name="addAst" returnType="Dependency" visibility="public">
+          <Argument type="Set&lt;IASTNode&gt;" name="astList"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Dependency" name="other"/>
+        </Method>
+        <Method name="addAst" returnType="Dependency" visibility="public">
+          <Argument type="IASTNode" name="ast"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="parseCIADependenceToWDependence" returnType="WDependence" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Project" package="com.vnu.fit.graph.models" visibility="public" xPosition="2120.0" yPosition="1620.0">
+      <Fields>
+        <Field name="instance" type="Project" visibility="private" isStatic="true"/>
+        <Field name="rootFile" type="File" visibility="private"/>
+        <Field name="filesForBuilding" type="List&lt;File&gt;" visibility="private"/>
+        <Field name="root" type="AbstractNode" visibility="private"/>
+        <Field name="nodes" type="List&lt;AbstractNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="dependencies" type="List&lt;Dependency&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="newInstance" returnType="Project" visibility="public" isStatic="true"/>
+        <Method name="getInstance" returnType="Project" visibility="public" isStatic="true"/>
+        <Method name="getNodes" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="getDependencies" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="getSortedNodes" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="getSortedDependencies" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="getRoot" returnType="AbstractNode" visibility="public"/>
+        <Method name="setRoot" returnType="void" visibility="public">
+          <Argument type="AbstractNode" name="root"/>
+        </Method>
+        <Method name="remove" returnType="void" visibility="public">
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="removeRemovableNodes" returnType="void" visibility="public"/>
+        <Method name="setRootFile" returnType="void" visibility="public">
+          <Argument type="File" name="rootFile"/>
+        </Method>
+        <Method name="getRootFile" returnType="File" visibility="public"/>
+        <Method name="getFilesForBuilding" returnType="List&lt;File&gt;" visibility="public"/>
+        <Method name="safelyAddDependency" returnType="Dependency" visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+        </Method>
+        <Method name="getDirectDependencies" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="getIndirectDependencies" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="remove" returnType="void" visibility="public">
+          <Argument type="Dependency" name="d"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AbstractCondition" package="com.vnu.fit.graph.searcher" visibility="public" isAbstract="true" xPosition="20.0" yPosition="2020.0">
+      <Fields>
+        <Field name="target" type="T" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="isSatisfied" returnType="boolean" visibility="public" isAbstract="true"/>
+        <Method name="getTarget" returnType="T" visibility="public"/>
+        <Method name="setTarget" returnType="void" visibility="public">
+          <Argument type="T" name="target"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ByClassCondition" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="320.0" yPosition="2020.0">
+      <Fields>
+        <Field name="type" type="Class&lt;E&gt;" visibility="private" isFinal="true"/>
+        <Field name="instanceOf" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Class&lt;E&gt;" name="type"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setInstanceOf" returnType="void" visibility="public">
+          <Argument type="boolean" name="instanceOf"/>
+        </Method>
+        <Method name="isSatisfied" returnType="boolean" visibility="public"/>
+        <Method name="getType" returnType="Class&lt;E&gt;" visibility="public"/>
+        <Method name="newInstance" returnType="T" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DependencyCondition" package="com.vnu.fit.graph.searcher" visibility="public" isAbstract="true" xPosition="620.0" yPosition="2020.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="InverseCondition" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="920.0" yPosition="2020.0">
+      <Fields>
+        <Field name="condition" type="AbstractCondition" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractCondition" name="condition"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isSatisfied" returnType="boolean" visibility="public"/>
+        <Method name="setTarget" returnType="void" visibility="public">
+          <Argument type="Object" name="target"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Logs" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="1220.0" yPosition="2020.0">
+      <Fields>
+        <Field name="SHOULD_CREATE_LOG" type="boolean" visibility="public" isStatic="true"/>
+        <Field name="logs" type="File" visibility="protected" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="log" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="out"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="NameCondition" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="1520.0" yPosition="2020.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="NameCondition" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="isSatisfied" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="NodeCondition" package="com.vnu.fit.graph.searcher" visibility="public" isAbstract="true" xPosition="1820.0" yPosition="2020.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ParamsCondition" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="2120.0" yPosition="2020.0">
+      <Fields>
+        <Field name="caller" type="AbstractNode" visibility="private" isFinal="true"/>
+        <Field name="usingNamespace" type="List&lt;NamespaceNode&gt;" visibility="private" isFinal="true"/>
+        <Field name="onCallListener" type="ExpressionVisitor.OnCallListener" visibility="private"/>
+        <Field name="level" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="caller"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespace"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setArguments" returnType="void" visibility="public">
+          <Argument type="List&lt;IASTExpression&gt;" name="arguments"/>
+        </Method>
+        <Method name="setOnCallListener" returnType="void" visibility="public">
+          <Argument type="ExpressionVisitor.OnCallListener" name="onCallListener"/>
+          <Argument type="int" name="level"/>
+        </Method>
+        <Method name="isSatisfied" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ParamsLengthCondition" package="com.vnu.fit.graph.searcher" visibility="public" xPosition="20.0" yPosition="2420.0">
+      <Fields>
+        <Field name="arguments" type="List&lt;IASTExpression&gt;" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="setArguments" returnType="void" visibility="public">
+          <Argument type="List&lt;IASTExpression&gt;" name="arguments"/>
+        </Method>
+        <Method name="isSatisfied" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Searcher" package="com.vnu.fit.graph.searcher" visibility="public" isFinal="true" xPosition="320.0" yPosition="2420.0">
+      <Fields>
+        <Field name="resultForFindingInInheritanceList" type="AbstractNode" visibility="private" isStatic="true"/>
+        <Field name="nameList" type="List&lt;String&gt;" visibility="private" isStatic="true"/>
+        <Field name="resultForFindingByQualifiedName" type="AbstractNode" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="findChild" returnType="E" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="parent"/>
+          <Argument type="AbstractCondition" name="conditions"/>
+        </Method>
+        <Method name="findChildren" returnType="List&lt;E&gt;" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="parent"/>
+          <Argument type="AbstractCondition" name="conditions"/>
+        </Method>
+        <Method name="findNodes" returnType="List&lt;E&gt;" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="root"/>
+          <Argument type="boolean" name="shouldFindAll"/>
+          <Argument type="AbstractCondition" name="conditions"/>
+        </Method>
+        <Method name="findNodes" returnType="List&lt;E&gt;" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="root"/>
+          <Argument type="boolean" name="shouldFindAll"/>
+          <Argument type="boolean" name="justFindChildren"/>
+          <Argument type="boolean" name="justFindChild"/>
+          <Argument type="AbstractCondition" name="conditions"/>
+        </Method>
+        <Method name="findOrCreateChild" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="parent"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findBySimpleName" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+          <Argument type="String" name="name"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findInInheritanceList" returnType="AbstractNode" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="String" name="name"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="recursiveFindForFindingInInheritanceList" returnType="void" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="i"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findByQualifiedName" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+          <Argument type="CPPASTQualifiedName" name="cppastQualifiedName"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findByQualifiedName" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+          <Argument type="List&lt;String&gt;" name="names"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="findByQualifiedName" returnType="AbstractNode" visibility="public" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="List&lt;NamespaceNode&gt;" name="usingNamespaces"/>
+          <Argument type="String" name="qualifiedName"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+        <Method name="recursiveFindForFindingByQualifiedName" returnType="void" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="int" name="i"/>
+          <Argument type="NodeCondition" name="conditions"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WeightCondition" package="com.vnu.fit.graph.searcher" visibility="public" isAbstract="true" xPosition="620.0" yPosition="2420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="CppFileFilter" package="com.vnu.fit.graph.utils" visibility="public" xPosition="920.0" yPosition="2420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="accept" returnType="boolean" visibility="public">
+          <Argument type="File" name="file"/>
+        </Method>
+        <Method name="getFileList" returnType="List&lt;File&gt;" visibility="public" isStatic="true">
+          <Argument type="File" name="root"/>
+        </Method>
+        <Method name="getFolderOf" returnType="List&lt;File&gt;" visibility="public" isStatic="true">
+          <Argument type="List&lt;File&gt;" name="files"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FileExtensionChecker" package="com.vnu.fit.graph.utils" visibility="public" xPosition="1220.0" yPosition="2420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="accept" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="File" name="file"/>
+          <Argument type="String" name="extensions"/>
+        </Method>
+        <Method name="hasExtension" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="getExtension" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="removeExtension" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="filename"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Log" package="com.vnu.fit.graph.utils" visibility="public" xPosition="1520.0" yPosition="2420.0">
+      <Fields>
+        <Field name="PROPERTY_STATE" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="INSTANCE" type="Log" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="changeSupport" type="PropertyChangeSupport" visibility="private" isFinal="true"/>
+        <Field name="state" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="Log" visibility="public" isStatic="true"/>
+        <Method name="addPropertyChangeListener" returnType="void" visibility="public">
+          <Argument type="PropertyChangeListener" name="listener"/>
+        </Method>
+        <Method name="removePropertyChangeListener" returnType="void" visibility="public">
+          <Argument type="PropertyChangeListener" name="listener"/>
+        </Method>
+        <Method name="state" returnType="void" visibility="public">
+          <Argument type="String" name="state"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ResourceManager" package="com.vnu.fit.graph.utils" visibility="public" isFinal="true" xPosition="1820.0" yPosition="2420.0">
+      <Fields>
+        <Field name="INSTANCE" type="ResourceManager" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="RESOURCES_LOCATION" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="IMAGES_LOCATION" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MCPP_LOCATION" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="tempFolder" type="File" visibility="private"/>
+        <Field name="imagesFolder" type="File" visibility="private"/>
+        <Field name="mcppFolder" type="File" visibility="private"/>
+        <Field name="isLoad" type="boolean" visibility="private"/>
+        <Field name="runningFile" type="File" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="ResourceManager" visibility="public" isStatic="true"/>
+        <Method name="extractResources" returnType="void" visibility="private"/>
+        <Method name="getResourceFolder" returnType="File" visibility="private" isStatic="true">
+          <Argument type="String" name="location"/>
+        </Method>
+        <Method name="load" returnType="void" visibility="public"/>
+        <Method name="loadIfNeeded" returnType="void" visibility="public"/>
+        <Method name="getMcppFolder" returnType="File" visibility="public"/>
+        <Method name="getImagesFolder" returnType="File" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="WDependence" package="com.vnu.fit.neo4jparser.model.dependence" visibility="public" xPosition="2120.0" yPosition="2420.0">
+      <Fields>
+        <Field name="id" type="long" visibility="private"/>
+        <Field name="type" type="String" visibility="private"/>
+        <Field name="weight" type="float" visibility="private"/>
+        <Field name="id_NodeStart" type="long" visibility="private"/>
+        <Field name="id_NodeEnd" type="long" visibility="private"/>
+        <Field name="typeWeight" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="queryCreateDependence" returnType="String" visibility="public"/>
+        <Method name="queryCreateWithHeightDependence" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="getId" returnType="long" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="long" name="id"/>
+        </Method>
+        <Method name="getType" returnType="String" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="String" name="type"/>
+        </Method>
+        <Method name="getId_NodeStart" returnType="long" visibility="public"/>
+        <Method name="setId_NodeStart" returnType="void" visibility="public">
+          <Argument type="long" name="id_NodeStart"/>
+        </Method>
+        <Method name="getId_NodeEnd" returnType="long" visibility="public"/>
+        <Method name="setId_NodeEnd" returnType="void" visibility="public">
+          <Argument type="long" name="id_NodeEnd"/>
+        </Method>
+        <Method name="getWeight" returnType="float" visibility="public"/>
+        <Method name="setWeight" returnType="void" visibility="public">
+          <Argument type="float" name="weight"/>
+        </Method>
+        <Method name="getTypeWeight" returnType="String" visibility="public"/>
+        <Method name="setTypeWeight" returnType="void" visibility="public">
+          <Argument type="String" name="typeWeight"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="WDependenceHelper" package="com.vnu.fit.neo4jparser.model.dependence" visibility="public" xPosition="20.0" yPosition="2820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="mergeListWDependence" returnType="List&lt;WDependence&gt;" visibility="public" isStatic="true">
+          <Argument type="List&lt;WDependence&gt;" name="lstWDependences"/>
+        </Method>
+        <Method name="parseFromListCIADependences" returnType="List&lt;WDependence&gt;" visibility="public" isStatic="true">
+          <Argument type="List&lt;Dependency&gt;" name="lstCIADependences"/>
+        </Method>
+        <Method name="toQuery" returnType="StringBuilder" visibility="public" isStatic="true">
+          <Argument type="List&lt;WDependence&gt;" name="lstWDependences"/>
+        </Method>
+        <Method name="toQueryViewWeightGraph" returnType="StringBuilder" visibility="public" isStatic="true">
+          <Argument type="List&lt;WDependence&gt;" name="lstWDependences"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WNode" package="com.vnu.fit.neo4jparser.model.node" visibility="public" xPosition="320.0" yPosition="2820.0">
+      <Fields>
+        <Field name="id" type="long" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="type" type="String" visibility="private"/>
+        <Field name="lstFile" type="List&lt;String&gt;" visibility="private"/>
+        <Field name="absolutePath" type="String" visibility="private"/>
+        <Field name="sumWeight" type="float" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="queryCreateNode" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="WNode" name="o"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="getAbsolutePath" returnType="String" visibility="public"/>
+        <Method name="setAbsolutePath" returnType="void" visibility="public">
+          <Argument type="String" name="absolutePath"/>
+        </Method>
+        <Method name="getId" returnType="long" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="long" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getType" returnType="String" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="String" name="type"/>
+        </Method>
+        <Method name="getLstFile" returnType="List&lt;String&gt;" visibility="public"/>
+        <Method name="setLstFile" returnType="void" visibility="public">
+          <Argument type="List&lt;String&gt;" name="lstFile"/>
+        </Method>
+        <Method name="getSumWeight" returnType="float" visibility="public"/>
+        <Method name="setSumWeight" returnType="void" visibility="public">
+          <Argument type="float" name="sumWeight"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WNodeHelper" package="com.vnu.fit.neo4jparser.model.node" visibility="public" xPosition="620.0" yPosition="2820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="mergeListWNode" returnType="List&lt;WNode&gt;" visibility="public" isStatic="true">
+          <Argument type="List&lt;WNode&gt;" name="lstNode"/>
+        </Method>
+        <Method name="parseFromListCIANode" returnType="List&lt;WNode&gt;" visibility="public" isStatic="true">
+          <Argument type="List&lt;AbstractNode&gt;" name="lstCIANodes"/>
+        </Method>
+        <Method name="toQueryCreate" returnType="StringBuilder" visibility="public" isStatic="true">
+          <Argument type="List&lt;WNode&gt;" name="lstWNodes"/>
+        </Method>
+        <Method name="toQueryReturn" returnType="StringBuilder" visibility="public" isStatic="true">
+          <Argument type="List&lt;WNode&gt;" name="lstWNodes"/>
+        </Method>
+        <Method name="regexVaildName" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="src"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WProjectData" package="com.vnu.fit.neo4jparser.model" visibility="public" xPosition="920.0" yPosition="2820.0">
+      <Fields>
+        <Field name="lstProjectData" type="List&lt;WNode&gt;" visibility="private"/>
+        <Field name="lstDependence" type="List&lt;WDependence&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="List&lt;WNode&gt;" name="lstProjectData"/>
+          <Argument type="List&lt;WDependence&gt;" name="lstDependence"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getLstProjectData" returnType="List&lt;WNode&gt;" visibility="public"/>
+        <Method name="setLstProjectData" returnType="void" visibility="public">
+          <Argument type="List&lt;WNode&gt;" name="lstProjectData"/>
+        </Method>
+        <Method name="getLstDependence" returnType="List&lt;WDependence&gt;" visibility="public"/>
+        <Method name="setLstDependence" returnType="void" visibility="public">
+          <Argument type="List&lt;WDependence&gt;" name="lstDependence"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ParseFromCIACalculator" package="com.vnu.fit.neo4jparser.parse" visibility="public" xPosition="1220.0" yPosition="2820.0">
+      <Fields>
+        <Field name="abstractTree" type="AbstractNode" visibility="private"/>
+        <Field name="lstAbstractNodesCreate" type="List&lt;AbstractNode&gt;" visibility="private"/>
+        <Field name="lstAbstractNodesReturn" type="List&lt;AbstractNode&gt;" visibility="private"/>
+        <Field name="lstDependences" type="List&lt;Dependency&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="abstractTree"/>
+          <Argument type="List&lt;AbstractNode&gt;" name="lstAbstractNodesCreate"/>
+          <Argument type="List&lt;AbstractNode&gt;" name="lstAbstractNodesReturn"/>
+          <Argument type="List&lt;Dependency&gt;" name="lstDependences"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="parseToNeo4JQuery" returnType="String" visibility="public">
+          <Argument type="TypeViewGraph" name="typeViewGraph"/>
+        </Method>
+        <Method name="FilterNodeToNeo4JQuery" returnType="String" visibility="public">
+          <Argument type="List&lt;AbstractNode&gt;" name="lstNodeSelect"/>
+          <Argument type="TypeViewGraph" name="typeViewGraph"/>
+        </Method>
+        <Method name="getAbstractTree" returnType="AbstractNode" visibility="public"/>
+        <Method name="setAbstractTree" returnType="void" visibility="public">
+          <Argument type="AbstractNode" name="abstractTree"/>
+        </Method>
+        <Method name="getLstAbstractNodesCreate" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="setLstAbstractNodesCreate" returnType="void" visibility="public">
+          <Argument type="List&lt;AbstractNode&gt;" name="lstAbstractNodesCreate"/>
+        </Method>
+        <Method name="getLstAbstractNodesReturn" returnType="List&lt;AbstractNode&gt;" visibility="public"/>
+        <Method name="setLstAbstractNodesReturn" returnType="void" visibility="public">
+          <Argument type="List&lt;AbstractNode&gt;" name="lstAbstractNodesReturn"/>
+        </Method>
+        <Method name="getLstDependences" returnType="List&lt;Dependency&gt;" visibility="public"/>
+        <Method name="setLstDependences" returnType="void" visibility="public">
+          <Argument type="List&lt;Dependency&gt;" name="lstDependences"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="testing" package="com.vnu.fit.neo4jparser" visibility="public" xPosition="1520.0" yPosition="2820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Visualization" package="com.vnu.fit.neo4jparser" visibility="public" xPosition="1820.0" yPosition="2820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Bundle" package="com.vnu.fit.visualization.models" visibility="public" xPosition="2120.0" yPosition="2820.0">
+      <Fields>
+        <Field name="nodes" type="List&lt;DefaultMutableTreeNode&gt;" visibility="private"/>
+        <Field name="parents" type="List&lt;Integer&gt;" visibility="private"/>
+        <Field name="childrens" type="List&lt;List&lt;Integer&gt;&gt;" visibility="private"/>
+        <Field name="isExpanded" type="List&lt;Boolean&gt;" visibility="private"/>
+        <Field name="codeMaps" type="List&lt;Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;&gt;" visibility="private"/>
+        <Field name="maxDependencyWeight" type="int" visibility="private"/>
+        <Field name="minDependencyWeight" type="int" visibility="private"/>
+        <Field name="maxNodeWeight" type="int" visibility="private"/>
+        <Field name="minNodeWeight" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="get" returnType="Object" visibility="public">
+          <Argument type="Key" name="key"/>
+        </Method>
+        <Method name="build" returnType="void" visibility="public">
+          <Argument type="File" name="project"/>
+        </Method>
+        <Method name="render" returnType="void" visibility="public"/>
+        <Method name="bundleInit" returnType="void" visibility="private"/>
+        <Method name="addNew" returnType="int" visibility="private">
+          <Argument type="DefaultMutableTreeNode" name="node"/>
+          <Argument type="int" name="pi"/>
+        </Method>
+        <Method name="addAbstractNode" returnType="int" visibility="private">
+          <Argument type="AbstractNode" name="node"/>
+          <Argument type="int" name="pi"/>
+        </Method>
+        <Method name="addDependencyList" returnType="int" visibility="private">
+          <Argument type="List&lt;Dependency&gt;" name="l"/>
+          <Argument type="int" name="pi"/>
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="addDependency" returnType="int" visibility="private">
+          <Argument type="Dependency" name="d"/>
+          <Argument type="int" name="pi"/>
+          <Argument type="AbstractNode" name="node"/>
+        </Method>
+        <Method name="merge" returnType="void" visibility="package" isStatic="true">
+          <Argument type="Map&lt;File, Set&gt;" name="pm"/>
+          <Argument type="Map&lt;File, Set&gt;" name="cm"/>
+        </Method>
+        <Method name="computeDependencyWeightFilter" returnType="void" visibility="private"/>
+        <Method name="computeNodeWeightRange" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="CIATreeModel" package="com.vnu.fit.visualization.models" visibility="public" xPosition="20.0" yPosition="3220.0">
+      <Fields>
+        <Field name="model" type="Model" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Model" name="model"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="attach" returnType="void" visibility="private"/>
+        <Method name="findNodeByName" returnType="TreePath" visibility="public">
+          <Argument type="TreePath" name="curPath"/>
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getPathIfFound" returnType="TreePath" visibility="private">
+          <Argument type="int" name="index"/>
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="findPointee" returnType="TreePath" visibility="public">
+          <Argument type="IPointer" name="pointer"/>
+        </Method>
+        <Method name="reload" returnType="void" visibility="public"/>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FileBoxModel" package="com.vnu.fit.visualization.models" visibility="public" xPosition="320.0" yPosition="3220.0">
+      <Fields>
+        <Field name="HIGHLIGHT_CODE" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="model" type="Model" visibility="private" isFinal="true"/>
+        <Field name="currentMap" type="Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Model" name="model"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCurrentMap" returnType="Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;" visibility="public"/>
+        <Method name="valueChanged" returnType="void" visibility="public">
+          <Argument type="TreeSelectionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Model" package="com.vnu.fit.visualization.models" visibility="public" xPosition="620.0" yPosition="3220.0">
+      <Fields>
+        <Field name="PROPERTY_DATA_CHANGED" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="nodes" type="List&lt;DefaultMutableTreeNode&gt;" visibility="private"/>
+        <Field name="parents" type="List&lt;Integer&gt;" visibility="private"/>
+        <Field name="childrens" type="List&lt;List&lt;Integer&gt;&gt;" visibility="private"/>
+        <Field name="isExpanded" type="List&lt;Boolean&gt;" visibility="private"/>
+        <Field name="codeMaps" type="List&lt;Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;&gt;" visibility="private"/>
+        <Field name="maxDependencyWeight" type="int" visibility="private"/>
+        <Field name="minDependencyWeight" type="int" visibility="private"/>
+        <Field name="maxNodeWeight" type="int" visibility="private"/>
+        <Field name="minNodeWeight" type="int" visibility="private"/>
+        <Field name="changeSupport" type="PropertyChangeSupport" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="addPropertyChangeListener" returnType="void" visibility="public">
+          <Argument type="PropertyChangeListener" name="listener"/>
+        </Method>
+        <Method name="modelInit" returnType="void" visibility="private"/>
+        <Method name="onSavedInstanceState" returnType="void" visibility="public">
+          <Argument type="Bundle" name="b"/>
+        </Method>
+        <Method name="getMinDependencyWeight" returnType="int" visibility="public"/>
+        <Method name="getMaxDependencyWeight" returnType="int" visibility="public"/>
+        <Method name="getMaxNodeWeight" returnType="int" visibility="public"/>
+        <Method name="getMinNodeWeight" returnType="int" visibility="public"/>
+        <Method name="getPathStates" returnType="Pair&lt;Set&lt;TreePath&gt;, Set&lt;TreePath&gt;&gt;" visibility="public"/>
+        <Method name="getTreeNodeList" returnType="List&lt;DefaultMutableTreeNode&gt;" visibility="public"/>
+        <Method name="getParentIndexList" returnType="List&lt;Integer&gt;" visibility="public"/>
+        <Method name="getCodeMaps" returnType="List&lt;Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;&gt;" visibility="public"/>
+        <Method name="setExpandedForPath" returnType="void" visibility="public">
+          <Argument type="TreePath" name="path"/>
+          <Argument type="boolean" name="isExpanded"/>
+        </Method>
+        <Method name="refilter" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="isVisible" returnType="boolean" visibility="public">
+          <Argument type="int" name="i"/>
+        </Method>
+        <Method name="setVisibility" returnType="void" visibility="private">
+          <Argument type="int" name="i"/>
+          <Argument type="boolean" name="b"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DefaultAbstractNode" package="com.vnu.fit.visualization.models.tree" visibility="public" isAbstract="true" xPosition="920.0" yPosition="3220.0">
+      <Fields>
+        <Field name="node" type="AbstractNode" visibility="protected"/>
+        <Field name="icon" type="Icon" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected">
+          <Argument type="AbstractNode" name="node"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNode" returnType="AbstractNode" visibility="public"/>
+        <Method name="getIcon" returnType="Icon" visibility="public"/>
+        <Method name="getAstList" returnType="Set&lt;IASTNode&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DefaultDependencyNode" package="com.vnu.fit.visualization.models.tree" visibility="public" isAbstract="true" xPosition="1220.0" yPosition="3220.0">
+      <Fields>
+        <Field name="dependency" type="Dependency" visibility="protected"/>
+        <Field name="icon" type="Icon" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected">
+          <Argument type="Dependency" name="dependency"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIcon" returnType="Icon" visibility="public"/>
+        <Method name="getDependency" returnType="Dependency" visibility="public"/>
+        <Method name="getAstList" returnType="Set&lt;IASTNode&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PointerAbstractNode" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="620.0" yPosition="3620.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="boolean" name="isBegin"/>
+          <Argument type="AbstractNode" name="begin"/>
+          <Argument type="AbstractNode" name="end"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClosestSimilarityParent" returnType="AbstractNode" visibility="private" isStatic="true">
+          <Argument type="AbstractNode" name="begin"/>
+          <Argument type="AbstractNode" name="end"/>
+        </Method>
+        <Method name="getPointer" returnType="Object" visibility="public"/>
+        <Method name="isVisible" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PointerDependencyNode" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="920.0" yPosition="3620.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPointer" returnType="Object" visibility="public"/>
+        <Method name="isVisible" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ViewableAbstractNode" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="1220.0" yPosition="3620.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AbstractNode" name="node"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPointee" returnType="Object" visibility="public"/>
+        <Method name="isVisible" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ViewableDependencyNode" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="1520.0" yPosition="3620.0">
+      <Fields>
+        <Field name="visibilityTarget" type="AbstractNode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Dependency" name="dependency"/>
+          <Argument type="AbstractNode" name="node"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPointee" returnType="Object" visibility="public"/>
+        <Method name="isVisible" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ViewableDependencyNodeList" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="1820.0" yPosition="3620.0">
+      <Fields>
+        <Field name="icon" type="Icon" visibility="protected"/>
+        <Field name="dependencyList" type="List&lt;Dependency&gt;" visibility="protected"/>
+        <Field name="visibility" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="boolean" name="isDependencyList"/>
+          <Argument type="List&lt;Dependency&gt;" name="dependencyList"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIcon" returnType="Icon" visibility="public"/>
+        <Method name="isVisible" returnType="boolean" visibility="public"/>
+        <Method name="setVisibility" returnType="void" visibility="public">
+          <Argument type="boolean" name="visibility"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="BundleBuilder" package="com.vnu.fit.visualization.utils" visibility="public" xPosition="2120.0" yPosition="3620.0">
+      <Fields>
+        <Field name="projectFolder" type="File" visibility="private" isFinal="true"/>
+        <Field name="statusLabel" type="JLabel" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="File" name="projectFolder"/>
+          <Argument type="JLabel" name="statusLabel"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="doInBackground" returnType="Bundle" visibility="protected"/>
+        <Method name="process" returnType="void" visibility="protected">
+          <Argument type="List&lt;String&gt;" name="chunks"/>
+        </Method>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CodeHighlighter" package="com.vnu.fit.visualization.utils" visibility="public" xPosition="20.0" yPosition="4020.0">
+      <Fields>
+        <Field name="model" type="Model" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Model" name="model"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="hightlight" returnType="int" visibility="public">
+          <Argument type="Map&lt;File, Set&lt;IASTFileLocation&gt;&gt;" name="map"/>
+          <Argument type="File" name="file"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CppFileChooserFilter" package="com.vnu.fit.visualization.utils" visibility="public" xPosition="320.0" yPosition="4020.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="accept" returnType="boolean" visibility="public">
+          <Argument type="File" name="f"/>
+        </Method>
+        <Method name="getDescription" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ExceptionHandler" package="com.vnu.fit.visualization.utils" visibility="public" isFinal="true" xPosition="620.0" yPosition="4020.0">
+      <Fields>
+        <Field name="TITLE_EXCEPTION" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="container" type="Container" visibility="private" isFinal="true"/>
+        <Field name="logger" type="Logger" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Container" name="frame"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="catchException" returnType="void" visibility="public">
+          <Argument type="Exception" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="IconManager" package="com.vnu.fit.visualization.utils" visibility="public" isFinal="true" xPosition="920.0" yPosition="4020.0">
+      <Fields>
+        <Field name="INSTANCE" type="IconManager" visibility="private" isStatic="true"/>
+        <Field name="APP_ICON" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="SEARCH" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="SAVE" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="EDIT" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="CANCEL" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="images" type="HashMap&lt;String, Image&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="IconManager" visibility="public" isStatic="true"/>
+        <Method name="getIcon" returnType="Icon" visibility="public">
+          <Argument type="String" name="key"/>
+        </Method>
+        <Method name="getImage" returnType="Image" visibility="public">
+          <Argument type="String" name="key"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MacroReplacer" package="com.vnu.fit.visualization.utils" visibility="public" xPosition="1220.0" yPosition="4020.0">
+      <Fields>
+        <Field name="text" type="JTextField" visibility="private" isFinal="true"/>
+        <Field name="project" type="File" visibility="private" isFinal="true"/>
+        <Field name="keepCmt" type="boolean" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="JTextField" name="text"/>
+          <Argument type="File" name="project"/>
+          <Argument type="boolean" name="keepCmt"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="doInBackground" returnType="File" visibility="protected"/>
+        <Method name="process" returnType="void" visibility="protected">
+          <Argument type="List&lt;String&gt;" name="chunks"/>
+        </Method>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Toast" package="com.vnu.fit.visualization.utils" visibility="public" xPosition="1520.0" yPosition="4020.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="LENGTH_SHORT" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="LENGTH_LONG" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="ERROR_RED" type="Color" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="SUCCESS_GREEN" type="Color" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="NORMAL_BLACK" type="Color" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="MAX_OPACITY" type="float" visibility="private" isFinal="true"/>
+        <Field name="OPACITY_INCREMENT" type="float" visibility="private" isFinal="true"/>
+        <Field name="FADE_REFRESH_RATE" type="int" visibility="private" isFinal="true"/>
+        <Field name="WINDOW_RADIUS" type="int" visibility="private" isFinal="true"/>
+        <Field name="CHARACTER_LENGTH_MULTIPLIER" type="int" visibility="private" isFinal="true"/>
+        <Field name="DISTANCE_FROM_PARENT_TOP" type="int" visibility="private" isFinal="true"/>
+        <Field name="mOwner" type="JFrame" visibility="private"/>
+        <Field name="mText" type="String" visibility="private"/>
+        <Field name="mDuration" type="int" visibility="private"/>
+        <Field name="mBackgroundColor" type="Color" visibility="private"/>
+        <Field name="mForegroundColor" type="Color" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="JFrame" name="owner"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="createGUI" returnType="void" visibility="private"/>
+        <Method name="fadeIn" returnType="void" visibility="public"/>
+        <Method name="fadeOut" returnType="void" visibility="public"/>
+        <Method name="getToastLocation" returnType="Point" visibility="private"/>
+        <Method name="setText" returnType="void" visibility="public">
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="setDuration" returnType="void" visibility="public">
+          <Argument type="int" name="duration"/>
+        </Method>
+        <Method name="setBackground" returnType="void" visibility="public">
+          <Argument type="Color" name="backgroundColor"/>
+        </Method>
+        <Method name="setForeground" returnType="void" visibility="public">
+          <Argument type="Color" name="foregroundColor"/>
+        </Method>
+        <Method name="makeText" returnType="Toast" visibility="public" isStatic="true">
+          <Argument type="JFrame" name="owner"/>
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="makeText" returnType="Toast" visibility="public" isStatic="true">
+          <Argument type="JFrame" name="owner"/>
+          <Argument type="String" name="text"/>
+          <Argument type="Style" name="style"/>
+        </Method>
+        <Method name="makeText" returnType="Toast" visibility="public" isStatic="true">
+          <Argument type="JFrame" name="owner"/>
+          <Argument type="String" name="text"/>
+          <Argument type="int" name="duration"/>
+        </Method>
+        <Method name="makeText" returnType="Toast" visibility="public" isStatic="true">
+          <Argument type="JFrame" name="owner"/>
+          <Argument type="String" name="text"/>
+          <Argument type="int" name="duration"/>
+          <Argument type="Style" name="style"/>
+        </Method>
+        <Method name="display" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UIConfigurations" package="com.vnu.fit.visualization.utils" visibility="public" isFinal="true" xPosition="1820.0" yPosition="4020.0">
+      <Fields>
+        <Field name="TREE_WIDTH_PROPORTION" type="float" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="CODE_WIDTH_PROPORTION" type="float" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="AutoCompleteTextField" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="2120.0" yPosition="4020.0">
+      <Fields>
+        <Field name="hinter" type="JComboBox" visibility="private"/>
+        <Field name="hints" type="List&lt;String&gt;" visibility="private"/>
+        <Field name="model" type="DefaultComboBoxModel" visibility="private"/>
+        <Field name="controller" type="AutoCompleteTextFieldController" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="void" visibility="private"/>
+        <Method name="setAdjusting" returnType="void" visibility="public">
+          <Argument type="boolean" name="adjusting"/>
+        </Method>
+        <Method name="isAdjusting" returnType="boolean" visibility="public"/>
+        <Method name="getHinter" returnType="JComboBox" visibility="package"/>
+        <Method name="getHints" returnType="List&lt;String&gt;" visibility="package"/>
+        <Method name="setHints" returnType="void" visibility="public">
+          <Argument type="List&lt;String&gt;" name="hints"/>
+        </Method>
+        <Method name="getController" returnType="AutoCompleteTextFieldController" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AutoCompleteTextFieldController" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="20.0" yPosition="4420.0">
+      <Fields>
+        <Field name="txtInput" type="AutoCompleteTextField" visibility="private" isFinal="true"/>
+        <Field name="cbInput" type="JComboBox" visibility="private" isFinal="true"/>
+        <Field name="mode" type="Mode" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="AutoCompleteTextField" name="txtInput"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setMode" returnType="void" visibility="public">
+          <Argument type="Mode" name="mode"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+        <Method name="keyPressed" returnType="void" visibility="public">
+          <Argument type="KeyEvent" name="e"/>
+        </Method>
+        <Method name="insertUpdate" returnType="void" visibility="public">
+          <Argument type="DocumentEvent" name="e"/>
+        </Method>
+        <Method name="removeUpdate" returnType="void" visibility="public">
+          <Argument type="DocumentEvent" name="e"/>
+        </Method>
+        <Method name="changedUpdate" returnType="void" visibility="public">
+          <Argument type="DocumentEvent" name="e"/>
+        </Method>
+        <Method name="updateList" returnType="void" visibility="private"/>
+        <Method name="isSatisfied" returnType="boolean" visibility="private">
+          <Argument type="String" name="input"/>
+          <Argument type="String" name="target"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="InitView" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="320.0" yPosition="4420.0">
+      <Fields>
+        <Field name="MESSAGE_NOT_FOUND" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MESSAGE_HIDDEN_NODE" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MESSAGE_SAVED" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="projectFolder" type="File" visibility="private"/>
+        <Field name="model" type="Model" visibility="private" isFinal="true"/>
+        <Field name="exceptionHandler" type="ExceptionHandler" visibility="private" isFinal="true"/>
+        <Field name="codeArea" type="RSyntaxTextArea" visibility="private"/>
+        <Field name="editingFile" type="File" visibility="private"/>
+        <Field name="cancelButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="checkAll" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="contentSplitPane" type="javax.swing.JSplitPane" visibility="private"/>
+        <Field name="dependencyFilter" type="javax.swing.JSlider" visibility="private"/>
+        <Field name="deselectAll" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="editButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="extendSplitPane" type="javax.swing.JSplitPane" visibility="private"/>
+        <Field name="fileBox" type="javax.swing.JComboBox&lt;File&gt;" visibility="private"/>
+        <Field name="filterTree" type="javax.swing.JTree" visibility="private"/>
+        <Field name="importMenuItem" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="importWindows" type="javax.swing.JFileChooser" visibility="private"/>
+        <Field name="nodeFilter" type="javax.swing.JSlider" visibility="private"/>
+        <Field name="parseSelectedNode" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="parseToNeo4j" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="reimportMenuItem" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="replaceMacro" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="saveButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="searchButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="searchTextField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="spCodeScroller" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="taCodeViewer" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="tree" type="javax.swing.JTree" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="frameInit" returnType="void" visibility="protected"/>
+        <Method name="createCodeHighlighter" returnType="Highlighter" visibility="public"/>
+        <Method name="createFileBoxModel" returnType="ComboBoxModel" visibility="public"/>
+        <Method name="createTreeModel" returnType="TreeModel" visibility="public"/>
+        <Method name="taCodeViewerPreInit" returnType="void" visibility="private"/>
+        <Method name="taCodeViewerPostAdding" returnType="void" visibility="private"/>
+        <Method name="filterTreePostInit" returnType="void" visibility="private"/>
+        <Method name="filterTreeCellRenderer" returnType="TreeCellRenderer" visibility="private"/>
+        <Method name="searchButtonIcon" returnType="Icon" visibility="private"/>
+        <Method name="saveButtonIcon" returnType="Icon" visibility="private"/>
+        <Method name="cancelButtonIcon" returnType="Icon" visibility="private"/>
+        <Method name="editButtonIcon" returnType="Icon" visibility="private"/>
+        <Method name="setEditing" returnType="void" visibility="private">
+          <Argument type="boolean" name="editing"/>
+        </Method>
+        <Method name="importProject" returnType="void" visibility="private"/>
+        <Method name="doParse" returnType="void" visibility="private">
+          <Argument type="List&lt;AbstractNode&gt;" name="filter"/>
+        </Method>
+        <Method name="setValueForWeightFilters" returnType="void" visibility="private"/>
+        <Method name="bindRangeAndValue" returnType="void" visibility="private">
+          <Argument type="JSlider" name="slider"/>
+          <Argument type="int" name="max"/>
+          <Argument type="int" name="min"/>
+          <Argument type="int" name="value"/>
+        </Method>
+        <Method name="reloadModel" returnType="void" visibility="private"/>
+        <Method name="importWindowsFileFilter" returnType="FileFilter" visibility="private"/>
+        <Method name="showCodeAndHighlight" returnType="void" visibility="private">
+          <Argument type="File" name="file"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="importMenuItemActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="reimportMenuItemActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="fileBoxItemStateChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ItemEvent" name="evt"/>
+        </Method>
+        <Method name="treeMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="saveButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="searchButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="searchTextFieldKeyPressed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.KeyEvent" name="evt"/>
+        </Method>
+        <Method name="dependencyFilterStateChanged" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.ChangeEvent" name="evt"/>
+        </Method>
+        <Method name="treeValueChanged" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.TreeSelectionEvent" name="evt"/>
+        </Method>
+        <Method name="formComponentResized" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ComponentEvent" name="evt"/>
+        </Method>
+        <Method name="extendSplitPaneComponentResized" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ComponentEvent" name="evt"/>
+        </Method>
+        <Method name="treeTreeExpanded" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.TreeExpansionEvent" name="evt"/>
+        </Method>
+        <Method name="treeTreeCollapsed" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.TreeExpansionEvent" name="evt"/>
+        </Method>
+        <Method name="nodeFilterStateChanged" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.ChangeEvent" name="evt"/>
+        </Method>
+        <Method name="parseToNeo4jActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="replaceMacroActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="parseSelectedNodeActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="deselectAllActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="checkAllActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cancelButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="editButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ParseNeo4jFrame" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="620.0" yPosition="4420.0">
+      <Fields>
+        <Field name="MESSAGE_QUERY" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MESSAGE_QUERY_NO_CHANGE" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="abstractTree" type="AbstractNode" visibility="private"/>
+        <Field name="lstNodeFilter" type="List&lt;AbstractNode&gt;" visibility="private"/>
+        <Field name="filterMode" type="boolean" visibility="private"/>
+        <Field name="currentTable" type="JTable" visibility="private"/>
+        <Field name="buttonPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="byTypeBtn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="byWeightBtn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="checkAll" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="dependencyScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="dependencyTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="indirectCheckBox" type="javax.swing.JCheckBox" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="nodeScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="nodeTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="popupMenu" type="javax.swing.JPopupMenu" visibility="private"/>
+        <Field name="queryScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="queryTextArea" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="slider" type="javax.swing.JSlider" visibility="private"/>
+        <Field name="typeScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="typeTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="weightIndirectLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="weightIndirectPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="weightIndirectTextField" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="sliderPostInit" returnType="void" visibility="private"/>
+        <Method name="setAbstractTree" returnType="void" visibility="package">
+          <Argument type="AbstractNode" name="abstractTree"/>
+        </Method>
+        <Method name="setFilterNode" returnType="void" visibility="package">
+          <Argument type="List&lt;AbstractNode&gt;" name="lstNodeFilter"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="byTypeBtnActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="checkAllActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="dependencyTableMouseReleased" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="nodeTableMouseReleased" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="typeTableMouseReleased" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="byWeightBtnActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="sliderStateChanged" returnType="void" visibility="private">
+          <Argument type="javax.swing.event.ChangeEvent" name="evt"/>
+        </Method>
+        <Method name="parseToNeo4j" returnType="void" visibility="private">
+          <Argument type="ParseFromCIACalculator.TypeViewGraph" name="type"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ProgressDialog" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="920.0" yPosition="4420.0">
+      <Fields>
+        <Field name="RET_CANCEL" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="RET_OK" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="adapter" type="BundleBuilder" visibility="private"/>
+        <Field name="exceptionHandler" type="ExceptionHandler" visibility="private" isFinal="true"/>
+        <Field name="bundle" type="Bundle" visibility="private"/>
+        <Field name="cancelButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="statusLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="returnStatus" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="java.awt.Frame" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="dialogInit" returnType="void" visibility="protected"/>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="File" name="project"/>
+        </Method>
+        <Method name="getBundle" returnType="Bundle" visibility="public"/>
+        <Method name="getReturnStatus" returnType="int" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="cancelButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="closeDialog" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="doClose" returnType="void" visibility="private">
+          <Argument type="int" name="retStatus"/>
+        </Method>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ReplaceMacroDialog" package="com.vnu.fit.visualization.viewandcontroller" visibility="public" xPosition="1220.0" yPosition="4420.0">
+      <Fields>
+        <Field name="RET_CANCEL" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="RET_OK" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="projectFolder" type="File" visibility="private"/>
+        <Field name="rebuiltProjectFolder" type="File" visibility="private"/>
+        <Field name="replacer" type="MacroReplacer" visibility="private"/>
+        <Field name="exceptionHandler" type="ExceptionHandler" visibility="private" isFinal="true"/>
+        <Field name="browseButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="browseProject" type="javax.swing.JFileChooser" visibility="private"/>
+        <Field name="cancelButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="keepCmt" type="javax.swing.JCheckBox" visibility="private"/>
+        <Field name="okButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="projectPath" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="rebuildPath" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="replaceButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="returnStatus" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="java.awt.Frame" name="parent"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getReturnStatus" returnType="int" visibility="public"/>
+        <Method name="getRebuiltProjectFolder" returnType="File" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="okButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cancelButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="closeDialog" returnType="void" visibility="private">
+          <Argument type="java.awt.event.WindowEvent" name="evt"/>
+        </Method>
+        <Method name="browseButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="replaceButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="doClose" returnType="void" visibility="private">
+          <Argument type="int" name="retStatus"/>
+        </Method>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TestAST" package="test" visibility="public" xPosition="1520.0" yPosition="4420.0">
+      <Fields>
+        <Field name="pathFile" type="String" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="pathFile"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="printSpace" returnType="String" visibility="private" isStatic="true">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="printTree" returnType="void" visibility="private" isStatic="true">
+          <Argument type="IASTNode" name="node"/>
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="isVisible" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="IASTNode" name="current"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="ITemplatable" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="1820.0" yPosition="1220.0">
+      <Methods>
+        <Method name="isTemplate" returnType="boolean" visibility="package"/>
+        <Method name="setTemplate" returnType="void" visibility="package">
+          <Argument type="boolean" name="template"/>
+        </Method>
+        <Method name="getTemplateDeclaration" returnType="ICPPASTTemplateDeclaration" visibility="package"/>
+        <Method name="setTemplateDeclaration" returnType="void" visibility="package">
+          <Argument type="ICPPASTTemplateDeclaration" name="td"/>
+        </Method>
+        <Method name="getTemplateParameters" returnType="List&lt;ICPPASTTemplateParameter&gt;" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="Removable" package="com.vnu.fit.graph.models.ast" visibility="public" xPosition="620.0" yPosition="1620.0">
+      <Methods/>
+    </Interface>
+    <Interface name="IGetWeight" package="com.vnu.fit.graph.models" visibility="public" xPosition="1820.0" yPosition="1620.0">
+      <Methods>
+        <Method name="getWeight" returnType="float" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="IGetAstList" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="1520.0" yPosition="3220.0">
+      <Methods>
+        <Method name="getAstList" returnType="Set&lt;IASTNode&gt;" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="IGetVisibility" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="1820.0" yPosition="3220.0">
+      <Methods>
+        <Method name="isVisible" returnType="boolean" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="INewIcon" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="2120.0" yPosition="3220.0">
+      <Methods>
+        <Method name="getIcon" returnType="Icon" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="IPointee" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="20.0" yPosition="3620.0">
+      <Methods>
+        <Method name="getPointee" returnType="Object" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="IPointer" package="com.vnu.fit.visualization.models.tree" visibility="public" xPosition="320.0" yPosition="3620.0">
+      <Methods>
+        <Method name="getPointer" returnType="Object" visibility="package"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.NameCondition" target="com.vnu.fit.graph.searcher.NodeCondition"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.TypedefAnalyser" target="com.vnu.fit.graph.analyser.components.TypedefAnalyser" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.ast.TypedefNode" target="com.vnu.fit.graph.models.ast.Removable"/>
+    <HasRelation name="functionNode" source="com.vnu.fit.graph.analyser.components.FunctionDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.FunctionNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.CompoundNode" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="caller" source="com.vnu.fit.graph.searcher.ParamsCondition" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.models.Bundle" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.searcher.ParamsCondition" target="com.vnu.fit.graph.analyser.visitors.ExpressionVisitor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.ParamsCondition" target="com.vnu.fit.graph.searcher.ParamsLengthCondition"/>
+    <UseRelation source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.model.node.WNode" target="com.vnu.fit.neo4jparser.model.node.WNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.ast.FunctionNode" target="com.vnu.fit.graph.models.ast.ITemplatable"/>
+    <UseRelation source="com.vnu.fit.visualization.utils.IconManager" target="com.vnu.fit.visualization.utils.IconManager" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.searcher.NameCondition" target="com.vnu.fit.graph.searcher.NameCondition" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.ast.LocalVariableNode" target="com.vnu.fit.graph.models.ast.Removable"/>
+    <HasRelation name="model" source="com.vnu.fit.visualization.models.FileBoxModel" target="com.vnu.fit.visualization.models.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.ClassNode" target="com.vnu.fit.graph.models.ast.CompoundNode"/>
+    <HasRelation name="exceptionHandler" source="com.vnu.fit.visualization.viewandcontroller.ReplaceMacroDialog" target="com.vnu.fit.visualization.utils.ExceptionHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.visitors.ExpressionVisitor" target="com.vnu.fit.graph.models.ast.MemberNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="exceptionHandler" source="com.vnu.fit.visualization.viewandcontroller.ProgressDialog" target="com.vnu.fit.visualization.utils.ExceptionHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="visibilityTarget" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNode" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="lstAbstractNodesReturn" source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.FunctionPointer" target="com.vnu.fit.graph.models.ast.FunctionNode"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.MemberNode" target="com.vnu.fit.graph.models.ast.AbstractNode"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.InitView" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.Project" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="baseDependencies" source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Dependency&gt;"/>
+    <HasRelation name="model" source="com.vnu.fit.visualization.viewandcontroller.InitView" target="com.vnu.fit.visualization.models.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.builder.hierarchy.components.VariableNodeBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="lstProjectData" source="com.vnu.fit.neo4jparser.model.WProjectData" target="com.vnu.fit.neo4jparser.model.node.WNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;WNode&gt;"/>
+    <HasRelation name="usingNamespace" source="com.vnu.fit.graph.searcher.ParamsCondition" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="beginNode" source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="lstDependences" source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Dependency&gt;"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.ClassNode" target="com.vnu.fit.graph.models.ast.ClassNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.searcher.Searcher" target="com.vnu.fit.graph.searcher.AbstractCondition" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.ast.ClassNode" target="com.vnu.fit.graph.models.ast.ITemplatable"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.LocalVariableNode" target="com.vnu.fit.graph.models.ast.VariableNode"/>
+    <HasRelation name="instance" source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.Project" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextField" target="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextFieldController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.FunctionNode" target="com.vnu.fit.graph.models.ast.MemberNode"/>
+    <HasRelation name="INSTANCE" source="com.vnu.fit.graph.utils.Log" target="com.vnu.fit.graph.utils.Log" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="usingNamespaceList" source="com.vnu.fit.graph.analyser.components.VariableDependenciesAnalysis" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.models.tree.PointerAbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.DependencyCondition" target="com.vnu.fit.graph.searcher.AbstractCondition"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.PointerAbstractNode" target="com.vnu.fit.visualization.models.tree.IPointer"/>
+    <HasRelation name="model" source="com.vnu.fit.visualization.models.CIATreeModel" target="com.vnu.fit.visualization.models.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="namespaceNode" source="com.vnu.fit.graph.builder.hierarchy.components.NamespaceBuilder" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.visitors.DeclSpecifierVisitor" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="com.vnu.fit.visualization.utils.CodeHighlighter" target="com.vnu.fit.visualization.models.Model" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.models.Bundle" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="variableNodes" source="com.vnu.fit.graph.builder.hierarchy.components.VariableNodeBuilder" target="com.vnu.fit.graph.models.ast.VariableNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;VariableNode&gt;"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.InverseCondition" target="com.vnu.fit.graph.searcher.AbstractCondition"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.VariableNodeBuilder" target="com.vnu.fit.graph.models.ast.VariableNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="type" source="com.vnu.fit.graph.models.ast.MemberNode" target="com.vnu.fit.graph.models.ast.ClassNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.calculator.GraphScan" target="com.vnu.fit.graph.models.Project" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.model.dependence.WDependenceHelper" target="com.vnu.fit.neo4jparser.model.dependence.WDependence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.builder.hierarchy.components.TemplateBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.NodeCondition" target="com.vnu.fit.graph.searcher.AbstractCondition"/>
+    <UseRelation source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="endNode" source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNode" target="com.vnu.fit.visualization.models.tree.IPointee"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.CompoundDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.VariableNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.ParamsLengthCondition" target="com.vnu.fit.graph.searcher.ByClassCondition"/>
+    <HasRelation name="dependency" source="com.vnu.fit.graph.calculator.DependencyCalculator" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="root" source="com.vnu.fit.graph.analyser.components.MemberDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.utils.ResourceManager" target="com.vnu.fit.graph.utils.ResourceManager" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="caller" source="com.vnu.fit.graph.analyser.visitors.DeclSpecifierVisitor" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.builder.hierarchy.components.FunctionBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="adapter" source="com.vnu.fit.visualization.viewandcontroller.ProgressDialog" target="com.vnu.fit.visualization.utils.BundleBuilder" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="baseClassList" source="com.vnu.fit.graph.analyser.components.CompoundDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.ClassNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ClassNode&gt;"/>
+    <HasRelation name="node" source="com.vnu.fit.visualization.models.tree.DefaultAbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.FileHierarchyBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.FunctionNode" target="com.vnu.fit.graph.models.ast.VariableNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.preprocessor.Dictionary" target="com.vnu.fit.graph.builder.preprocessor.Dictionary" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="caller" source="com.vnu.fit.graph.analyser.visitors.ExpressionVisitor" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="INSTANCE" source="com.vnu.fit.visualization.utils.IconManager" target="com.vnu.fit.visualization.utils.IconManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.builder.preprocessor.Dictionary" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="nodes" source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.models.tree.DefaultAbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dependency" source="com.vnu.fit.visualization.models.tree.DefaultDependencyNode" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.visualization.models.tree.PointerDependencyNode" target="com.vnu.fit.visualization.models.tree.DefaultDependencyNode"/>
+    <UseRelation source="com.vnu.fit.visualization.utils.BundleBuilder" target="com.vnu.fit.visualization.models.Bundle" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.ViewableAbstractNode" target="com.vnu.fit.visualization.models.tree.IPointee"/>
+    <HasRelation name="resultForFindingInInheritanceList" source="com.vnu.fit.graph.searcher.Searcher" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultDependencyNode" target="com.vnu.fit.visualization.models.tree.INewIcon"/>
+    <HasRelation name="lstDependence" source="com.vnu.fit.neo4jparser.model.WProjectData" target="com.vnu.fit.neo4jparser.model.dependence.WDependence" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;WDependence&gt;"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.FunctionDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.VariableNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dependencyList" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNodeList" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Dependency&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNodeList" target="com.vnu.fit.visualization.models.tree.IGetVisibility"/>
+    <HasRelation name="usingNamespaceList" source="com.vnu.fit.graph.analyser.components.FunctionDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.models.CIATreeModel" target="com.vnu.fit.visualization.models.tree.IPointer" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="condition" source="com.vnu.fit.graph.searcher.InverseCondition" target="com.vnu.fit.graph.searcher.AbstractCondition" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="usingNamespaceList" source="com.vnu.fit.graph.analyser.components.CompoundDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <HasRelation name="project" source="com.vnu.fit.graph.analyser.DependenciesAnalyser" target="com.vnu.fit.graph.models.Project" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.MemberDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.visualization.models.tree.PointerAbstractNode" target="com.vnu.fit.visualization.models.tree.DefaultAbstractNode"/>
+    <HasRelation name="dependencyList" source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Dependency&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultAbstractNode" target="com.vnu.fit.visualization.models.tree.INewIcon"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.IGetWeight"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.model.node.WNodeHelper" target="com.vnu.fit.neo4jparser.model.node.WNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.NamespaceBuilder" target="com.vnu.fit.graph.models.ast.NamespaceNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.HierarchyBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.DependenciesAnalyser" target="com.vnu.fit.graph.models.Project" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="list2" source="com.vnu.fit.graph.calculator.DependencyCalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.ClassBuilder" target="com.vnu.fit.graph.models.ast.ClassNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="list1" source="com.vnu.fit.graph.calculator.DependencyCalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <HasRelation name="instance" source="com.vnu.fit.graph.builder.preprocessor.MacroReplace" target="com.vnu.fit.graph.builder.preprocessor.MacroReplace" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultAbstractNode" target="com.vnu.fit.visualization.models.tree.IGetAstList"/>
+    <HasRelation name="compoundNode" source="com.vnu.fit.graph.analyser.components.CompoundDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.CompoundNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="variableNode" source="com.vnu.fit.graph.analyser.components.VariableDependenciesAnalysis" target="com.vnu.fit.graph.models.ast.VariableNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.FunctionNode" target="com.vnu.fit.graph.models.ast.FunctionNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.HierarchyBuilder" target="com.vnu.fit.graph.models.ast.FunctionNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.ParseNeo4jFrame" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.CompoundNode" target="com.vnu.fit.graph.models.ast.AbstractNode"/>
+    <HasRelation name="bundle" source="com.vnu.fit.visualization.viewandcontroller.ProgressDialog" target="com.vnu.fit.visualization.models.Bundle" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.CompoundDependenciesAnalyser" target="com.vnu.fit.graph.models.ast.FunctionNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="usingNamespace" source="com.vnu.fit.graph.builder.hierarchy.components.NamespaceBuilder" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.visitors.ExpressionVisitor" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.searcher.NodeCondition" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.graph.models.IGetWeight"/>
+    <HasRelation name="usingNamespaces" source="com.vnu.fit.graph.analyser.visitors.ExpressionVisitor" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.models.Model" target="com.vnu.fit.visualization.models.Bundle" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.HierarchyBuilder" target="com.vnu.fit.graph.models.ast.NamespaceNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dependencies" source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.dependences.Dependency" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Dependency&gt;"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.VariableNode" target="com.vnu.fit.graph.models.ast.MemberNode"/>
+    <HasRelation name="lstAbstractNodesCreate" source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.TemplateBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.ByClassCondition" target="com.vnu.fit.graph.searcher.NodeCondition"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultDependencyNode" target="com.vnu.fit.visualization.models.tree.IGetAstList"/>
+    <HasRelation name="exceptionHandler" source="com.vnu.fit.visualization.viewandcontroller.InitView" target="com.vnu.fit.visualization.utils.ExceptionHandler" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.builder.hierarchy.components.NamespaceBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.FunctionBuilder" target="com.vnu.fit.graph.models.ast.FunctionNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.neo4jparser.model.node.WNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNode" target="com.vnu.fit.visualization.models.tree.DefaultDependencyNode"/>
+    <HasRelation name="abstractTree" source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.MemberNode" target="com.vnu.fit.graph.models.ast.ClassNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.GraphCreator" target="com.vnu.fit.graph.GraphCreator" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="replacer" source="com.vnu.fit.visualization.viewandcontroller.ReplaceMacroDialog" target="com.vnu.fit.visualization.utils.MacroReplacer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.InitView" target="com.vnu.fit.visualization.models.Model" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="root" source="com.vnu.fit.graph.models.Project" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.searcher.WeightCondition" target="com.vnu.fit.graph.searcher.AbstractCondition"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.PointerDependencyNode" target="com.vnu.fit.visualization.models.tree.IPointer"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.TypedefNode" target="com.vnu.fit.graph.models.ast.VariableNode"/>
+    <HasRelation name="templateNode" source="com.vnu.fit.graph.analyser.visitors.DeclSpecifierVisitor" target="com.vnu.fit.graph.models.ast.ITemplatable" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.visitors.DeclSpecifierVisitor" target="com.vnu.fit.graph.models.ast.ITemplatable" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.utils.Log" target="com.vnu.fit.graph.utils.Log" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="controller" source="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextField" target="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextFieldController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultAbstractNode" target="com.vnu.fit.visualization.models.tree.IGetVisibility"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.components.TypedefAnalyser" target="com.vnu.fit.graph.builder.preprocessor.Dictionary" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.EnumerationNode" target="com.vnu.fit.graph.models.ast.ClassNode"/>
+    <HasRelation name="usingNamespaces" source="com.vnu.fit.graph.analyser.visitors.DeclSpecifierVisitor" target="com.vnu.fit.graph.models.ast.NamespaceNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;NamespaceNode&gt;"/>
+    <HasRelation name="children" source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.models.tree.DefaultDependencyNode" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.ast.AbstractNode" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.models.dependences.Dependency" target="com.vnu.fit.neo4jparser.model.dependence.WDependence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.preprocessor.MacroReplace" target="com.vnu.fit.graph.builder.preprocessor.MacroReplace" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.model.WProjectData" target="com.vnu.fit.neo4jparser.model.node.WNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.searcher.Searcher" target="com.vnu.fit.graph.searcher.NodeCondition" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.ViewableDependencyNodeList" target="com.vnu.fit.visualization.models.tree.INewIcon"/>
+    <HasRelation name="abstractTree" source="com.vnu.fit.visualization.viewandcontroller.ParseNeo4jFrame" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="INSTANCE" source="com.vnu.fit.graph.utils.ResourceManager" target="com.vnu.fit.graph.utils.ResourceManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.vnu.fit.graph.models.ast.NamespaceNode" target="com.vnu.fit.graph.models.ast.CompoundNode"/>
+    <HasRelation name="lstNodeFilter" source="com.vnu.fit.visualization.viewandcontroller.ParseNeo4jFrame" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <IsRelation name="is" source="com.vnu.fit.visualization.models.tree.ViewableAbstractNode" target="com.vnu.fit.visualization.models.tree.DefaultAbstractNode"/>
+    <HasRelation name="resultForFindingByQualifiedName" source="com.vnu.fit.graph.searcher.Searcher" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.visualization.utils.Toast" target="com.vnu.fit.visualization.utils.Toast" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="functionNode" source="com.vnu.fit.graph.builder.hierarchy.components.FunctionBuilder" target="com.vnu.fit.graph.models.ast.FunctionNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.vnu.fit.visualization.models.tree.DefaultDependencyNode" target="com.vnu.fit.visualization.models.tree.IGetVisibility"/>
+    <HasRelation name="dictionary" source="com.vnu.fit.graph.analyser.components.TypedefAnalyser" target="com.vnu.fit.graph.builder.preprocessor.Dictionary" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.builder.hierarchy.components.IASTBuilder" target="com.vnu.fit.graph.builder.hierarchy.components.IASTBuilder" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.dependences.Dependency" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="subChilds" source="com.vnu.fit.graph.models.ast.CompoundNode" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.ParseNeo4jFrame" target="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="txtInput" source="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextFieldController" target="com.vnu.fit.visualization.viewandcontroller.AutoCompleteTextField" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="com.vnu.fit.graph.builder.hierarchy.components.ClassBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.model.WProjectData" target="com.vnu.fit.neo4jparser.model.dependence.WDependence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.neo4jparser.parse.ParseFromCIACalculator" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="abstractNodes" source="com.vnu.fit.graph.builder.HierarchyBuilder" target="com.vnu.fit.graph.models.ast.AbstractNode" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AbstractNode&gt;"/>
+    <UseRelation source="com.vnu.fit.visualization.viewandcontroller.ProgressDialog" target="com.vnu.fit.visualization.models.Bundle" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.vnu.fit.graph.analyser.DependenciesAnalyser" target="com.vnu.fit.graph.models.ast.AbstractNode" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

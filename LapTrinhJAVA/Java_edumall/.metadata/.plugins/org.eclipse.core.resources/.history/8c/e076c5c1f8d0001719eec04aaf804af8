@@ -1,0 +1,7 @@
+package ChelLong.javaDatabase.ui;
+
+import javax.swing.JDialog;
+
+public class TimKiemCDDVDUI extends JDialog {
+
+}

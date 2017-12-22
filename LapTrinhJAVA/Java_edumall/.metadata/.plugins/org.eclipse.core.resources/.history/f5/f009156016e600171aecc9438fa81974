@@ -1,0 +1,42 @@
+package ChelLong.JavaDatabase.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+public class SanPhamUI extends JFrame {
+	public SanPhamUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = this.getContentPane();
+		con.setLayout(new BorderLayout());
+		
+		JPanel pnLeft = new JPanel();
+		pnLeft.setPreferredSize(new Dimension(300, 0));;
+		JPanel pnRight = new JPanel();
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, pnRight);
+		sp.setOneTouchExpandable(true);
+		con.add(sp, BorderLayout.CENTER);
+	}
+	
+	public void showWindow() {
+		this.setSize(900, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

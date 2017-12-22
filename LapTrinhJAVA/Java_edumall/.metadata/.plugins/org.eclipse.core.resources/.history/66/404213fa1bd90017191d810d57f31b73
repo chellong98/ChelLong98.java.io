@@ -1,0 +1,193 @@
+package ChelLong.javaDatabase.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import ChelLong.javaDatabase.model.DanhMuc;
+
+public class QuanLySanPhamUi extends JFrame {
+//	các thuộc tính panel trái
+	JList<DanhMuc> listDanhMuc; 
+	JButton btnThemMoiDanhMuc, btnChinhSuaDanhMuc, btnXoaDanhMuc;
+	
+//	các thuộc tính panel bên phải
+	DefaultTableModel dtmSanPham;
+	JTable tblSanPham;
+	JComboBox<DanhMuc> cboDanhMuc;
+	JTextField txtMaSanPham, txtTenSanPham, txtSoLuong, txtDonGia;
+	JButton btnTaoMoiSanPham, btnLuuSanPham, btnXoaSanPham;
+	public QuanLySanPhamUi (String title) {
+		super(title);
+		addControls();
+		addEvents();
+		ketNoiCoSoDuLieu();
+	}
+
+	private void ketNoiCoSoDuLieu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+//		tạo container
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+//		tạo pnLeft và pnRight phân đôi màn hình theo hàng dọc
+		JPanel pnLeft = new JPanel();
+		pnLeft.setPreferredSize(new Dimension(300, 0));
+		JPanel pnRight = new JPanel();
+		
+//		phân đôi màn hình bằng JSplitPane
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, pnRight);
+		sp.setOneTouchExpandable(true); //tạo nút điều khiển cho JSplitPane
+		con.add(sp, BorderLayout.CENTER);
+		
+//		thiết kế giao diện bên trái
+		pnLeft.setLayout(new BorderLayout());
+		listDanhMuc = new JList<DanhMuc>();
+		JScrollPane scListDanhMuc = new JScrollPane(listDanhMuc, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pnLeft.add(scListDanhMuc, BorderLayout.CENTER);
+		
+//		tạo border list
+		TitledBorder borderListDanhMuc = new TitledBorder(
+				BorderFactory.createLineBorder(Color.red), //tạo line border
+				"danh sách danh mục");
+		listDanhMuc.setBorder(borderListDanhMuc);
+		
+		btnThemMoiDanhMuc = new JButton("thêm DM");
+		btnChinhSuaDanhMuc = new JButton("cập nhật DM");
+		btnXoaDanhMuc = new JButton("Xóa DM");
+		JPanel pnButtonDanhMuc = new JPanel();
+		pnButtonDanhMuc.setLayout(new FlowLayout());
+		pnButtonDanhMuc.add(btnThemMoiDanhMuc);
+		pnButtonDanhMuc.add(btnChinhSuaDanhMuc);
+		pnButtonDanhMuc.add(btnXoaDanhMuc);
+		
+		
+		pnLeft.add(pnButtonDanhMuc, BorderLayout.SOUTH);
+		
+//		thiết kế giao diện phải
+		pnRight.setLayout(new BorderLayout());
+		
+//		thiết kế giao diện trên của pnRight
+		JPanel pnTopOfRight = new JPanel();
+		JPanel pnBottomOfRight = new JPanel();
+		pnTopOfRight.setPreferredSize(new Dimension(0, 250));
+		
+//		phân đôi pnright
+		JSplitPane spRight = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pnTopOfRight, pnBottomOfRight);
+		spRight.setOneTouchExpandable(true);
+		pnRight.add(spRight);
+		
+//		thiết kế top op right
+		pnTopOfRight.setLayout(new BorderLayout());
+		dtmSanPham = new DefaultTableModel();
+		dtmSanPham.addColumn("mã SP");
+		dtmSanPham.addColumn("Tên SP");
+		dtmSanPham.addColumn("Số Lượng");
+		dtmSanPham.addColumn("Đơn Giá");
+		tblSanPham = new JTable(dtmSanPham);
+		JScrollPane scTableSanPham = new JScrollPane(tblSanPham,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pnTopOfRight.add(scTableSanPham, BorderLayout.CENTER);
+		
+//		thiết kế giao diện dưới pnRight
+		pnBottomOfRight.setLayout(new BoxLayout(pnBottomOfRight, BoxLayout.Y_AXIS));
+		
+//		panel danh mục
+		JPanel pnDanhMuc = new JPanel();
+		pnDanhMuc.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnBottomOfRight.add(pnDanhMuc);
+		JLabel lblDanhMuc = new JLabel("Danh Mục: ");
+		cboDanhMuc = new JComboBox<DanhMuc>();
+		cboDanhMuc.setPreferredSize(new Dimension(300, 25));
+		pnDanhMuc.add(lblDanhMuc);
+		pnDanhMuc.add(cboDanhMuc);
+		
+//		panel mã sản phẩm
+		JPanel pnMa = new JPanel();
+		pnMa.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnBottomOfRight.add(pnMa);
+		JLabel lblMa = new JLabel("Mã Sản Phẩm");
+		txtMaSanPham = new JTextField(30);
+		pnMa.add(lblMa);
+		pnMa.add(txtMaSanPham);
+		
+//		panel tên sản phẩm
+		JPanel pnTen = new JPanel();
+		pnTen.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnBottomOfRight.add(pnTen);
+		JLabel lblTen = new JLabel("Tên Sản Phẩm");
+		txtTenSanPham = new JTextField(30);
+		pnTen.add(lblTen);
+		pnTen.add(txtTenSanPham);
+		
+//		panel số lượng
+		JPanel pnSoLuong = new JPanel();
+		pnSoLuong.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnBottomOfRight.add(pnSoLuong);
+		JLabel lblSoLuong = new JLabel("Số lượng Sản Phẩm");
+		txtSoLuong = new JTextField(30);
+		pnSoLuong.add(lblSoLuong);
+		pnSoLuong.add(txtSoLuong);
+		
+//		panel đơn giá
+		JPanel pnDonGia = new JPanel();
+		pnDonGia.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnBottomOfRight.add(pnDonGia);
+		JLabel lblDonGia = new JLabel("Đơn giá Sản Phẩm");
+		txtDonGia = new JTextField(30);
+		pnDonGia.add(lblDonGia);
+		pnDonGia.add(txtDonGia);
+		
+		lblMa.setPreferredSize(lblSoLuong.getPreferredSize());
+		lblDanhMuc.setPreferredSize(lblSoLuong.getPreferredSize());
+		lblDonGia.setPreferredSize(lblSoLuong.getPreferredSize());
+		lblTen.setPreferredSize(lblSoLuong.getPreferredSize());
+		
+//		button
+		JPanel pnButtonSanPham = new JPanel();
+		pnButtonSanPham.setLayout(new FlowLayout());
+		btnTaoMoiSanPham = new JButton("tạo mới");
+		btnLuuSanPham = new JButton("lưu sản phẩm");
+		btnXoaSanPham = new JButton("Xóa sản phẩm");
+		pnButtonSanPham.add(btnTaoMoiSanPham);
+		pnButtonSanPham.add(btnLuuSanPham);
+		pnButtonSanPham.add(btnXoaSanPham);
+	}
+	
+	public void showWindow() {
+		this.setSize(800, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

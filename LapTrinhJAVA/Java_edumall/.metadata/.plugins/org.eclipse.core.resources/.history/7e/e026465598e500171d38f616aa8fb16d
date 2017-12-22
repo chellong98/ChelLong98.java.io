@@ -1,0 +1,81 @@
+package ChelLong.database.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+public class TaiSanUI extends JFrame {
+	private DefaultTableModel dtmTaiSan;
+	private JTable tblTaiSan;
+	
+	Connection conn = null;
+	Statement statement = null;
+	public TaiSanUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+		ketNoiCoSoDuLieu();
+	}
+
+private void ketNoiCoSoDuLieu() {
+		// TODO Auto-generated method stub
+		try {
+			String strConn = "jdbc:mysql://localhost//dbtaisan";
+			Properties pro = new Properties();
+			pro.put("user", "root");
+			pro.put("password", "");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+		JPanel pnNorth = new JPanel();
+		JLabel lblTitle = new JLabel("chương trình quản lý tài sản");
+		lblTitle.setFont(new Font("times new roman", Font.ITALIC, 20));
+		lblTitle.setForeground(Color.blue);
+		pnNorth.add(lblTitle);
+		con.add(pnNorth, BorderLayout.NORTH);
+		
+		dtmTaiSan = new DefaultTableModel();
+		dtmTaiSan.addColumn("Mã tài sản");
+		dtmTaiSan.addColumn("Tên tài sản");
+		dtmTaiSan.addColumn("Ngày Nhập");
+		dtmTaiSan.addColumn("Số năm khấu hao");
+		dtmTaiSan.addColumn("Giá Trị");
+		tblTaiSan = new JTable(dtmTaiSan);
+		JScrollPane scTableTaiSan = new JScrollPane(tblTaiSan, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		con.add(scTableTaiSan, BorderLayout.CENTER);
+		
+		
+	}
+	
+	private void addEvents() {
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(800, 500);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

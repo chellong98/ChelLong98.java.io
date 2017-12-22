@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/bai13_QLKH_2/src/ChelLong/javacoban/test/TestKhachHang.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ChelLong.javacoban.test.TestKhachHang"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="bai13_QLKH_2"/>
+</launchConfiguration>

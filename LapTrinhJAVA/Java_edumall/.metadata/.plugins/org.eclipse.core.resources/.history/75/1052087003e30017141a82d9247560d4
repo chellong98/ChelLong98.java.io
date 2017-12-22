@@ -1,0 +1,35 @@
+package ChelLong.javaswing.ui;
+
+import java.awt.Container;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+
+public class demoUI extends JFrame {
+	
+	public demoUI(String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BoxLayout(con, BoxLayout.Y_AXIS));
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(500, 300);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

@@ -1,0 +1,29 @@
+﻿--tạo 1 store Procedure để lấy toàn bộ danh sách CD DVD
+create proc LayToanBoCDDVD
+as
+select * from CDDCDColection
+
+exec LayToanBoCDDVD
+
+go
+--tạo 1 store procedure lấy danh sách CD DVD có năm xuất bản bất kì
+create proc LayDanhSachCDDVDTheoNamXuatBan
+@namxb int
+as
+select * from CDDCDColection where NamXuatBan=@namxb
+
+go
+exec LayDanhSachCDDVDTheoNamXuatBan @namxb=2015
+go
+exec LayDanhSachCDDVDTheoNamXuatBan @namxb=2010
+
+go
+--tạo 1 store procedure lấy danh sách theo loại đĩa và năm xuất bản bất kì
+alter proc LayDanhSachDiaTheoLoaiVaNamXuatBanBatKy
+@loaidia nvarchar(50),
+@namxb int
+as
+select * from CDDCDColection where LoaiDia=@loaidia and NamXuatBan=@namxb
+
+go 
+exec LayDanhSachDiaTheoLoaiVaNamXuatBanBatKy @loaidia='DVD' , @namxb=2014

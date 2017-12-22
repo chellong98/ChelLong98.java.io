@@ -1,0 +1,7 @@
+package pccc.quanlytailieu.ui;
+
+import javax.swing.JFrame;
+
+public class ThongTinUI extends JFrame {
+
+}

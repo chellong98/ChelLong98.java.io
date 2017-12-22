@@ -1,0 +1,56 @@
+package ChelLong.javaswing.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class demoUI extends JFrame {
+	
+	public demoUI(String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BoxLayout(con, BoxLayout.Y_AXIS));
+		
+		JPanel pnImage = new JPanel();
+		pnImage.setLayout(new BorderLayout());
+		JLabel lblImage = new JLabel(new ImageIcon("images//anime.png"));
+		pnImage.add(lblImage, BorderLayout.CENTER);
+		con.add(pnImage);
+		
+		JPanel pnTitle = new JPanel();
+		pnTitle.setLayout(new FlowLayout(FlowLayout.CENTER));
+		JLabel lbltitle = new JLabel("Cún ơi! T có điều muốn nói");
+		lbltitle.setFont(new Font("times new roman", Font.ITALIC, 20));
+		JLabel lblLove = new JLabel(new ImageIcon("images//heart.png"));
+		pnTitle.add(lbltitle);
+		pnTitle.add(lblLove);
+		con.add(pnTitle);
+	}
+	
+	public void showWindow() {
+		this.setSize(500, 300);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

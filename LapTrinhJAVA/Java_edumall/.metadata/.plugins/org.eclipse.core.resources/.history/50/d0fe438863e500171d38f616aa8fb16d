@@ -1,0 +1,27 @@
+package ChelLong.database.ui;
+
+import javax.swing.JFrame;
+
+public class TaiSanUI extends JFrame {
+	public TaiSanUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void addEvents() {
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(800, 500);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

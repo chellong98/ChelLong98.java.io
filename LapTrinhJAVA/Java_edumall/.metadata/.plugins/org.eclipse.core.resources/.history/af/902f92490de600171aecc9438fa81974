@@ -1,0 +1,10 @@
+package ChelLong.JavaDatabase.test;
+
+public class TestSanPhamUI {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

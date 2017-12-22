@@ -1,0 +1,88 @@
+package ChelLong.JavaDatabase.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import ChelLong.JavaDatabase.model.DanhMuc;
+
+public class SanPhamUI extends JFrame {
+	JList<DanhMuc>listDanhMuc;
+	
+	JButton btnThemMoiDM, btnChinhSuaDM, btnXoaDM;
+	
+	DefaultTableModel dtmSanPham;
+	JTable tblSanPham;
+	public SanPhamUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = this.getContentPane();
+		con.setLayout(new BorderLayout());
+		
+//		thiết kế 2 panel chính
+		JPanel pnLeft = new JPanel();
+		pnLeft.setPreferredSize(new Dimension(250, 0));;
+		JPanel pnRight = new JPanel();
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, pnRight);
+		sp.setOneTouchExpandable(true);
+		con.add(sp, BorderLayout.CENTER);
+		
+//		thiết kế Jlist của panel trái
+		pnLeft.setLayout(new BorderLayout());
+		listDanhMuc = new JList<DanhMuc>();
+		JScrollPane scListDanhMuc = new JScrollPane(listDanhMuc, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pnLeft.add(scListDanhMuc, BorderLayout.CENTER);
+		TitledBorder borderListDanhMuc = new TitledBorder(BorderFactory.createLineBorder(Color.red), 
+														"Danh mục sản phẩm");
+		listDanhMuc.setBorder(borderListDanhMuc);
+		
+//		tạo các button
+		btnThemMoiDM = new JButton("Thêm DM");
+		btnChinhSuaDM = new JButton("Cập nhật DM");
+		btnXoaDM = new JButton("Xóa DM");
+		JPanel pnButton = new JPanel();
+		pnButton.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pnButton.add(btnThemMoiDM);
+		pnButton.add(btnChinhSuaDM);
+		pnButton.add(btnXoaDM);
+		pnLeft.add(pnButton, BorderLayout.SOUTH);
+		
+//		thiết kế giao diện phải
+		pnRight.setLayout(new BorderLayout());
+		JPanel pnTopOfRight = new JPanel();
+		pnTopOfRight.setLayout(new BorderLayout());
+		pnRight.add(pnTopOfRight, BorderLayout.NORTH);
+		pnTopOfRight.setPreferredSize(new Dimension(0, 200));
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(900, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

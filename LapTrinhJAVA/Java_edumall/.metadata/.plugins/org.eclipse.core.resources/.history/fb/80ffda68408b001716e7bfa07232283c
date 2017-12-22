@@ -1,0 +1,55 @@
+package ChelLong.javaSwing.ui;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Panel;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class PhuongTrinhBac1UI extends JFrame {
+	
+	public PhuongTrinhBac1UI (String title) {
+		super (title);
+		this.addControls();
+	}
+	public void addControls () {
+		 Container con = getContentPane();
+		 
+		 JPanel pnMain = new JPanel();
+		 pnMain.setLayout(new BoxLayout(pnMain, BoxLayout.Y_AXIS));
+		 
+		 con.add(pnMain);
+		 
+		 JPanel pnTitle = new JPanel();
+		 pnTitle.setLayout(new FlowLayout());
+		 JLabel lblTieude = new JLabel("Giải phương trình bậc 1");
+		 pnTitle.add(lblTieude);
+		 
+		 pnMain.add(pnTitle); //thêm layout title vào layout Main
+		 lblTieude.setForeground(Color.BLUE); //màu chữ
+		 Font fontTieuDe = new Font("arial",Font.BOLD,20);//tạo font
+		 lblTieude.setFont(fontTieuDe);//thêm font
+		 
+		 JPanel pnHeSoA = new JPanel();
+		 pnHeSoA.setLayout(new FlowLayout());
+		 JLabel lblHeSoA = new JLabel("Hệ số A: "); //nhãn hệ số A
+		 JTextField txtHeSoA = new JTextField(15); //độ rộng 15
+		 pnHeSoA.add(lblHeSoA);
+		 pnHeSoA.add(txtHeSoA);
+		 
+		 pnMain.add(pnHeSoA);
+	}
+	
+	public void showWindow () {
+		this.setSize(600, 400);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

@@ -1,0 +1,111 @@
+package ChelLong.database.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+public class TaiSanUI extends JFrame {
+	private DefaultTableModel dtmTaiSan;
+	private JTable tblTaiSan;
+	
+	Connection conn = null;
+	Statement statement = null;
+	ResultSet result = null;
+	public TaiSanUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+		ketNoiCoSoDuLieu();
+		hienThiToanBoTaiSan();
+	}
+
+private void hienThiToanBoTaiSan() {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "select * from dbtaisan";
+			statement  = conn.createStatement(
+					ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			result = statement.executeQuery(sql);
+			dtmTaiSan.setRowCount(0);
+			while(result.next()) {
+				Vector<Object> vec = new Vector<>();
+				vec.add(result.getInt(1));
+				vec.add(result.getString(2));
+				vec.add(result.getDate(3));
+				vec.add(result.getInt(4));
+				vec.add(result.getInt(4));
+				dtmTaiSan.addRow(vec);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+private void ketNoiCoSoDuLieu() {
+		// TODO Auto-generated method stub
+		try {
+			String strConn = "jdbc:mysql://localhost//dbtaisan";
+			Properties pro = new Properties();
+			pro.put("user", "root");
+			pro.put("password", "");
+			com.mysql.jdbc.Driver driver = new com.mysql.jdbc.Driver();
+			conn = driver.connect(strConn, pro);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+		JPanel pnNorth = new JPanel();
+		JLabel lblTitle = new JLabel("chương trình quản lý tài sản");
+		lblTitle.setFont(new Font("times new roman", Font.ITALIC, 20));
+		lblTitle.setForeground(Color.blue);
+		pnNorth.add(lblTitle);
+		con.add(pnNorth, BorderLayout.NORTH);
+		
+		dtmTaiSan = new DefaultTableModel();
+		dtmTaiSan.addColumn("Mã tài sản");
+		dtmTaiSan.addColumn("Tên tài sản");
+		dtmTaiSan.addColumn("Ngày Nhập");
+		dtmTaiSan.addColumn("Số năm khấu hao");
+		dtmTaiSan.addColumn("Giá Trị");
+		tblTaiSan = new JTable(dtmTaiSan);
+		JScrollPane scTableTaiSan = new JScrollPane(tblTaiSan, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		con.add(scTableTaiSan, BorderLayout.CENTER);
+		
+		
+	}
+	
+	private void addEvents() {
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(800, 500);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

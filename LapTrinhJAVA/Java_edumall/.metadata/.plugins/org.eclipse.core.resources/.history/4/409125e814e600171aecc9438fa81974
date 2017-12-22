@@ -1,0 +1,28 @@
+package ChelLong.JavaDatabase.ui;
+
+import javax.swing.JFrame;
+
+public class SanPhamUI extends JFrame {
+	public SanPhamUI (String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(900, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

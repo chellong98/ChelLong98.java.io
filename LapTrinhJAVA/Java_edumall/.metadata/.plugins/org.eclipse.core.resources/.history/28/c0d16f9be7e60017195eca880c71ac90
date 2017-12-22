@@ -1,0 +1,5 @@
+package ChelLong.JavaDatabase.service;
+
+public class DanhMucService extends SQLServerService {
+
+}

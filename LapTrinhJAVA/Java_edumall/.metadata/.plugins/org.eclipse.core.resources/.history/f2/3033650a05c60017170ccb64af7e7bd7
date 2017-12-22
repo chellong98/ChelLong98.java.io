@@ -1,0 +1,95 @@
+package test;
+
+
+import com.vnu.fit.graph.builder.hierarchy.components.IASTBuilder;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTVisibilityLabel;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import org.eclipse.core.runtime.CoreException;
+
+/**
+ * Created by hp on 3/28/2016.
+ */
+
+public class TestAST {
+    public String pathFile;
+    public TestAST(String pathFile) throws IOException, CoreException, InterruptedException {
+        File inputFile = new File(pathFile);
+        IASTBuilder builder = new IASTBuilder().setFile(inputFile);
+        IASTTranslationUnit ast = builder.build();
+        IASTTranslationUnit.IDependencyTree tree=ast.getDependencyTree();
+//        IASTPreprocessorMacroDefinition[] marcoList= ast.getMacroDefinitions();
+//        for(IASTPreprocessorMacroDefinition marco:marcoList){
+//            System.out.println(marco.getRawSignature());
+//        }
+
+//        Dictionary dictionary=new TypedefAnalyser(ast).analyser().getDictionary();
+//        for(Pair<String,String> pair:dictionary.getTypedefList()){
+//            System.err.println(pair);
+//        }
+        printTree(ast, 1);
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        try {
+            System.setOut(new PrintStream(new File("ast.txt")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+//        TestAST case1 = new TestAST("C:\\Users\\nguye\\Documents\\TestResult_Req2\\c2.cpp");
+        
+
+//        File inputFile = new File("/Users/tranvietthang/Source Code/Research CIA /sample/main.cpp");
+//        IASTBuilder builder = new IASTBuilder().setFile(inputFile);
+//        IASTTranslationUnit ast = builder.build();
+//        IASTPreprocessorMacroDefinition[] marcoList= ast.getMacroDefinitions();
+//        for(IASTPreprocessorMacroDefinition marco:marcoList){
+//            System.out.println(marco.getRawSignature());
+//        }
+
+        //printTree(ast, 1);
+    }
+    private static String printSpace(int index) {
+        String t = "";
+        for (int pos = 0; pos < index * 4; pos++) {
+            t += " ";
+        }
+        return t;
+    }
+
+    private static void printTree(IASTNode node, int index) {
+        IASTNode[] children = node.getChildren();
+        boolean printContents = true;
+        if ((node instanceof CPPASTTranslationUnit)) {
+            printContents = false;
+        }
+        System.out.format("%s %d   %-40s %-40s  \n",printSpace(index),index, node.getClass().getSimpleName(),(printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, 5)));
+        //de quy
+        if(true) {
+            for (IASTNode iastNode : children) {
+
+                printTree(iastNode, index + 1);
+            }
+        }
+    }
+    public static boolean isVisible(IASTNode current) {
+        IASTNode declator = current.getParent().getParent();
+        IASTNode[] children = declator.getChildren();
+
+        for (IASTNode iastNode : children) {
+            if ((iastNode instanceof ICPPASTVisibilityLabel)) {
+                return 1 == ((ICPPASTVisibilityLabel) iastNode).getVisibility();
+            }
+        }
+
+        return false;
+    }
+
+}

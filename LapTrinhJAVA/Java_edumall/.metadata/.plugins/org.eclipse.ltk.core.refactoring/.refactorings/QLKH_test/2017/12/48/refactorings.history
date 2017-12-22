@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.java.ui&apos; to &apos;com.java.model&apos;&#x0D;&#x0A;- Original project: &apos;QLKH_test&apos;&#x0D;&#x0A;- Original element: &apos;QLKH_test/src/com.java.ui&apos;&#x0D;&#x0A;- Renamed element: &apos;QLKH_test/src/com.java.model&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.java.ui&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;com.java.ui" name="com.java.model" qualified="false" references="true" stamp="1512201251182" textual="false" version="1.0"/>
+</session>

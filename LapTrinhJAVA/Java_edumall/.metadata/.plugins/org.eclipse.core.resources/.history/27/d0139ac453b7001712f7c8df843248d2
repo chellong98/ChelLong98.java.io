@@ -1,0 +1,67 @@
+package ChelLong.javaSwing.Ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import ChelLong.javaSwing.model.NhanVien;
+import ChelLong.javaSwing.model.PhongBan;
+
+public class QuanLyNhanVienUi extends JFrame {
+	JComboBox<PhongBan> cboPhongBan; // danh sách phòng ban
+	JList<NhanVien> listNhanVien;// danh sahcs nhân viên
+	JTextField txtMa, txtTen, txtNgayVaoLam, txtNamSinh;
+	JButton btnLuu, btnXoa, btnThoat;
+
+	public QuanLyNhanVienUi(String title) {
+		super(title);
+		addControl();
+		addEvents();
+	}
+
+	public void addControl() {
+		Container con = getContentPane();
+		JPanel pnMain = new JPanel();
+		con.add(pnMain);
+		pnMain.setLayout(new BoxLayout(pnMain, BoxLayout.Y_AXIS));
+		JPanel pnPhongBan = new JPanel();
+		pnPhongBan.setLayout(new FlowLayout());
+		pnMain.add(pnPhongBan);
+		JLabel lblPhongBan = new JLabel(" chọn Phòng ban: ");
+		cboPhongBan = new JComboBox<PhongBan>();
+		cboPhongBan.setPreferredSize(new Dimension(200, 25)); // tạo kích thước cho combobox
+		pnPhongBan.add(lblPhongBan);
+		pnPhongBan.add(cboPhongBan);
+		
+		JPanel pnDanhSachVachiTiet = new JPanel();
+		pnDanhSachVachiTiet.setLayout(new GridLayout(1, 2)); //1 dòng 2 cột
+		pnMain.add(pnDanhSachVachiTiet);
+		JPanel pnDanhSach = new JPanel();
+		pnDanhSach.setLayout(new BorderLayout());
+		listNhanVien = new JList<NhanVien>();
+		JScrollPane sc = new JScrollPane(view)
+	}
+
+	public void addEvents() {
+
+	}
+
+	public void showWindow() {
+		this.setSize(500, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

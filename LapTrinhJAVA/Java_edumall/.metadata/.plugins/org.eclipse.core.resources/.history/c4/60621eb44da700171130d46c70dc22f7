@@ -1,0 +1,7 @@
+package ChelLong.javaSwing.Ui;
+
+import javax.swing.JFrame;
+
+public class HoccomboBoxJlistUi extends JFrame {
+
+}

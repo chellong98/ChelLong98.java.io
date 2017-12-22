@@ -1,0 +1,50 @@
+package ChelLong.javaswing.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class QuestionUI extends JFrame {
+	public QuestionUI(String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		
+		
+	}
+
+	
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BoxLayout(con, BoxLayout.Y_AXIS));
+		
+		JPanel pnTitle = new JPanel();
+		pnTitle.setLayout(new FlowLayout());
+		JLabel lblImage = new JLabel(new ImageIcon("images//question.gif"));
+		JLabel lblTitle = new JLabel("Bây giờ mi có rảnh không? :))");
+		pnTitle.add(lblImage);
+		pnTitle.add(lblTitle);
+	}
+	
+	public void showWindow() {
+		this.setSize(400, 200);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

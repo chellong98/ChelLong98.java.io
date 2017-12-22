@@ -1,0 +1,7 @@
+package ChelLong.database.ui;
+
+import javax.swing.JFrame;
+
+public class TaiSanUI extends JFrame {
+
+}

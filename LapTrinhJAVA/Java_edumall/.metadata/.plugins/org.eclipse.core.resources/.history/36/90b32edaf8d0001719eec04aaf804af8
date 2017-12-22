@@ -1,0 +1,29 @@
+package ChelLong.javaDatabase.ui;
+
+import javax.swing.JDialog;
+
+public class TimKiemCDDVDUI extends JDialog {
+	public TimKiemCDDVDUI (String title) {
+		this.setTitle(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(400, 300);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setModal(true);
+		this.setVisible(true);
+	}
+}

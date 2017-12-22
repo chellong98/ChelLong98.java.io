@@ -1,0 +1,65 @@
+package ChelLong.javaDatabase.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+
+import ChelLong.javaDatabase.model.DanhMuc;
+
+public class QuanLySanPhamUi extends JFrame {
+	JList<DanhMuc> listDanhMuc; 
+	public QuanLySanPhamUi (String title) {
+		super(title);
+		addControls();
+		addEvents();
+		ketNoiCoSoDuLieu();
+	}
+
+	private void ketNoiCoSoDuLieu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+//		tạo container
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+//		tạo pnLeft và pnRight phân đôi màn hình theo hàng dọc
+		JPanel pnLeft = new JPanel();
+		pnLeft.setPreferredSize(new Dimension(300, 0));
+		JPanel pnRight = new JPanel();
+		
+//		phân đôi màn hình bằng JSplitPane
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, pnRight);
+		sp.setOneTouchExpandable(true); //tạo nút điều khiển cho JSplitPane
+		con.add(sp, BorderLayout.CENTER);
+		
+//		thiết kế giao diện bên trái
+		pnLeft.setLayout(new BorderLayout());
+		listDanhMuc = new JList<DanhMuc>();
+		JScrollPane scListDanhMuc = new JScrollPane(listDanhMuc, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pnLeft.add(scListDanhMuc, BorderLayout.CENTER);
+	}
+	
+	public void showWindow() {
+		this.setSize(800, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

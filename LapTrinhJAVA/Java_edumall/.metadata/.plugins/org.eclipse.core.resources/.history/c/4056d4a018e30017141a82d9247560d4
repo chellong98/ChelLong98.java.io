@@ -1,0 +1,44 @@
+package ChelLong.javaswing.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class NoUI extends JFrame {
+	public NoUI(String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		
+		
+	}
+
+	
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+		JLabel lblImage = new JLabel(new ImageIcon("images//ghepFinish.png"));
+		con.add(lblImage, BorderLayout.CENTER);
+	}
+	
+	public void showWindow() {
+		this.setSize(900, 600);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

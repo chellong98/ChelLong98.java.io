@@ -1,0 +1,27 @@
+Description
+The java.lang.System.getProperty(String key) method gets the system property indicated by the specified key.
+Declaration
+Following is the declaration for java.lang.System.getProperty() method
+public static String getProperty(String key)
+Parameters
+key − This is the name of the system property.
+Return Value
+This method returns the string value of the system property, or null if there is no property with that key.
+Exception
+SecurityException − if a security manager exists and its checkPropertyAccess method doesn't allow access to the specified system property.
+NullPointerException − if key is null.
+IllegalArgumentException − if key is empty.
+Example
+The following example shows the usage of java.lang.System.getProperty() method.
+package com.tutorialspoint;
+import java.lang.*;
+public class SystemDemo {
+   public static void main(String[] args) {
+      // prints the name of the system property
+      System.out.println(System.getProperty("user.dir"));
+      // prints the name of the Operating System
+      System.out.println(System.getProperty("os.name"));
+      // prints Java Runtime Version
+      System.out.println(System.getProperty("java.runtime.version" ));
+   }
+sd

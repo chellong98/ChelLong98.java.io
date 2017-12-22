@@ -1,0 +1,15 @@
+package ChelLong.javacoban.QLKH;
+
+public class Main {
+	public static void main (String[] args) {
+		do {
+			int chon = QLKH.menu();
+			switch(chon) {
+				case 1: QLKH.xuLuNhap();break;
+				case 2: QLKH.xuLuXuat();break;
+				case 8: System.exit(0);break;
+				default: System.out.println("mời bạn nhập lại lệnh");
+			}
+		}while(true);
+	}
+}

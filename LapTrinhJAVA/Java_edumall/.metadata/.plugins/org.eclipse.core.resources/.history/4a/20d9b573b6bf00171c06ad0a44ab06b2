@@ -1,0 +1,26 @@
+package ChelLong.javaDatabase;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class TestKetNoiAccess {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String databasePath = "G:\\docum,ent\\java\\Lập trình cơ sở dữ liệu với Java\\Lập trình cơ sở dữ liệu với Java\\Lập trình cơ sở dữ liệu với Java\\Tai Lieu\\Bai26\\csdlmau.accdb\\";
+			String StrConnection = "jdbc:ucanaccess://"+databasePath; //jdbc là 1 API giúp java có thể kết nối đến các cơ sở dữ liệu thuộc nhiều loại
+			Connection conn = DriverManager.getConnection(StrConnection);//câu lệnh kết nối
+			if (conn!=null) {
+				System.out.println("kết nối tới CSDL thành công" );
+			} else {
+				System.out.println("kết nối thất bại");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+}

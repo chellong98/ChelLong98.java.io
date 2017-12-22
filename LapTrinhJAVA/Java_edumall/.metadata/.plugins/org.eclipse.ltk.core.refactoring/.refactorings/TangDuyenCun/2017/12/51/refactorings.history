@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ChelLong.javaswing.ui.EndUI&apos; to &apos;NoUI&apos;&#x0D;&#x0A;- Original project: &apos;TangDuyenCun&apos;&#x0D;&#x0A;- Original element: &apos;ChelLong.javaswing.ui.EndUI&apos;&#x0D;&#x0A;- Renamed element: &apos;ChelLong.javaswing.ui.NoUI&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Rename similarly named elements&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;EndUI&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;ChelLong.javaswing.ui{EndUI.java[EndUI" matchStrategy="1" name="NoUI" qualified="false" references="true" similarDeclarations="true" stamp="1513507584315" textual="false" version="1.0"/>
+</session>

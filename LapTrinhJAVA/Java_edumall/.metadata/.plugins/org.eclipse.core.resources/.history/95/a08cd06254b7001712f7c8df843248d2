@@ -1,0 +1,116 @@
+package ChelLong.javaSwing.Ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import ChelLong.javaSwing.model.NhanVien;
+import ChelLong.javaSwing.model.PhongBan;
+
+public class QuanLyNhanVienUi extends JFrame {
+	JComboBox<PhongBan> cboPhongBan; // danh sách phòng ban
+	JList<NhanVien> listNhanVien;// danh sahcs nhân viên
+	JTextField txtMa, txtTen, txtNgayVaoLam, txtNamSinh;
+	JButton btnLuu, btnXoa, btnThoat;
+
+	public QuanLyNhanVienUi(String title) {
+		super(title);
+		addControl();
+		addEvents();
+	}
+
+	public void addControl() {
+		/*tạo giao diện khung*/
+		Container con = getContentPane();
+		JPanel pnMain = new JPanel();
+		con.add(pnMain);
+		pnMain.setLayout(new BoxLayout(pnMain, BoxLayout.Y_AXIS));
+		
+		/**
+		 * tạo giao diện cho phòng ban
+		 * */
+		JPanel pnPhongBan = new JPanel();
+		pnPhongBan.setLayout(new FlowLayout());
+		pnMain.add(pnPhongBan);
+		JLabel lblPhongBan = new JLabel(" chọn Phòng ban: ");
+		cboPhongBan = new JComboBox<PhongBan>();
+		cboPhongBan.setPreferredSize(new Dimension(200, 25)); // tạo kích thước cho combobox
+		pnPhongBan.add(lblPhongBan);
+		pnPhongBan.add(cboPhongBan);
+		
+		/**
+		 * tạo giao diện cho danh sách nhân viên và chi tiết
+		 * */
+		JPanel pnDanhSachVachiTiet = new JPanel();
+		pnDanhSachVachiTiet.setLayout(new GridLayout(1, 2)); //1 dòng 2 cột
+		pnMain.add(pnDanhSachVachiTiet);
+		/*tạo giao diện cho danh sách*/
+		JPanel pnDanhSach = new JPanel();
+		pnDanhSach.setLayout(new BorderLayout()); //set border layout cho danh sách
+		listNhanVien = new JList<NhanVien>();
+		JScrollPane sc = new JScrollPane(listNhanVien, // 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pnDanhSach.add(sc, BorderLayout.CENTER);
+		pnDanhSachVachiTiet.add(pnDanhSach);
+		/*tạo giao diện cho chi tiết*/
+		JPanel pnChiTiet = new JPanel();
+		pnChiTiet.setLayout(new BoxLayout(pnChiTiet, BoxLayout.Y_AXIS));
+		pnDanhSachVachiTiet.add(pnChiTiet);
+		//pn mã
+		JPanel pnMa = new JPanel();
+		pnMa.setLayout(new FlowLayout());
+		JLabel lblMa = new JLabel("Mã: ");
+		txtMa = new JTextField(18);
+		pnMa.add(lblMa);
+		pnMa.add(txtMa);
+		pnChiTiet.add(pnMa);
+		//pn tên
+		JPanel pnTen = new JPanel();
+		pnTen.setLayout(new FlowLayout());
+		JLabel lblTen = new JLabel("Tên: ");
+		txtTen = new JTextField(18);
+		pnTen.add(lblTen);
+		pnTen.add(txtTen);
+		pnChiTiet.add(pnTen);
+		//pn ngày vào làm
+		JPanel pnNgayVao = new JPanel();
+		pnNgayVao.setLayout(new FlowLayout());
+		JLabel lblNgayVao = new JLabel("Ngày vào làm: ");
+		txtNgayVaoLam = new JTextField(13);
+		pnNgayVao.add(lblNgayVao);
+		pnNgayVao.add(txtNgayVaoLam);
+		pnChiTiet.add(pnNgayVao);
+		//pn ngày sinh
+		JPanel pnNgaySinh = new JPanel();
+		pnNgaySinh.setLayout(new FlowLayout());
+		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
+		txtNamSinh = new JTextField(15);
+		pnNgaySinh.add(lblNgaySinh);
+		pnNgaySinh.add(txtNamSinh);
+		pnChiTiet.add(pnNgaySinh);
+	}
+ 
+	public void addEvents() {
+
+	}
+
+	public void showWindow() {
+		this.setSize(500, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

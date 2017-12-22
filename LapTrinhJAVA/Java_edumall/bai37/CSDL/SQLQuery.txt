@@ -1,0 +1,31 @@
+﻿--lấy danh sách khách hàng
+select * from KhachHang
+--lấy danh sách nhóm khách hàng
+select * from Nhom
+insert into Nhom values('mn1', N'Khách hàng VIP')
+insert into Nhom values('mn2', N'Khách hàng Tiềm năng')
+insert into Nhom values('mn3', N'Khách hàng Khó Tính')
+--xóa nhóm
+delete from Nhom where MaNhom='mn2'
+--cập nhập khách hàng 
+update KhachHang set MaNhom='mn3' where MaKH='kh1'
+update KhachHang set MaNhom='mn2' where MaKH='kh2'
+update KhachHang set MaNhom='mn1' where MaKH='kh3'
+update KhachHang set MaNhom='mn2' where MaKH='kh4'
+--lọc các khách hàng thuộc nhóm 2
+select * from KhachHang where MaNhom='mn2'
+go
+--để tạo store procedure (viết hàm sử dụng), tạo thì dùng create, có rồi thì dùng alter để sửa
+alter proc LayToanBoKhachHang
+as
+select * from KhachHang
+go
+exec LayToanBoKhachHang
+go
+--tạo store lấy khách hàng thuộc nhóm bất kì
+create proc LayKhachHangTheoNhom
+@manhom nvarchar(50)
+as
+select * from KhachHang where MaNhom=@manhom
+go
+exec LayKhachHangTheoNhom @manhom='mn2'

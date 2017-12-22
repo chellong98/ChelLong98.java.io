@@ -1,0 +1,29 @@
+package ChelLong.database.ui;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
+public class TaiSanChiTietUI extends JDialog {
+	public TaiSanChiTietUI(String title) {
+		this.setTitle(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void showWindow() {
+		this.setSize(400, 300);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

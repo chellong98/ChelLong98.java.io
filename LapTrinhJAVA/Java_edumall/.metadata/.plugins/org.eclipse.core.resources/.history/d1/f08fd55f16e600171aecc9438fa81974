@@ -1,0 +1,5 @@
+package ChelLong.JavaDatabase.model;
+
+public class SanPham {
+
+}

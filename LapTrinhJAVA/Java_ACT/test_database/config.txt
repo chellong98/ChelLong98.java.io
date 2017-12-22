@@ -1,0 +1,5 @@
+HOST=localhost
+POST=1433
+DATABASE=myDatabase
+username=sa
+password=longvip98

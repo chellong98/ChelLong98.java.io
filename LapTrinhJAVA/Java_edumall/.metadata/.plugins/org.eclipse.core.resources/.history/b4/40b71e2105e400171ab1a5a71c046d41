@@ -1,0 +1,9 @@
+package pccc.detaikhoahoc.model;
+
+public class ThuatNgu {
+	private int soThuTu;
+	private String tenThuatNgu;
+	private String dinhNghiaThuatNgu;
+	
+	
+}

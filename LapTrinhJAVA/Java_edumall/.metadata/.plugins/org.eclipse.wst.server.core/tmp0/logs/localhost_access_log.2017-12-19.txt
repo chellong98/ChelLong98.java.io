@@ -1,0 +1,7 @@
+127.0.0.1 - - [19/Dec/2017:15:26:13 +0700] "GET / HTTP/1.1" 404 1069
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:26:19 +0700] "GET /TestServlet/Expression.jsp HTTP/1.1" 200 499
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:26:39 +0700] "GET /TestServlet/Expression.jsp?testParam=ATTT HTTP/1.1" 200 499
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:46:46 +0700] "GET /TestServlet/index.html HTTP/1.1" 200 381
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:47:00 +0700] "GET /TestServlet/params.jsp?param1=long&param2=1998&param3=ATTT HTTP/1.1" 200 399
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:47:29 +0700] "GET /TestServlet/index.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Dec/2017:15:47:51 +0700] "GET /TestServlet/params.jsp?param1=long&param2=1998&param3=ATTT HTTP/1.1" 200 405

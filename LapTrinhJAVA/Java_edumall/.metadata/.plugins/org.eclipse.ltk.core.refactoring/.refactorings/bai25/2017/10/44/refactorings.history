@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ChelLong.javaSwing.model.Khachhang&apos; to &apos;KhachHang&apos;&#x0D;&#x0A;- Original project: &apos;bai25&apos;&#x0D;&#x0A;- Original element: &apos;ChelLong.javaSwing.model.Khachhang&apos;&#x0D;&#x0A;- Renamed element: &apos;ChelLong.javaSwing.model.KhachHang&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Rename similarly named elements&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Khachhang&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;ChelLong.javaSwing.model{Khachhang.java[Khachhang" matchStrategy="1" name="KhachHang" qualified="false" references="true" similarDeclarations="true" stamp="1509460893153" textual="false" version="1.0"/>
+</session>

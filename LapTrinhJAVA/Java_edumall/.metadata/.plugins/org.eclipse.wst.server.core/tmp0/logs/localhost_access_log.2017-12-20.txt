@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:01 +0700] "GET /TestServlet/color-form.html HTTP/1.1" 200 269
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:07 +0700] "GET /TestServlet/java.jsp?bgcolor= HTTP/1.1" 200 505
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:18 +0700] "GET /TestServlet/java.jsp?bgcolor=blue HTTP/1.1" 200 504
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:25 +0700] "GET /TestServlet/java.jsp?bgcolor=green HTTP/1.1" 200 505
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:35 +0700] "GET /TestServlet/java.jsp?bgcolor=green HTTP/1.1" 200 506
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:15:15:36 +0700] "GET /favicon.ico HTTP/1.1" 404 1080

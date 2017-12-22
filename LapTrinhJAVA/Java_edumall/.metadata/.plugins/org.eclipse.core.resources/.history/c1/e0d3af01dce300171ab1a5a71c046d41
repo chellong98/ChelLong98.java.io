@@ -1,0 +1,51 @@
+package pccc.quanlytailieu.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+public class ThongTinUI extends JFrame {
+	public ThongTinUI(String title) {
+		super(title);
+		addControls();
+		addEvents();
+	}
+
+	private void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addControls() {
+		// TODO Auto-generated method stub
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout());
+		
+//		tạo ra 2 panel chính
+		JPanel pnLeft= new JPanel();
+		pnLeft.setPreferredSize(new Dimension(250, 0));
+		JPanel pnRight = new JPanel();
+		JSplitPane spMain = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, pnRight);
+		spMain.setOneTouchExpandable(true);
+		con.add(spMain, BorderLayout.CENTER);
+		
+//		tạo 2 panel trên phải và dưới phải
+		pnRight.setLayout(new BoxLayout(pnRight, BoxLayout.Y_AXIS));
+		JPanel pnTopOfRight = new JPanel();
+		pnTopOfRight.setPreferredSize(new Dimension(0, 300));
+		JPanel pnBottomOfRight = new JPanel();
+		JSplitPane spRight = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pnTopOfRight, pnBottomOfRight);
+	}
+	
+	public void showWindow() {
+		this.setSize(900, 700);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

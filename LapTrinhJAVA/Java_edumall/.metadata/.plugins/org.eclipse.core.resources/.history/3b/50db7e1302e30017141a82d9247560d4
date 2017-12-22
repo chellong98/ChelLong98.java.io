@@ -1,0 +1,10 @@
+package ChelLong.javaswing.test;
+
+public class TestDemoUI {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

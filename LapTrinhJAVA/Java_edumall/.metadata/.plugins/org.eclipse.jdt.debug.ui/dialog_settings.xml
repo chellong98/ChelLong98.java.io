@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=CIA_Final/\/CIA_Final\/ExecuteCIA\/CIA_Execute.jar&amp;lt;org.eclipse.cdt.utils.xcoff(AR.class[AR&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/src\/main\/java&amp;lt;com.vnu.fit.visualization.utils{Toast.java[Toast&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/lib\/CIA_Execute.jar&amp;lt;com.jidesoft.swing(Calculator.class[Calculator&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=QuanLyMuonSach/src&amp;lt;view{BooksForm.java[BooksForm&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=SinhVienBachKhoa/src&amp;lt;com.bachkhoa.test{TestQuanLySinhVien.java[TestQuanLySinhVien&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/src\/main\/java&amp;lt;com.vnu.fit.visualization.viewandcontroller{InitView.java[InitView&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/src\/main\/java&amp;lt;com.vnu.fit.neo4jparser{testing.java[testing&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/src\/main\/java&amp;lt;com.vnu.fit.visualization.viewandcontroller{ParseNeo4jFrame.java[ParseNeo4jFrame&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/lib\/CIA_Execute.jar&amp;lt;sources.visualization.viewandcontroller(ParseNeo4jFrame.class[ParseNeo4jFrame&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=cia.fit/lib\/CIA_Execute.jar&amp;lt;sources.visualization.viewandcontroller(Frame.class[Frame&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=bai51/src&amp;lt;ChelLong.database.test{TestTaiSanUi.java[TestTaiSanUi&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="388" key="DIALOG_X_ORIGIN"/>
+			<item value="39" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+	<section name="org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl">
+		<item value="500" key="SashWeightTree"/>
+		<item value="500" key="SashWeightDetails"/>
+		<item value="614" key="WIDTH"/>
+		<item value="194" key="HEIGHT"/>
+	</section>
+</section>
