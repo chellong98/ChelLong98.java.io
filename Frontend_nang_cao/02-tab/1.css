@@ -1,0 +1,89 @@
+*{margin: 0; padding: 0;}
+
+.noiDungChiTiet {
+    color: #8a6161;
+    font-family: -webkit-body;
+    line-height: 38px;
+    font-size: 19px;
+}
+
+.noiDungChiTiet img {
+    border: 1px solid gray;
+    padding: 2px;
+    margin-right: 8px;
+    border-radius: 137px;
+    box-shadow: -5px -2px 6px 3px;
+}
+
+.bonNd {
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.bonNut li {
+    list-style: none;
+    float: left;
+    margin: 10px;
+}
+
+.bonNd li {
+    list-style: none;
+    position: absolute;
+    width: 891px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 14px;
+    transition: 0.4s;
+}
+
+.bonNd li:after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -9px;
+    transform: rotateZ(45deg);
+}
+
+.bonNd:before {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 18px;
+    position: absolute;
+    top: 13px;
+    left: 41px;
+    transform: rotateZ(45deg);
+    background: white;
+    z-index: 4;
+}
+
+.bonNut {
+    width: 900px;
+    margin: auto;
+    background-color: #ffffff00;
+    height: 65px;
+} 
+.float-xs-left {
+	float: left;
+}
+
+li.active b.btn {
+    background: #f0ad4e;
+    color: #414141;
+}
+
+.bonNd li {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bonNd li.hienLen {
+    opacity: 1;
+    visibility: visible;
+}

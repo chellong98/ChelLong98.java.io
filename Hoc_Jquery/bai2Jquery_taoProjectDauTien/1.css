@@ -1,0 +1,40 @@
+*{margin: 0; padding: 0;} 
+
+.moiKhoi h3:hover {
+    background: url(images/down.png) no-repeat 96% #76b392}
+
+.ndMotKhoi {
+    padding: 10px;
+    border: 1px solid #8080804d;
+    margin-top: -8px;
+    background: #ece9e96b;
+}
+
+.moiKhoi h3 {
+    background: #76b392;
+    color: white;
+    padding: 10px 12px;
+}
+
+h3.mauXanh {
+    background: #4545b78f;
+}
+
+.moiKhoi h3.mauXanh:hover {
+    background-color: #4545b78f;
+    background: url(images/up.png) no-repeat 96% #4545b78f;
+}
+
+.hieuUng {
+    width: 400px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+body {
+    font-family: segoe ui light;
+}
+
+.container {
+    text-align: center;
+} 
