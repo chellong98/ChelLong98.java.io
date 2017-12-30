@@ -8,6 +8,8 @@
  		console.log('Da click roi !');
  		$(this).next().slideToggle(); //tiếp theo của h3 sẽ slide down
  		$(this).toggleClass('mauXanh') //kich vào thì thêm class, kích thêm nữa thì bỏ class
+ 		
+
  	});
 });
  

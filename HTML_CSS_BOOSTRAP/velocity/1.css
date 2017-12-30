@@ -1,0 +1,12 @@
+*{margin: 0; padding: 0;}
+/*.search {
+    position: absolute;
+    right:  100px;
+}*/
+.float-right {
+    position:  absolute;
+    right:  256px;
+} 
+.col-sm-push-3 {
+	margin: auto;
+}
