@@ -54,7 +54,7 @@ public class WindowExplorerUI extends JFrame {
         pnLeft.setLayout(new BorderLayout());
         pnLeft.setPreferredSize(new Dimension(250, 0));
         pnRight = new JPanel();
-        JScrollPane scRight = new JScrollPane(pnRight, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane scRight = new JScrollPane(pnRight);
         JSplitPane spMain = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, pnLeft, scRight);
         spMain.setOneTouchExpandable(true);
         con.add(spMain, BorderLayout.CENTER);
@@ -95,30 +95,30 @@ public class WindowExplorerUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 showWindow();
-                if (e.getClickCount() == 2) {
-                    pnRight.removeAll();
-                    showWindow();
-                    nodeSelected = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                    if (nodeSelected != null) {
-                        fileSelected = (Node) nodeSelected.getUserObject();
-                        if (fileSelected.isFile()) {
+                if (e.getClickCount() == 2) { //nếu kích 2 phát
+                    pnRight.removeAll(); //remove all các phần tử ở panel phải 
+                    showWindow();//show lại giao diện
+                    nodeSelected = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();//chọn ra node vừa kích
+                    if (nodeSelected != null) { //nếu node đó k rỗng
+                        fileSelected = (Node) nodeSelected.getUserObject();//lấy ra đối tượng file của node đó
+                        if (fileSelected.isFile()) {//nếu là file
                             icon = new ImageIcon("images//document.png");
                             JLabel lblFile = new JLabel(fileSelected.getName(), icon, JLabel.CENTER);
 //                            showWindow();
-                            pnRight.add(lblFile);
-                            showWindow();
+                            pnRight.add(lblFile);//thêm vào panel
+                            showWindow();//show lại giao diện
                         }
-                        if (fileSelected.isDirectory()) {
-                            listFiles = fileSelected.listFiles();
+                        if (fileSelected.isDirectory()) { //nếu là thư mục
+                            listFiles = fileSelected.listFiles();//lấy ra các thư mục con
                             for (File file : listFiles) {
-                                if (file.isFile()) {
+                                if (file.isFile()) {//nếu là file
                                     icon = new ImageIcon("images//document.png");
                                 }
-                                if (file.isDirectory()) {
+                                if (file.isDirectory()) {//nếu là doccument
                                     icon = new ImageIcon("images//folder.png");
                                 }
                                 JLabel lblFile = new JLabel(file.getName(), icon, JLabel.CENTER);
-                                pnRight.add(lblFile);
+                                pnRight.add(lblFile);//thêm các file vào panel
                                 showWindow();
                             }
                         }
