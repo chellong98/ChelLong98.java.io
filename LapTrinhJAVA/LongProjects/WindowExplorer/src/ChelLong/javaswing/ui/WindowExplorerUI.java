@@ -5,6 +5,7 @@
  */
 package ChelLong.javaswing.ui;
 
+import ChelLong.javaswing.model.Item;
 import ChelLong.javaswing.model.Node;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,6 +16,9 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +27,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -31,7 +38,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class WindowExplorerUI extends JFrame {
 
-    public static final String path = "G:\\LapTrinhJAVA";
+    static String workingDir = System.getProperty("user.dir");
+    public static final String path = workingDir;
     DefaultMutableTreeNode root = null;
     JTree tree;
     DefaultMutableTreeNode nodeSelected = null;
@@ -39,9 +47,11 @@ public class WindowExplorerUI extends JFrame {
     JPanel pnRight = null;
     File[] listFiles = null;
     ImageIcon icon = null;
+    List<Item> listItems;
 
     public WindowExplorerUI(String title) {
         super(title);
+        listItems = new ArrayList<Item>();
         addControls();
         addEvents();
     }
@@ -67,6 +77,7 @@ public class WindowExplorerUI extends JFrame {
         pnLeft.add(scTree, BorderLayout.CENTER);
 
         pnRight.setLayout(new GridLayout(5, 5));
+        pnRight.setBackground(Color.WHITE);
 
     }
 
@@ -94,34 +105,23 @@ public class WindowExplorerUI extends JFrame {
         tree.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                showWindow();
-                if (e.getClickCount() == 2) { //nếu kích 2 phát
-                    pnRight.removeAll(); //remove all các phần tử ở panel phải 
-                    showWindow();//show lại giao diện
-                    nodeSelected = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();//chọn ra node vừa kích
-                    if (nodeSelected != null) { //nếu node đó k rỗng
-                        fileSelected = (Node) nodeSelected.getUserObject();//lấy ra đối tượng file của node đó
-                        if (fileSelected.isFile()) {//nếu là file
-                            icon = new ImageIcon("images//document.png");
-                            JLabel lblFile = new JLabel(fileSelected.getName(), icon, JLabel.CENTER);
-//                            showWindow();
-                            pnRight.add(lblFile);//thêm vào panel
-                            showWindow();//show lại giao diện
-                        }
-                        if (fileSelected.isDirectory()) { //nếu là thư mục
-                            listFiles = fileSelected.listFiles();//lấy ra các thư mục con
-                            for (File file : listFiles) {
-                                if (file.isFile()) {//nếu là file
-                                    icon = new ImageIcon("images//document.png");
-                                }
-                                if (file.isDirectory()) {//nếu là doccument
-                                    icon = new ImageIcon("images//folder.png");
-                                }
-                                JLabel lblFile = new JLabel(file.getName(), icon, JLabel.CENTER);
-                                pnRight.add(lblFile);//thêm các file vào panel
-                                showWindow();
-                            }
-                        }
+//                showWindow();
+                pnRight.removeAll(); //remove all các phần tử ở panel phải 
+
+                showWindow();//show lại giao diện
+                nodeSelected = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();//chọn ra node vừa kích
+                if (nodeSelected != null) { //nếu node đó k rỗng
+                    fileSelected = (Node) nodeSelected.getUserObject();//lấy ra đối tượng file của node đó
+                    if (fileSelected.isFile()) {//nếu là file
+                        icon = new ImageIcon("images//document.png");
+                        Item item = new Item(fileSelected, icon); //tạo ra item
+                        item.setBackground(Color.white);
+                        listItems.add(item);
+                        pnRight.add(item);//thêm vào panel
+                        showWindow();//show lại giao diện
+                    }
+                    if (fileSelected.isDirectory()) { //nếu là thư mục
+                        showItem(fileSelected);
                     }
                 }
             }
@@ -144,6 +144,91 @@ public class WindowExplorerUI extends JFrame {
 
             }
         });
+
+        pnRight.addMouseListener(new MouseListener() { //nếu click vào panel phải
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                for (Item item : listItems) {
+                    item.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+
+                            if (e.getClickCount() == 1) {
+                                for (Item item : listItems) {
+                                    item.setBackground(Color.white);
+                                }
+                                Item item = (Item) e.getSource();
+                                System.out.println(item.getLblItem().getText());
+                                item.setBackground(new Color(0, 0, 0, 64));
+                                System.out.println(item.getFile().getPath());
+                                showWindow();
+                            }
+
+                            if (e.getClickCount() == 2) {
+                                pnRight.removeAll();
+                                showWindow();
+                                File fileSelected = item.getFile();
+                                if (fileSelected.isDirectory()) {
+                                    showItem(fileSelected);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
+    }
+
+    private void showItem(File fileSelected) {
+        listItems.clear(); //xóa những item ở file cũ
+        listFiles = fileSelected.listFiles();//lấy ra các thư mục con
+        for (File file : listFiles) {
+            if (file.isFile()) {//nếu là file
+                icon = new ImageIcon("images//document.png");
+            }
+            if (file.isDirectory()) {//nếu là doccument
+                icon = new ImageIcon("images//folder.png");
+            }
+            Item item = new Item(file, icon);
+            item.setBackground(Color.white);
+            listItems.add(item); //thêm item mới vào list
+            pnRight.add(item);//thêm các file vào panel
+            showWindow();
+
+        }
     }
 
     public void showWindow() {
