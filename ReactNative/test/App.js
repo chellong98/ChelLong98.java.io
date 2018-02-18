@@ -13,7 +13,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-// import { TabNavigator } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
