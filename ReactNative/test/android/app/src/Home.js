@@ -19,7 +19,7 @@ export default class Home extends Component {
                         style={styles.logo}
                         source={require('../src/logoContainer.png')}
                     />
-                    <Text style={styles.content}>welcome to</Text>
+                    <Text style={styles.content}>welcome to </Text>
                     <Text style={styles.content}>OWS</Text>
                 </View>
             </View>
