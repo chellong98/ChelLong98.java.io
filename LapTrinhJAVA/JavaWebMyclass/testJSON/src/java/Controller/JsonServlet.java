@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.SQLService;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Servlet implementation class AjaxServlet
@@ -23,6 +26,7 @@ import com.google.gson.GsonBuilder;
 public class JsonServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    SQLService service = null;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,29 +43,25 @@ public class JsonServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
+//        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
+        service = new SQLService("root", "longvip98", "SucKhoe");
+        
         String processData = request
                 .getParameter("processData");
         response.setContentType("application/json");
         response.setHeader("Cache-Control", "no-cache");
-        Map<String, String> personMap
-                = new HashMap<String, String>();
-        if (null != processData && processData.
-                equalsIgnoreCase("JSON")) {
-            personMap.put("processData", processData);
-            personMap.put("firstName", "Java");
-            personMap.put("lastName", "chellong");
-        } else {
-            for (int i = 0; i < 5; i++) {
-                personMap.put("firstName" + i, "Java");
-                personMap.put("lastName" + i, "chellong");
-            }
+        ArrayList<HashMap<String, String>> list = service.ListCategory();
+        response.getWriter().write("[");
+        for (HashMap<String, String> maps : list) {
+            HashMap<String, String> personMap = maps;
+            Gson gson = new GsonBuilder().setPrettyPrinting()
+                    .create();
+            String json = gson.toJson(personMap);
+            response.getWriter().write(json);
         }
-
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                .create();
-        String json = gson.toJson(personMap);
-        response.getWriter().write(json);
+        response.getWriter().write("]");
     }
 
     /**
@@ -75,4 +75,3 @@ public class JsonServlet extends HttpServlet {
     }
 
 }
-

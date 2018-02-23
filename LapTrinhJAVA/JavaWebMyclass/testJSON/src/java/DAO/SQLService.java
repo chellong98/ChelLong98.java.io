@@ -7,6 +7,11 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -25,9 +30,29 @@ public class SQLService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
 
+    public ArrayList<HashMap<String, String>> ListCategory() {
+        ArrayList<HashMap<String,String>>list = new ArrayList<>();
+        HashMap<String, String> category = null;
+        try {
+            String sql = "select * from category";
+            PreparedStatement preStatement = conn.prepareStatement(sql);
+            ResultSet rs = preStatement.executeQuery();
+            while(rs.next()) {
+                category = new HashMap<>();
+                category.put("CategoryId", rs.getInt(1)+"");
+                category.put("CategoryName", rs.getString(2)+"");
+                list.add(category);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+            
+    
     public static void main(String[] args) {
         SQLService sql = new SQLService("root", "longvip98", "suckhoe");
         if (sql.conn != null) {
@@ -35,6 +60,16 @@ public class SQLService {
         } else {
             System.out.println("kết nối ko thành công");
         }
-        
+        ArrayList<HashMap<String,String>>list = sql.ListCategory();
+        for(HashMap<String,String> map : list) {
+            System.out.println("{");
+            Iterator it = map.keySet().iterator();
+            while(it.hasNext()) {
+                String key = it.next()+"";
+                String value = map.get(key)+"";
+                System.out.println("{"+key +" : "+value+"}");
+            }
+            System.out.println("}");
+        }
     }
 }
