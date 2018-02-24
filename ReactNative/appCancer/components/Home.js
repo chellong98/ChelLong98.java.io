@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ListView,
     StatusBar,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native';
 
 var MENU = [
@@ -15,6 +16,7 @@ var MENU = [
 ]
 
 class Home extends Component {
+    
     constructor(props) {
         super(props);
         var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1!==r2 });
@@ -33,7 +35,7 @@ class Home extends Component {
             <TouchableOpacity style={styles.listRow} onPress={()=>this._pushView(property.name)}>
                 <View style={styles.title}>
                     <Text style={styles.rowText}>
-                    {property.name}
+                        {property.name}
                     </Text>
                 </View>
             </TouchableOpacity>
@@ -41,15 +43,12 @@ class Home extends Component {
     }
 
     _pushView(menuName) {
-        // if(menuName=="tin tức") {
-        //     this.props.navigator.push({ //chuyển trang
-        //         name:'components',
-        //         component: require('./TinTuc'),
-        //         props: { //set thuộc tính
-        //             title: menuName,
-        //         }
-        //     })
-        // }
+        if(menuName=="tin tức") {
+            this.props.navigation.navigate('Category')
+            /**
+             * không sử dụng this.props.navigator.push() vì chỉ dành cho IOS
+             */
+        }
         // if(menuName=="hỏi đáp") {
         //     this.props.navigator.push({ //chuyển trang
         //         name:'components',
@@ -72,7 +71,9 @@ class Home extends Component {
 
     render() {
         return (
-            <View style = {styles.container}>
+            <ImageBackground 
+            source={require('../images/backgroundHome.jpg')}
+            style = {styles.container}>
                 <StatusBar 
                  hidden={this.state.hidden}
                 // backgroundColor = "blue"
@@ -90,7 +91,7 @@ class Home extends Component {
                     renderRow={this.taoHang}
                    />
                 </View>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -104,8 +105,9 @@ var styles = StyleSheet.create(
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'green',
-          
+            backgroundColor: 'rgba(34,139,34,0.7)',
+            borderBottomWidth: 2,
+            borderColor: 'green',
         },
         headerText: {
             color: 'white',
@@ -114,14 +116,15 @@ var styles = StyleSheet.create(
         },
         list: {
             flex: 10, //chiếm 10 phần
-            backgroundColor: 'white',
+            // backgroundColor: 'white',
+           
         },
         listRow: {
             flexDirection: 'row',
             flex: 1,
             padding: 10,
             borderBottomWidth: 2,
-            borderColor: 'green',
+            borderColor: 'rgba(34,139,34,0.7)',
         },
         title: {
             flex: 1,
@@ -131,6 +134,7 @@ var styles = StyleSheet.create(
         rowText: {
             fontSize: 18,
             fontWeight: '300',
+            color: 'white'
         }
     }
 )
