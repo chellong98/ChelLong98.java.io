@@ -55,15 +55,9 @@ public class JsonServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setHeader("Cache-Control", "no-cache");
         ArrayList<HashMap<String, String>> list = service.ListCategory();
-        response.getWriter().write("[");
-        for (HashMap<String, String> maps : list) {
-            HashMap<String, String> personMap = maps;
-            Gson gson = new GsonBuilder().setPrettyPrinting()
-                    .create();
-            String json = gson.toJson(personMap);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(list);
             response.getWriter().write(json);
-        }
-        response.getWriter().write("]");
     }
 
     /**

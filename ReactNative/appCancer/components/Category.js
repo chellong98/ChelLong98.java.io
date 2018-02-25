@@ -7,28 +7,28 @@ import {
     StatusBar,
     TouchableOpacity
 }from 'react-native'
-
+var URL_API='http://10.0.3.2:8080/Json/JsonServlet'
 class Category extends Component {
     constructor(props) {
         super(props);
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r1)=>r1!==r2});
+        
         this.state= {
-            dataSource : ds
+            dataSource : new ListView.DataSource({rowHasChanged: (r1, r2)=>r1!==r2})
         }
     }
-
+   
     fetchData() {
         fetch(URL_API, {method:"POST", body:null})
         .then((response) => response.json()) //lấy về dữ liệu là 1 dạng Json
         .then((responseData) => {
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows()
+                dataSource: this.state.dataSource.cloneWithRows(responseData)
             })
         })
         .done()
     }
 
-    ComponentDidMount(){
+    componentDidMount(){
         this.fetchData();
     }
 
