@@ -49,15 +49,9 @@ class Home extends Component {
              * không sử dụng this.props.navigator.push() vì chỉ dành cho IOS
              */
         }
-        // if(menuName=="hỏi đáp") {
-        //     this.props.navigator.push({ //chuyển trang
-        //         name:'components',
-        //         component: require('./HoiDap'),
-        //         props: { //set thuộc tính
-        //             title: menuName,
-        //         }
-        //     })
-        // }
+        if(menuName=="hỏi đáp") {
+            this.props.navigation.navigate('QuestionAndAnswer')
+        }
         // if(menuName=="nhật ký") {
         //     this.props.navigator.push({ //chuyển trang
         //         name:'components',

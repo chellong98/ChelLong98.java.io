@@ -1,14 +1,14 @@
 import React , {Component} from 'react'
 import {
-    Text,
     View,
+    Text,
     StyleSheet,
     ListView,
-    StatusBar,
     TouchableOpacity
 }from 'react-native'
-var URL_API='http://10.0.3.2:8080/Json/JsonServlet'
-class Category extends Component {
+
+// var URL_API='http://10.0.3.2:8080/Json/JsonServlet'
+class QuestionAndAnswer extends Component {
     constructor(props) {
         super(props);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=>r1!==r2});
@@ -48,17 +48,14 @@ class Category extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar
-                    // hidden='true'
-                />
                 <View style={styles.header} /*header*/> 
                     <View style={styles.baoTitle}>
                         <Text style={styles.titleHeader}>
-                            Tin tức
+                            Hỏi Đáp
                         </Text>
                     </View>
                 </View>
-                <View style={styles.list}/*danh sach category*/>
+                <View style={styles.list}/*danh sach hỏi đáp*/>
                     <ListView
                         dataSource={this.state.dataSource}
                         renderRow={this.taoHang.bind(this)}
@@ -76,7 +73,7 @@ var styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         flex: 1,
-        backgroundColor: 'rgba(34,139,34,0.7)',
+        backgroundColor: '#910B7B',
         justifyContent: 'center',
     },
     baoTitle: {
@@ -91,7 +88,7 @@ var styles = StyleSheet.create({
     },
     list: {
         flex: 10,
-        backgroundColor:'#6ab04c',
+        backgroundColor:'#DE64CA',
     },
     row: {
         flexDirection: 'row',
@@ -112,4 +109,4 @@ var styles = StyleSheet.create({
     }
 })
 
-module.exports = Category;
+module.exports = QuestionAndAnswer;
