@@ -18,7 +18,7 @@ class Category extends Component {
     }
    
     fetchData() {
-        fetch(URL_API, {method:"POST", body:null})
+        fetch(URL_API, {method:"GET", body:null})
         .then((response) => response.json()) //lấy về dữ liệu là 1 dạng Json
         .then((responseData) => {
             this.setState({
