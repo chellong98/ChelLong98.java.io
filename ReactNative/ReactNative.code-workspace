@@ -1,19 +1,8 @@
 {
 	"folders": [
 		{
-			"path": "test"
-		},
-		{
-			"path": "appCancer"
-		},
-		{
-			"path": "project"
-		},
-		{
-			"path": "ListViewNews"
-		},
-		{
-			"path": "evnict-reactnative-course\\BaseProject"
+			"path": "evnict-reactnative-course"
 		}
-	]
+	],
+	"settings": {}
 }
