@@ -5,6 +5,7 @@
  */
 package ViewUI;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -47,9 +48,11 @@ public class Paint extends JFrame {
     public static final int CIRCLE = 1;
     public static final int SQUARE = 2;
     public static final int OVAL = 3;
-    JButton btnCircle, btnSquare, btnOval;
+    public static final int LINE = 4;
+    public static final int ERASER = 5;
+    JButton btnCircle, btnSquare, btnOval, btnLine, btnEraser;
     JLabel lblPaint;
-    public int status=-1;
+    public int status = -1;
     public int[] originXY = new int[2]; //toa do click chuoi
     public int[] oldXY = new int[2]; //toa do hien tai cua chuot
     boolean clickStatus = false;
@@ -62,30 +65,36 @@ public class Paint extends JFrame {
         "#F7FE2E", "#FE2E2E"};
     List<JButton> Buttons = new ArrayList<>();
     JPanel pnBangMau;
-    String color="#FFFFF";
+    Color color = null;
+    MyColor lblBangMau;
+    BufferedImage canvasBangMau;
+  
     Thread thread = new Thread() {
         @Override
         public void run() {
             while (true) {
                 switch (status) {
                     case CIRCLE: {
+                        
                         if (clickStatus) { //neu bat dau ve
+                             grCanvas.setStroke(new BasicStroke(1));
                             grCanvas.clearRect(0, 0, 600, 800);
                             grCanvas.drawImage(canvasTemp, 0, 0, null);
 
                             int length = lengthMouseMove();
-                            grCanvas.setColor(Color.decode(color));
+                            grCanvas.setColor(color);
                             grCanvas.drawArc(oldXY[0] - length, oldXY[1] - length, length * 2, length * 2, 0, 360); //ve tu tam hinh tron
                         }
                     }
                     break;
                     case SQUARE: {
                         if (clickStatus) {
+                             grCanvas.setStroke(new BasicStroke(1));
                             grCanvas.clearRect(0, 0, 600, 800);
                             grCanvas.drawImage(canvasTemp, 0, 0, null);
 
                             int length = lengthMouseMove();
-                            grCanvas.setColor(Color.decode(color));
+                            grCanvas.setColor(color);
                             int[] sizesquare = sizeSquare();
                             grCanvas.drawRect(oldXY[0] - sizesquare[0] / 2, oldXY[1] - sizesquare[1] / 2, sizesquare[0], sizesquare[1]);
                         }
@@ -93,25 +102,52 @@ public class Paint extends JFrame {
                     break;
                     case OVAL: {
                         if (clickStatus) {
+                             grCanvas.setStroke(new BasicStroke(1));
                             grCanvas.clearRect(0, 0, 600, 800);
                             grCanvas.drawImage(canvasTemp, 0, 0, null);
 
                             int length = lengthMouseMove();
-                            grCanvas.setColor(Color.decode(color));
+                            grCanvas.setColor(color);
                             int[] sizesquare = sizeSquare();
                             grCanvas.drawArc(oldXY[0] - sizesquare[0] / 2, oldXY[1] - sizesquare[1] / 2, sizesquare[0], sizesquare[1], 0, 360);
                         }
                     }
                     break;
+                    case LINE: {
+                        if (clickStatus) {
+                             grCanvas.setStroke(new BasicStroke(1));
+                            grCanvas.clearRect(0, 0, 600, 800);
+                            grCanvas.drawImage(canvasTemp, 0, 0, null);
+//                            grCanvas.setStroke(new BasicStroke(10));
+                            grCanvas.setColor(color);
+                            int length = lengthMouseMove();
+                            grCanvas.drawLine(oldXY[0], oldXY[1], originXY[0], originXY[1]);
+                        }
+                    }
+                    break;
+                    case ERASER: {
+                        if(clickStatus) {
+                            grCanvas.setColor(Color.WHITE);
+                            grCanvas.setStroke(new BasicStroke(10));
+                            grCanvas.drawLine(oldXY[0], oldXY[1], originXY[0], originXY[1]);
+                            oldXY[0] = originXY[0];
+                            oldXY[1] = originXY[1];
+                        }
+                    }break;
                     default: {
                         if (clickStatus) {
+                             grCanvas.setStroke(new BasicStroke(1));
 //                            grCanvas.clearRect(0, 0, 600, 800);
 //                            grCanvas.drawImage(canvasTemp, 0, 0, null);
-//                            grCanvas.setColor(Color.decode(color));
+                            grCanvas.setColor(color);
 //                            int length = lengthMouseMove();
 //                            grCanvas.drawLine(oldXY[0], oldXY[1], originXY[0], originXY[1]);
 //                            System.out.println(oldXY[0] + " | " + oldXY[1]);
-                            grCanvas.fillArc(oldXY[0], oldXY[1], 10, 10, 0, 360);
+                            grCanvas.drawLine(oldXY[0], oldXY[1], originXY[0], originXY[1]);
+//                            grCanvas.setStroke(new BasicStroke(10));
+                            oldXY[0] = originXY[0];
+                            oldXY[1] = originXY[1];
+//                            grCanvas.fillArc(originXY[0], originXY[1], 10, 10, 0, 360);
                         }
                     }
                     break;
@@ -119,7 +155,7 @@ public class Paint extends JFrame {
 
                 lblPaint.repaint();
                 try {
-                    Thread.sleep(2);
+                    Thread.sleep(10);
                 } catch (InterruptedException ex) {
                 }
             }
@@ -173,10 +209,22 @@ public class Paint extends JFrame {
         btnCircle = new MyButton("Image//circle1.png");
         btnSquare = new MyButton("Image//square.png");
         btnOval = new MyButton("Image//oval.png");
+        btnLine = new MyButton("Image//line.png");
+        btnEraser = new MyButton("Image//eraser.png");
+        lblBangMau = new MyColor("Image//bangmau.png");
+        lblBangMau.setPreferredSize(new Dimension(100, 100));
+        
+//        lblBangMau.setSize(100, 100);
+        color = lblBangMau.getColor();
         toolbar.add(btnCircle);
         toolbar.add(btnSquare);
         toolbar.add(btnOval);
-        pnLeft.add(toolbar);
+        toolbar.add(btnLine);
+        toolbar.add(btnEraser);
+        toolbar.add(lblBangMau);
+//        JPanel pnBangMau1 = new JPanel();
+        
+        pnLeft.add(toolbar, BorderLayout.CENTER);
 
         pnBangMau = new JPanel();
         pnBangMau.setLayout(new GridLayout(2, 4));
@@ -239,19 +287,54 @@ public class Paint extends JFrame {
                 paintOval();
             }
         });
-        lblPaint.addMouseListener(new MouseListener() {
+        btnLine.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintLine();
+            }
+        });
+        btnEraser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paintEraser();
+            }
+        });
+        lblBangMau.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-              
-                    oldXY[0] = e.getX(); //toa do click chuoi
-                    oldXY[1] = e.getY();
-                    canvasTemp = deepCopy(canvas);
+                color = lblBangMau.getColor();
+            }
 
-                
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        
+        lblPaint.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                oldXY[0] = e.getX(); //toa do click chuoi
+                oldXY[1] = e.getY();
+                canvasTemp = deepCopy(canvas);
+
                 clickStatus = true;
             }
 
@@ -269,7 +352,8 @@ public class Paint extends JFrame {
             public void mouseExited(MouseEvent e) {
             }
         });
-
+        
+        
         lblPaint.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -289,7 +373,7 @@ public class Paint extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     JButton button = (JButton) e.getSource();
                     System.out.println(button.getText());
-                    color = button.getText();
+                    color = Color.decode(button.getText());
                 }
             });
         }
@@ -309,6 +393,12 @@ public class Paint extends JFrame {
         status = OVAL;
     }
 
+    private void paintLine() {
+        status = LINE;
+    }
+    private void paintEraser() {
+        status = ERASER;
+    }
     public void showWindow() {
         this.setSize(800, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

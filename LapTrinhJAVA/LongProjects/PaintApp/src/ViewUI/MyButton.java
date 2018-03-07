@@ -21,7 +21,7 @@ public class MyButton extends JButton {
     public MyButton(String url) {
         try {
             img = ImageIO.read(getClass().getResource(url));
-            this.setPreferredSize(new Dimension(70 , 70));
+            this.setPreferredSize(new Dimension(120 , 120));
         } catch (Exception e) {
         }
         
@@ -31,8 +31,7 @@ public class MyButton extends JButton {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawImage(img, 2, 2, 66, 66, null);
+        g2.drawImage(img, 2, 2, 116, 116, null);
 //        System.out.println("abc");
-        
     }
 }
