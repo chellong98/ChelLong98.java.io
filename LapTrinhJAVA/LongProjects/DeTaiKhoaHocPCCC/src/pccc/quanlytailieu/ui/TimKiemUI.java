@@ -30,28 +30,44 @@ import pccc.detaikhoahoc.service.ThuatNguService;
 public class TimKiemUI extends JFrame{
 	JTextField txtNhap;
 	JButton btnTimKiem;
-	Thread t;
+	static Thread t1;
 	ThongTinUI ui;
+	
 	public TimKiemUI (String title) {
 		super(title);
 		ui = new ThongTinUI("Tài liệu cần tìm kiếm");
-		Threads();
+		
 		addControls();
 		addEvents();
-		
 	}
 
 	private void Threads() {
 		// TODO Auto-generated method stub
-		t= new Thread(new Runnable() {
+		t1= new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				int i = 0;
+				while(i++<1) {
+					try {
+						btnTimKiem.setText("Searching.");
+						Thread.sleep(1000);
+						btnTimKiem.setText("Searching..");
+						Thread.sleep(1000);
+						btnTimKiem.setText("Searching...");
+						Thread.sleep(1000);
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					
+				}
 				xuLyTimKiem();//tạo luồng xử lý tìm kiếm
+				
 			}
 		});
-		t.start();
+		t1.start();
 	}
 
 	private void addEvents() {
@@ -61,24 +77,36 @@ public class TimKiemUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
-				ui.showWindow();
-				
-				
+				Threads();
+			}
+		});
+		
+		txtNhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Threads();
 			}
 		});
 	}
 
 	protected void xuLyTimKiem() {
-		ThuatNguService service = new ThuatNguService();
-		Vector<ThuatNgu>vec;
+		
+		Vector<ThuatNgu>vec=null;
 		// TODO Auto-generated method stub
 		if(txtNhap.getText().trim().equals("")) {
-			vec = service.docToanBoThuatNgu();
+			JOptionPane.showMessageDialog(null, "bạn chưa nhập từ cần tìm");
+			btnTimKiem.setText("");
+			return;
 		} else {
+			ThuatNguService service = new ThuatNguService();
 			vec = service.timTheoTenThuatNgu(txtNhap.getText().trim());
 			if(vec.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "không tim thấy thuật ngữ " + "["+txtNhap.getText().trim()+"]");
+				btnTimKiem.setText("");
+				txtNhap.setText("");
+				return;
 			}
 		}
 		ui.listThuatNgu.setListData(vec);
@@ -86,6 +114,10 @@ public class TimKiemUI extends JFrame{
 		for(ThuatNgu tt : vec) {
 			ui.cboThuatNgu.addItem(tt);
 		}
+		ui.xuLyXoa(ui.tblThuatNgu.getRowCount()-1);
+		ui.txtpaneThuatNgu.setText("");
+		ui.showWindow();
+		btnTimKiem.setText("");
 	}
 
 	private void addControls() {

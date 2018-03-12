@@ -97,12 +97,13 @@ public class TestDocFile {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Vector<ThuatNgu>vec = docFile("test.txt");
+		Vector<ThuatNgu>vec = docFile("STT1.txt");
+		
+		for(ThuatNgu tt : vec) {
+			System.out.println(tt);
+		}
 		System.out.println(vec.size());
-//		for(ThuatNgu tt : vec) {
-//			System.out.println(tt);
-//		}
-//		if(luuFile(vec, "test1.txt")) {
+//		if(luuFile(vec, "STT1.txt")) {
 //			System.out.println("lưu file thành công");
 //		}
 		ThuatNguService service = new ThuatNguService();

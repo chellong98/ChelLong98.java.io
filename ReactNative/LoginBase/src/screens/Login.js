@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Alert,
+    KeyboardAvoidingView,
 } from 'react-native';
 import {Container, Header, Left, Button, Icon, Body, Title, Right, Content, Input, Item} from 'native-base';
 const username = "admin";
@@ -42,7 +43,7 @@ export default class Login extends Component {
                 <Title><Icon name='person' style={{color: 'white'}}/>   Login</Title>
             </Body>
         </Header>
-        <ScrollView style={styles.container}>
+        <KeyboardAvoidingView  style={styles.container}>
        
             <View style={styles.imageContainer}>
                 <Image
@@ -53,7 +54,8 @@ export default class Login extends Component {
             <View style={styles.contentContainer}>
                 <Text style={{color: 'rgba(255,250,240,0.6)',}}>Life will be easy if we have Source Code</Text>
             </View>
-            <View style={{flex: 3/10 , paddingHorizontal: 10,}}>
+            <View style={{flex: 5/10}}>
+            <View style={{flex: 5/10 , paddingHorizontal: 10, paddingBottom: 70}}>
                
                     <Item rounded style={styles.input}>
                         <Input 
@@ -80,12 +82,13 @@ export default class Login extends Component {
                 <Button block info style={styles.button} onPress={()=>this.login()}>
                     <Title style={{color: 'rgba(255,250,240,0.7)'}}>Login</Title>
                 </Button>
-                <Button block info style={styles.button}>
+                <Button block info style={styles.button} onPress={()=>this.login()}>
                     <Title style={{color: 'rgba(255,250,240,0.7)'}}>Register</Title>
                 </Button>
+                
             </View>
-  
-        </ScrollView>
+            </View>
+        </KeyboardAvoidingView>
        </Container>
     )
   }
@@ -110,15 +113,17 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#3742FA',
-        // marginHorizontal: '10',s
+        // marginHorizontal: '10',
         marginTop: 10,
         marginBottom: 15,  
     },
     buttonContainer: {
-        flex: 3/10,
+        flex: 5/10,
         // justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10,
+        paddingTop: 50,
+        marginTop: 20,
     },
     button: {
         backgroundColor: '#2980b9',

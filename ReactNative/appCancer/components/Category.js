@@ -6,7 +6,7 @@ import {
     ListView,
     StatusBar,
     TouchableOpacity
-}from 'react-native'
+}from 'react-native';
 var URL_API='http://10.0.3.2:8080/Json/JsonServlet'
 class Category extends Component {
     constructor(props) {

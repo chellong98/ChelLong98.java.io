@@ -1,6 +1,6 @@
 package pccc.detaikhoahoc.model;
 
-public class ThuatNgu {
+public class ThuatNgu implements Comparable<ThuatNgu>{
 	private int soThuTu;
 	private String tenThuatNgu;
 	private String dinhNghiaThuatNgu;
@@ -67,6 +67,22 @@ public class ThuatNgu {
 	public String toString() {
 		return this.soThuTu + ". " + this.tenThuatNgu;
 	}
+
+
+@Override
+public int compareTo(ThuatNgu tt) {
+	// TODO Auto-generated method stub
+	if(this.soThuTu > tt.soThuTu) return 1;
+	else if(this.soThuTu < tt.soThuTu) return -1;
+	else return 0;
+}
+
+
+//@Override
+//public String toString() {
+//	return "ThuatNgu [soThuTu=" + soThuTu + ", tenThuatNgu=" + tenThuatNgu + ", dinhNghiaThuatNgu=" + dinhNghiaThuatNgu
+//			+ ", taiLieuThuatNgu=" + taiLieuThuatNgu + ", isImportant=" + isImportant + "]";
+//}
 
 	
 }
