@@ -1,20 +1,20 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
 import {Root} from 'native-base';
-import Home from './screens/Home';
-import Login from './screens/Login';
+import HomeContainer from './container/HomeContainer';
+import LoginContainer from './container/LoginContainer';
 
 const Main = StackNavigator(
     {
-        Home: {
-            screen: Home
+        HomeContainer: {
+            screen: HomeContainer
         },
-        Login: {
-            screen: Login
+        LoginContainer: {
+            screen: LoginContainer
         }
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "HomeContainer",
         headerMode: "none",
     }
 )

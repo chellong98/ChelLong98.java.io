@@ -10,9 +10,13 @@ import {
     KeyboardAvoidingView,
 } from 'react-native';
 import {Container, Header, Left, Button, Icon, Body, Title, Right, Content, Input, Item} from 'native-base';
-const username = "admin";
-const password = "123";
-export default class Login extends Component {
+
+export interface Props {
+    navigation: any,
+    login: Function,
+}
+export interface State {}
+export default class Login extends Component<Props, State> {
 
     constructor(props) {
         super(props);
@@ -22,13 +26,7 @@ export default class Login extends Component {
         }
     }
 
-    login() {
-        if(this.state.username===username && this.state.password===password) {
-            this.props.navigation.navigate('Home');
-        } else {
-            Alert.alert('username or password is incorrect');
-        }
-    }
+   
   render() {
     return (
        <Container>
@@ -79,10 +77,10 @@ export default class Login extends Component {
                     </Item>              
             </View>
             <View style={styles.buttonContainer}>
-                <Button block info style={styles.button} onPress={()=>this.login()}>
+                <Button block info style={styles.button} onPress={()=>this.props.login(this.state.username, this.state.password)}>
                     <Title style={{color: 'rgba(255,250,240,0.7)'}}>Login</Title>
                 </Button>
-                <Button block info style={styles.button} onPress={()=>this.login()}>
+                <Button block info style={styles.button} >
                     <Title style={{color: 'rgba(255,250,240,0.7)'}}>Register</Title>
                 </Button>
                 

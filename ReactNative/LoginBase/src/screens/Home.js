@@ -5,31 +5,15 @@ import {
     StyleSheet,
     ListView,
     Alert,
+    TouchableOpacity,
 } from 'react-native';
 import {Container, Header, Body, Title, Icon, Left, Button, Form, Input, Content, Item, Label, List, ListItem} from 'native-base';
-const URL_API = 'https://facebook.github.io/react-native/movies.json';
-// var list = [
-//   {
-//   title: "Star Wars",
-//   releaseYear: "1977"
-//   },
-//   {
-//   title: "Back to the Future",
-//   releaseYear: "1985"
-//   },
-//   {
-//   title: "The Matrix",
-//   releaseYear: "1999"
-//   },
-//   {
-//   title: "Inception",
-//   releaseYear: "2010"
-//   },
-//   {
-//   title: "Interstellar",
-//   releaseYear: "2014"
-//   }
-// ];
+
+export interface Props {
+  navigation: any,
+  data: any,
+  back: Function,
+}
 export default class Home extends Component { 
   constructor(props) {
     super(props);
@@ -40,45 +24,30 @@ export default class Home extends Component {
       list : []
     }
   }
-  back() {
-    this.props.navigation.navigate('Login');
-  }
-   getRequest() {
-    // Alert.alert('hello');
-    fetch(URL_API, {
-      method: "GET",
-      headers: {
-        'Content-type':'application/json'
-      }
-    }).then(response => response.json()
-      ).then(responseData => {
-        // Alert.alert(responseData.movies+"");
-        this.setState ({
-          list : responseData.movies
-        }); 
-        // Alert.alert(list+"");
-        // this.setState = {
-        //   dataSource : this.state.dataSource.cloneWithRows(list)
-        // }
-      }).done()
-  }
+ 
+  
   taoHang(property) {
     return(
-      
-        <Text>{property.title}</Text>
-     
+    
+      <ListItem onPress={()=> Alert.alert(property.title)} button  style={{paddingBottom: 10, borderBottomWidth: 1}}>
+        <Left style={{flex: 2/10}}>
+          <Icon name='person'/>
+        </Left>
+        <Body>
+          <Text>{property.title}</Text>
+        </Body>
+     </ListItem>
+   
     )
   }
-  componentDidMount () {
-    this.getRequest();
-  }
+ 
   render() {
     return (
         <Container>
 
           <Header>
             <Left>
-              <Button iconLeft transparent onPress={()=>this.back()}>
+              <Button iconLeft transparent onPress={()=>this.props.back()}>
                 <Icon name= 'arrow-back'/>
               </Button>
             </Left>
@@ -95,12 +64,11 @@ export default class Home extends Component {
               </Item>
             </Form>
   
-            <List dataArray={this.state.list}
-            renderRow={(item) =>
-              <ListItem>
-                <Text>{item.title}</Text>
-              </ListItem>
-            }>
+            <List 
+            
+            dataArray={this.props.data} //da sua
+            renderRow={this.taoHang.bind(this)}
+            >
             </List>
           </Content>
         </Container>
