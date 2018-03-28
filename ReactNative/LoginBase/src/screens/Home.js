@@ -27,7 +27,7 @@ export default class Home extends Component {
  
   
   taoHang(property) {
-    return(
+    return( 
     
       <ListItem onPress={()=> Alert.alert(property.title)} button  style={{paddingBottom: 10, borderBottomWidth: 1}}>
         <Left style={{flex: 2/10}}>
@@ -63,9 +63,8 @@ export default class Home extends Component {
                 <Input/>
               </Item>
             </Form>
-  
-            <List 
             
+            <List 
             dataArray={this.props.data} //da sua
             renderRow={this.taoHang.bind(this)}
             >
