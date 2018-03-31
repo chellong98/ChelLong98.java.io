@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="HomeForward">index</a>
+        <a href="HomeForward?pageid=1">index</a>
     </body>
 </html>

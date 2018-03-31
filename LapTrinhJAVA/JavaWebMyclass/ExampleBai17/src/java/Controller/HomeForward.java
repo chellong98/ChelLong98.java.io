@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import BEAN.EMP;
+import DAO.HomeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,9 +59,27 @@ public class HomeForward extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static int total = HomeDAO.totalEMP().size();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String pageid = request.getParameter("pageid");
+        int count = 7;
+        int start;
+        System.out.println(total);
+        if((Integer.parseInt(pageid) > total%count + total/count) || Integer.parseInt(pageid)<0) {
+            start = 1;
+            pageid = "1";
+        } else {
+            start = Integer.parseInt(pageid);
+        }
+        if(!pageid.equals("1")) {
+            start = start*count-count+1;
+        }
+        List<EMP> list = HomeDAO.displayEMP(start-1, count);
+        
+        request.setAttribute("listemp", list);
+        request.setAttribute("numberpage", pageid);
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/home.jsp");
         rd.forward(request, response);
     }

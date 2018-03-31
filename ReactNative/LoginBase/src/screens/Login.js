@@ -35,7 +35,7 @@ export default class Login extends Component<Props, State> {
             <Button transparent>
                 <Icon name='menu'/>
             </Button>
-            
+             
             </Left>
             <Body>       
                 <Title><Icon name='person' style={{color: 'white'}}/>   Login</Title>

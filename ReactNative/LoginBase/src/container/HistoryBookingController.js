@@ -25,8 +25,7 @@ export default class HistoryBookingController extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.getRequest();
-    
+    this.getRequest();  
   }
   render() {
     return (
