@@ -26,7 +26,7 @@ export default class Database {
 			tx.executeSql(query, params, callback);
 		});
 	}
-
+ 
 	errorCB(err) {
 		console.error("SQL Error: " + err);
 	}

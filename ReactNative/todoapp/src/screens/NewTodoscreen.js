@@ -60,14 +60,14 @@ export default class newtodoscreen extends Component<Props> {
   renderDate() {
     if(this.state.status === true) {
       return (<View>
-        <ListItem style={{paddingHorizontal: 10}}>
+        <ListItem style={{paddingHorizontal: 10, flex: 1}}>
           <Left>
             <Text style={styles.text}>Due by</Text>
           </Left>
           <Body style={{ position: 'relative', right: 30}}>
             <Text style={styles.text}>July 17, 2018</Text>
           </Body>
-          <Right>
+          <Right style={{flex: 6/10}}>
               <Text style={{color: '#45637C', fontSize: 15}}>1:00 PM</Text>  
           </Right>
         </ListItem>
@@ -99,6 +99,7 @@ export default class newtodoscreen extends Component<Props> {
       hour: this.state.hour,
       minute: this.state.minute,
       text: this.state.text,
+      pageid : 1,
     })
     
   }

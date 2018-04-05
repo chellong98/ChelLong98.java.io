@@ -30,7 +30,7 @@ export default class todos extends Component<Props> {
           <View>
             <Separator bordered>
               <Text>Not Done</Text> 
-            </Separator>
+            </Separator> 
             <List> 
             {
               this.props.data.map((value,index)=>{ //cai nay la sao

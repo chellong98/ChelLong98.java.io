@@ -1,0 +1,68 @@
+{
+  "name": "realm",
+  "description": "Realm is a mobile database: an alternative to SQLite and key-value stores",
+  "version": "1.10.3",
+  "license": "SEE LICENSE IN https://realm.io/legal/professional-license-terms/",
+  "homepage": "https://realm.io",
+  "keywords": [
+    "database",
+    "db",
+    "react",
+    "react-native",
+    "persistence",
+    "localstorage",
+    "sqlite",
+    "asyncstorage",
+    "rocksdb",
+    "leveldb"
+  ],
+  "author": {
+    "name": "Realm",
+    "email": "help@realm.io",
+    "url": "https://realm.io"
+  },
+  "dependencies": {
+    "nan": "^2.3.3",
+    "needle": "^1.3.0",
+    "node-fetch": "^1.6.3",
+    "node-gyp": "^3.6.1",
+    "node-pre-gyp": "^0.6.34",
+    "request": "^2.74.0",
+    "url": "^0.11.0",
+    "url-parse": "^1.1.7"
+  },
+  "files": [
+    "lib",
+    "public/lib",
+    "compiled"
+  ],
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "pretest": "scripts/download-object-server.sh",
+    "test": "jasmine",
+    "test-public": "jasmine JASMINE_CONFIG_PATH=spec/support/jasmine-public.json",
+    "build-changes": "REALM_CORE_PREFIX=$(pwd)/../realm-core REALM_SYNC_PREFIX=$(pwd)/../realm-sync node-gyp build --build-from-source --debug ",
+    "rebuild-changes": "REALM_CORE_PREFIX=$(pwd)/../realm-core REALM_SYNC_PREFIX=$(pwd)/../realm-sync npm install --build-from-source --debug"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.2",
+    "jasmine-console-reporter": "^1.2.7",
+    "jasmine-reporters": "^2.2.0",
+    "js-yaml": "^3.8.1",
+    "jsonwebtoken": "^7.3.0",
+    "mockery": "^2.0.0",
+    "spawn-sync": "^1.0.15",
+    "terminate": "^1.0.8",
+    "tmp": "0.0.29",
+    "ursa": "^0.9.4"
+  },
+  "binary": {
+    "module_name": "realm",
+    "module_path": "./compiled/{platform}-{arch}/{node_abi}",
+    "host": "https://static.realm.io",
+    "remote_path": "/node-pre-gyp/{version}"
+  }
+}

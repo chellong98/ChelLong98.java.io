@@ -29,7 +29,7 @@ export default {
         {
           
           name: "Pay Rent",
-          time: "Due: Today @ 12:00",
+          time: "",
           status: 0,
         },
         {

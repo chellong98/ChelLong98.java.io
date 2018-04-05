@@ -3,6 +3,7 @@ import {PanResponder ,Animated,View, Text, TouchableOpacity, StyleSheet,Alert,Re
 import {Container,Right,Switch,Icon,Item,Input, Header, Body, Left, Title,Content, Separator, ListItem, Thumbnail,List } from 'native-base';
 import PanResponderView from './panResponder';
 import Setting from './../utils/setting';
+import TodosModel from './../model/TodosModel';
 export interface Props {
   navigation: any,
   year: any,
@@ -14,9 +15,8 @@ export default class edittodoscreen extends Component<Props> {
     super(props);
     this.state = {
       status : true,
-      year: "",
-      month: "",
-      minute: "",
+      year: this.props.year.slice(6,this.props.year.length)+" "+this.props.year.slice(4,5)+", 2018",
+      time: this.props.time+" PM",
 
     }
   }
@@ -26,15 +26,15 @@ export default class edittodoscreen extends Component<Props> {
     if(this.state.status === true) {
       return (
         <View>
-        <ListItem style={{paddingHorizontal: 10}}>
+        <ListItem style={{paddingHorizontal: 10, flex :1}}>
           <Left>
             <Text style={styles.text}>Due by</Text>
           </Left>
           <Body style={{ position: 'relative', right: 30}}>
-            <Text style={styles.text}>{this.props.year}</Text>
+            <Text style={styles.text}>{this.state.year}</Text>
           </Body>
-          <Right>
-              <Text style={{color: '#45637C', fontSize: 15}}>{this.props.time}</Text>  
+          <Right style={{flex : 6/10}}>
+              <Text style={{color: '#45637C', fontSize: 15}}>{this.state.time}</Text>  
           </Right>
         </ListItem>
         
@@ -48,12 +48,19 @@ export default class edittodoscreen extends Component<Props> {
     this.props.navigation.navigate('TodosContainer', {
       item: {
         name: this.props.text,
-        time: "",
+        time: this.props.year+":"+this.props.time,
         status: 0,
       }
-    });
+    }); 
   }
-
+  removeItem() {
+    this.todosmodel = new TodosModel();
+    this.todosmodel.removeTodos({name: this.props.text}, {}, (err, numberRemoved)=>{
+      console.log('numberRemoved: '+numberRemoved)
+    })
+    Alert.alert("your todos has deleted")
+    this.props.navigation.navigate('SplashScreenContainer')
+  }
   render() {
     
     // console.log(year + " | " + month + " | " + minute);
@@ -61,7 +68,10 @@ export default class edittodoscreen extends Component<Props> {
     <Container style={{flex: 1}}>
         <Header style={{backgroundColor: '#FFFFFF'}}>
             <Left>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>{
+                Alert.alert("return New todos")
+                this.props.navigation.navigate('NewTodoContainer')
+              }}>
                 <Icon name='close'  style={{color: '#45637C', fontSize: 40,}}/> 
               </TouchableOpacity>                             
             </Left>
@@ -96,10 +106,7 @@ export default class edittodoscreen extends Component<Props> {
                 }
               </View>
               <View style={{backgroundColor: '#FFFFFF', alignItems: 'center', paddingTop: 15, marginTop: 20, paddingBottom: 15}}>
-                <TouchableOpacity onPress={()=>{
-                  Alert.alert("your todos has deleted")
-                  this.props.navigation.navigate('SplashScreenContainer')
-                }}>
+                <TouchableOpacity onPress={()=>this.removeItem()}>
                   <Text style={{color: 'red'}}>Delete Todo</Text>
                 </TouchableOpacity>
               </View>
