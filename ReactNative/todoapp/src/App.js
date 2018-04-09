@@ -5,7 +5,7 @@ import TodosContainer from './containers/todoContainer';
 import NewTodoContainer from './containers/NewTodoContainer';
 import EditTodoContainer from './containers/EditTodoContainer';
 import RealmContainer from './containers/RealmContainer';
-const App = StackNavigator(
+const App = StackNavigator( 
   {
     SplashScreenContainer : {
       screen: SplashScreenContainer

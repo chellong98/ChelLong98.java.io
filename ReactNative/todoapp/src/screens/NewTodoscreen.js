@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {PanResponder ,Animated,View, Text, TouchableOpacity, StyleSheet,Alert,RefreshControl } from 'react-native';
+import {PanResponder, Keyboard,Animated,View, Text, TouchableOpacity, StyleSheet,Alert,RefreshControl } from 'react-native';
 import {Container,Right,Switch,Icon,Item,Input, Header, Body, Left, Title,Content, Separator, ListItem, Thumbnail,List } from 'native-base';
 import PanResponderView from './panResponder';
 import Setting from './../utils/setting';
@@ -92,6 +92,7 @@ export default class newtodoscreen extends Component<Props> {
   }
 
   setValue() {
+    Keyboard.dismiss()
     console.log(month[this.state.year]);
     console.log(this.state.text);
     this.props.navigation.navigate('EditTodoContainer', {
@@ -126,7 +127,12 @@ export default class newtodoscreen extends Component<Props> {
           
             <Content>
               <Item regular style={{backgroundColor: '#FFFFFF', marginTop: 20, paddingTop: 1}}>
-                <Input  placeholder='Todo Name'  placeholderTextColor='rgba(69,99,124,0.5)' onChangeText={(text)=>this.setState({text})}/>
+                <Input  
+                  placeholder='Todo Name'  
+                  placeholderTextColor='rgba(69,99,124,0.5)' 
+                  onChangeText={(text)=>this.setState({text})}
+                
+                />
               </Item>
               <View style={{backgroundColor: '#FFFFFF', marginTop: 20, paddingTop: 10, paddingBottom: 30, flex: 5/10}}>
                 <ListItem style={{paddingHorizontal: 10, }}>

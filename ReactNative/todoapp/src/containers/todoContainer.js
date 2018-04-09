@@ -7,7 +7,7 @@ import {View, Text, TouchableOpacity, StyleSheet,Alert,RefreshControl } from 're
 var ListDone = Setting.ListTodo;
 export interface Props {
   navigation: any,
-  time: any,
+  // time: any,
 }
 export interface State {}
 
@@ -47,10 +47,10 @@ export default class todoContainer extends Component<Props,State> {
     if (type==1)
     {
       return ( 
-        <ListItem key = {row} style={styles.listItem}  >
+        <ListItem key = {row} style={styles.listItem} onPress={()=>this.navigateEditTodo(type, item.name, item.time)} >
         
         <Left>
-          <TouchableOpacity onPress = {()=>this.changeStatus(row,item)}>
+          <TouchableOpacity onPress = {()=>this.changeStatus(row,item)} >
             <Thumbnail source={require('./../../images/checked.png')} />
           </TouchableOpacity>
         </Left>
@@ -107,7 +107,7 @@ export default class todoContainer extends Component<Props,State> {
       console.log('no params navigate');
     }else{
       var item = params.item;
-      this.props.time = item.time;
+      // this.props.time = item.time;
       // item.time = "Due: " + item.time.slice(0,4)+" @ "+item.time.slice(10,item.time.length);
       console.log(item.time);
       // if(this.state.data.indexOf(item)) return;

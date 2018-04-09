@@ -22,9 +22,9 @@ export default class splashscreen extends Component<Props> {
   render() {
     return (
         <Container>
-          <Body>
-            <Image source={require('./../../images/LoadingScreen.png')}/>
-          </Body>
+       
+            <Image resizeMode='stretch' style={{width:'100%',height:'100%'}} source={require('./../../images/LoadingScreen.png')}/>
+        
         </Container>
     
     );
