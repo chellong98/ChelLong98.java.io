@@ -95,7 +95,7 @@ export default class todoContainer extends Component<Props,State> {
       console.log('update: ')
       console.log( numAffected+ " | "+affectedDocuments+" | "+ upsert)
     });
-  this.forceUpdate();
+    this.forceUpdate();
   
   console.log("click")
   

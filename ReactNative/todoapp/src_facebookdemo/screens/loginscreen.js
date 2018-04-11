@@ -22,7 +22,7 @@ export default class loginscreen extends Component<Props> {
               <Item rounded style={{backgroundColor: 'rgba(255,255,255,0.6)', marginTop: 20}}>
                 <Icon android='md-contact' ios='md-contact' style={{color: 'white'}}/>
                 <Input 
-                  placeholder='Rounded Textbox'
+                  placeholder='Username'
                   placeholderTextColor= 'white'
                   selectionColor = 'white'
                   returnKeyLabel = "next"
@@ -48,7 +48,7 @@ export default class loginscreen extends Component<Props> {
                   onPress = {()=>{
                     setTimeout(()=>{this.button.cancel()},5000);
                   }}
-
+                 
                   ref = {(btn)=>{
                     this.button = btn;
                   }}
