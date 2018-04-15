@@ -2,14 +2,13 @@ export default class Http {
     get(url, headers) {
         return fetch(url, {
             method: 'GET',
-            headers: headers
+            headers: headers 
         })
     }
 
-    post(url, headers, body) {
+    post(url,  body) {
         return fetch(url, {
             method: 'POST',
-            headers: headers,
             body: body,
         })
     }

@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
-import {View , Image, StyleSheet,TouchableOpacity, Text,Dimensions} from 'react-native';
+import {View , Animated, Image, StyleSheet,TouchableOpacity, Text,Dimensions} from 'react-native';
 import {Container, Card,List, CardItem, Item,Thumbnail, Button, ListItem, Header, Body, Right, Title, Left,Icon, Content} from 'native-base';
+import DrawNavContainer from './../container/CustomDrawNav';
+import Setting from './../utils/setting';
 const {width, height} = Dimensions.get('window');
+export interface Props {
+    navigation: any, 
+    login : Function,
+    dataUsers: any,
+}
+
 export default class listuser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [
-                {name: 'giaynhap', thumbnail: '/uploadImages/giaynhap.jpg', image: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'},
-                {name: 'chellong', thumbnail: '/uploadImages/chellong.jpg', image: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'},
-                {name: 'lehieu', thumbnail: '/uploadImages/sucvathieu.jpg', image: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'}
-            ],
-            statusLike: false,
-            statusComment: false,
-
+            // list: [
+            //     {hoten: 'giaynhap', image: 'uploadImages/giaynhap.jpg', cover: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'},
+            //     {hoten: 'chellong', image: 'uploadImages/chellong.jpg', cover: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'},
+            //     {hoten: 'lehieu', image: 'uploadImages/sucvathieu.jpg', cover: './../ACT.jpg', ngaysinh: '1998-02-13', linkfacebook: 'https://www.facebook.com/GiayNhapcoder', gioitinh: 'Male', email: 'giaynhapcoder@gmail.com', password: 'cuccut123'}
+            // ],
+            width: 1,
+            height: 1,
+            layout: new Animated.Value(1),
+            list: this.props.dataUsers,
+            
         };
+
+        global.listUsers = this.state.list;
        
     }
+
+    onLayout(event) {
+        const {x, y, height, width} = event.nativeEvent.layout;
+        if ( this.state.width==1){
+
+
+        this.setState({width: width, height: height})
+        }
+        console.log(width);
+    }
+
     componentWillMount() {
+
+
         for(i=0; i<this.state.list.length; i++) {
             this.state.list[i].statusLike = false //them 1 thuoc tinh vao doi tuong trong mang
             this.state.list[i].statusComent = false 
         }
         this.forceUpdate()
-        console.log(this.state.list)
+     
     }
     taoHang(item, index) {
         console.log("yes");
@@ -32,23 +57,25 @@ export default class listuser extends Component {
         var likeColor =item.statusLike==true ? '#00903b' : undefined
         var commentColor=item.statusComment==true ? '#00903b' : undefined
         return (
-            <ListItem style={{borderBottomWidth: 0}}>
-            <Card>
-                <CardItem style={{}}>
-                    <Left>                       
-                        <Thumbnail source={{uri: 'http://192.168.1.98:8080/adminDashboard'+item.thumbnail}}/>
-                        <Body>
-                            <Text style={{fontSize: 20,color: '#00903b', fontWeight: '100'}}>{item.name}</Text>
+            <ListItem key={index} style={{borderBottomWidth: 0}}>
+            <Card onLayout={(e)=>this.onLayout(e)}>
+                <CardItem >
+                    <Item style={{paddingBottom: 10}}>
+                    <Left style={{flexDirection: 'row'}} >                       
+                        <Thumbnail source={{uri: Setting.SERVER_API+item.image}}/>
+                        <View style={{paddingLeft: 20}}>
+                            <Text style={{fontSize: 20,color: '#00903b', fontWeight: '100'}}>{item.hoten}</Text>
                             <Text style={{fontStyle: 'italic'}}>10/04/2018 - <Icon android='md-globe' ios='md-globe' style={{fontSize: 15, color: '#00903b'}}/></Text>
-                        </Body>
+                        </View>
                     </Left>
                     <Right>
                         <Icon android='md-more' ios='md-more'/>
                     </Right>
+                    </Item>
                 </CardItem>
                 <CardItem>
                     <Body> 
-                        <Image source={require('./../images/ACT.jpg')} style={{width: width*(9/10), height: height*(2/10), marginRight: 20}}/>
+                        <Image source={require('./../images/ACT.jpg')} style={{width: this.state.width-50, height: this.state.height, marginRight: 20}}/>
                         
                     </Body>
                 </CardItem>
@@ -86,7 +113,8 @@ export default class listuser extends Component {
     }
   render() {
     var listItem = this.state.list;
-    
+    console.log("data: ");
+    console.log(listItem);
     return (
         <Container style={{flex: 1}}>
             <Header 
@@ -94,7 +122,7 @@ export default class listuser extends Component {
             backgroundColor='#00903b' 
             androidStatusBarColor='#00903b'>
                 <Body >
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={ () => {this.props.navigation.navigate('DrawerToggle')}}>
                         <Icon android='md-arrow-back' ios='md-arrow-back' style={{color: 'white'}}/>
                     </TouchableOpacity>
                 </Body>

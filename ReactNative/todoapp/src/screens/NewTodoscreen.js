@@ -96,7 +96,7 @@ export default class newtodoscreen extends Component<Props> {
     console.log(month[this.state.year]);
     console.log(this.state.text);
     this.props.navigation.navigate('EditTodoContainer', {
-      year: month[this.state.year],
+      year: month[this.state.year], 
       hour: this.state.hour,
       minute: this.state.minute,
       text: this.state.text,

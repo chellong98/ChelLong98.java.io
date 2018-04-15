@@ -1,5 +1,6 @@
 export default {
-    SERVER_NAME: "http://", 
+    SERVER_API: "http://192.168.50.115:8080/adminDashboard/",
+    SERVER_NAME: "http://192.168.50.115:8080/APIUsers/", 
     API_URL: "https://facebook.github.io/react-native/movies.json",
     ListTodo : [
         {

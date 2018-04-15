@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import {View, Text, ImageBackground,TextInput, TouchableOpacity} from 'react-native';
+import {View,Keyboard,Text, ImageBackground,TextInput,Alert,TouchableOpacity} from 'react-native';
 import {Item,Input,Icon,Button,Left, Right,Content} from 'native-base';
 import ButtonLoading from 'rn-gn-buttonloading';
 
 srcimage = require('./../images/login.jpg');
 export interface Props {
   navigation: any,
+  login: Function,
+  
 }
 export default class loginscreen extends Component<Props> {
+  constructor(props) {
+    super(props)
+    this.state={
+      username: '',
+      password: ''
+    }
+    
+  }
   render() {
     return ( 
       <ImageBackground
@@ -27,6 +37,7 @@ export default class loginscreen extends Component<Props> {
                   selectionColor = 'white'
                   returnKeyLabel = "next"
                   style={{color: 'white'}}
+                  onChangeText={(username)=>this.setState({username: username})}
                   />
               </Item>
               <Item rounded style={{backgroundColor: 'rgba(255,255,255,0.6)', marginTop: 20}}>
@@ -36,6 +47,7 @@ export default class loginscreen extends Component<Props> {
                   placeholderTextColor= 'white'
                   secureTextEntry
                   style={{color: 'white'}}
+                  onChangeText={(password)=>this.setState({password: password})}
                   />
               </Item>
               <Item style={{borderBottomWidth: 0, marginTop: 20}}>
@@ -46,7 +58,29 @@ export default class loginscreen extends Component<Props> {
                   title = 'LOGIN'
                   size = {40}
                   onPress = {()=>{
-                    setTimeout(()=>{this.button.cancel()},5000);
+                    this.props.login(this.state.username, this.state.password,
+                    (status)=>{ 
+                      if(status.error==0){
+                        Keyboard.dismiss();
+                       for (var i in status.data) {
+                         if(status.data[i].email===this.state.username && status.data[i].password===this.state.password) {
+                           global.account=status.data[i];
+                           break;
+                         } 
+                       }
+                        // global.account = {username: this.state.username, password: this.state.password}
+                        setTimeout(()=>{
+                          this.props.navigation.navigate('ListUsersContainer', {dataUsers: status.data});
+                        }, 1000);
+                      }
+                      else {
+                        Keyboard.dismiss();
+                        setTimeout(()=>{
+                          Alert.alert("username password incorrect");
+                          this.button.cancel();
+                        }, 5000);
+                      }
+                    });
                   }}
                  
                   ref = {(btn)=>{
