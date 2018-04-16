@@ -11,10 +11,10 @@ export default class customdraw extends Component<Props> {
   getUsers() { 
     // console.log("listUsers: ");
     // console.log(global.listUsers);
-    return global.listUsers;
+    return global.listUsers; //lay ben listuserscreen
   }
   render() {
-    const account = global.account;
+    const account = global.account; //lay ben loginscreen
   
     return (
       

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {View,Keyboard,Text, ImageBackground,TextInput,Alert,TouchableOpacity} from 'react-native';
 import {Item,Input,Icon,Button,Left, Right,Content} from 'native-base';
 import ButtonLoading from 'rn-gn-buttonloading';
+import Pakage from './../utils/pakage';
 
 srcimage = require('./../images/login.jpg');
 export interface Props {
@@ -14,10 +15,23 @@ export default class loginscreen extends Component<Props> {
     super(props)
     this.state={
       username: '',
-      password: ''
+      password: '',
+      // account: {},
     }
-    
+     
   }
+
+  componentWillMount() {
+    var loginAccount = Pakage.getLogin().then((data)=>{
+      console.log("loginAccount: ");
+     
+      this.setState({username: data.email, password: data.password});
+      // console.log(this.state.account); 
+      // this.setState({})
+    });
+   
+  }
+
   render() {
     return ( 
       <ImageBackground
@@ -32,6 +46,7 @@ export default class loginscreen extends Component<Props> {
               <Item rounded style={{backgroundColor: 'rgba(255,255,255,0.6)', marginTop: 20}}>
                 <Icon android='md-contact' ios='md-contact' style={{color: 'white'}}/>
                 <Input 
+                  value = {this.state.username == '' ? '' : this.state.username} //set nick cu da dang nhap
                   placeholder='Username'
                   placeholderTextColor= 'white'
                   selectionColor = 'white'
@@ -43,6 +58,7 @@ export default class loginscreen extends Component<Props> {
               <Item rounded style={{backgroundColor: 'rgba(255,255,255,0.6)', marginTop: 20}}>
                 <Icon android='md-lock' ios='md-lock' style={{color: 'white'}}/>
                 <Input 
+                  value = {this.state.password == '' ? '' : this.state.password} //set nick cu da dang nhap
                   placeholder='Password'
                   placeholderTextColor= 'white'
                   secureTextEntry
@@ -64,7 +80,8 @@ export default class loginscreen extends Component<Props> {
                         Keyboard.dismiss();
                        for (var i in status.data) {
                          if(status.data[i].email===this.state.username && status.data[i].password===this.state.password) {
-                           global.account=status.data[i];
+                           global.account=status.data[i]; //cho CustomNav su dung
+                            Pakage.saveLogin(status.data[i]);
                            break;
                          } 
                        }

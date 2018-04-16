@@ -26,7 +26,7 @@ export default class listuser extends Component {
             
         };
 
-        global.listUsers = this.state.list;
+        global.listUsers = this.state.list; //cho CustomNav su dung
        
     }
 
@@ -34,15 +34,12 @@ export default class listuser extends Component {
         const {x, y, height, width} = event.nativeEvent.layout;
         if ( this.state.width==1){
 
-
-        this.setState({width: width, height: height})
+             this.setState({width: width, height: height})
         }
         console.log(width);
     }
 
     componentWillMount() {
-
-
         for(i=0; i<this.state.list.length; i++) {
             this.state.list[i].statusLike = false //them 1 thuoc tinh vao doi tuong trong mang
             this.state.list[i].statusComent = false 
@@ -75,13 +72,13 @@ export default class listuser extends Component {
                 </CardItem>
                 <CardItem>
                     <Body> 
-                        <Image source={require('./../images/ACT.jpg')} style={{width: this.state.width-50, height: this.state.height, marginRight: 20}}/>
+                        <Image source={{uri: Setting.SERVER_API+item.imageCover}} style={{width: this.state.width-50, height: this.state.height, marginRight: 20}}/>
                         
                     </Body>
                 </CardItem>
                 <CardItem >
                     <Left>
-                        <Button 
+                        <Button //nut like
                         transparent
                         onPress={()=>{
                             this.state.list[index].statusLike=!this.state.list[index].statusLike; 
@@ -94,7 +91,7 @@ export default class listuser extends Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Button transparent onPress={()=>{
+                        <Button transparent onPress={()=>{  //nut comment
                             this.state.list[index].statusComment=!this.state.list[index].statusComment; 
                             this.forceUpdate(); 
                             console.log(this.state.statusComment)
@@ -121,19 +118,14 @@ export default class listuser extends Component {
             style={{}} 
             backgroundColor='#00903b' 
             androidStatusBarColor='#00903b'>
-                <Body >
+                <Left >
                     <TouchableOpacity onPress={ () => {this.props.navigation.navigate('DrawerToggle')}}>
-                        <Icon android='md-arrow-back' ios='md-arrow-back' style={{color: 'white'}}/>
+                        <Icon android='md-menu' ios='md-menu' style={{color: 'white'}}/>
                     </TouchableOpacity>
-                </Body>
-                <Left>
-                    <Title>New Feed</Title>
                 </Left>
-                <Right>
-                    <TouchableOpacity>
-                        <Icon android='md-search' ios='md-search' style={{color: 'white'}}/>
-                    </TouchableOpacity>
-                </Right>
+                <Body>
+                    <Title>Users Infomation</Title>
+                </Body>
             </Header>
             <Content style={{flex: 1}}>
                 <List
